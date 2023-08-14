@@ -189,7 +189,7 @@ const EditCmp = () => {
             </Box>
           );
         })}
-        <span onClick={addEps}>Add Endpoint</span>
+        {/* <span onClick={addEps}>Add Endpoint</span> */}
         <button type="submit">Submit</button>
       </form>
     </div>
