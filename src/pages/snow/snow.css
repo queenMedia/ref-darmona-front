@@ -1,0 +1,14 @@
+.snowPage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+.input-date {
+}
+.countTrue {
+  background-color: red
+}
+.countFalse {
+  background-color: green;
+}

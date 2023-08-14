@@ -1,0 +1,114 @@
+.app-container {
+  display: table;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+.sidebar {
+  border-right: 1px solid rgb(45, 45, 45);
+  display: table-cell;
+  width: 13%;
+  vertical-align: top;
+}
+.main {
+  padding: 40px;
+  display: table-cell;
+  width: 87%;
+  vertical-align: top;
+}
+
+.header {
+  padding: 30px;
+}
+
+.content {
+  padding: 30px;
+
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("./assets/images/loginbkg.jpeg") center center / cover
+      no-repeat,
+    rgb(30, 30, 30);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+input {
+  font-style: normal;
+  font-size: 1rem;
+  font-weight: 300;
+  background-color: transparent;
+  padding: 0px 8px;
+  color: var(--text-color);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgb(136, 136, 136);
+
+}
+input:focus {
+  outline: none;
+  border-color: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+input:-internal-autofill-selected {
+  outline: none;
+  border-color: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: green;
+}
+select {
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(136, 136, 136);
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: brown;
+  transition: 0.25s all ease;
+  pointer-events: none;
+}
+span {
+  cursor: pointer;
+}

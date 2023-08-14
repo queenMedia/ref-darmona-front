@@ -1,0 +1,34 @@
+.addCmp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  gap: 30px;
+}
+
+.newCmp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.newCmp-form > input {
+  margin: 15px;
+}
+.formBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 200px 0 200px;
+}
+.geoSelect {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+.geoSelect-text:hover{
+  color: green;
+  
+}
+.geoSelect:hover{
+  color: green;
+}

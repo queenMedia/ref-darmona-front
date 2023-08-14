@@ -1,0 +1,33 @@
+.table {
+  margin: auto;
+  max-width: 1050px;
+  width: 100%;
+}
+.table > thead {
+}
+.table > tbody {
+}
+tbody::before {
+  content: "";
+  display: block;
+  height: 15px;
+}
+td::before {
+  content: "";
+  display: block;
+  margin: 4px;
+  
+}
+td {
+  text-align: center;
+
+}
+td >img{
+  margin-left: 10px;
+}
+tr{
+  cursor: pointer;
+}
+tr:hover{
+  background-color: green;
+}
