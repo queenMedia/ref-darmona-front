@@ -13,69 +13,35 @@ const Domains = () => {
   const [id, setId] = useState("");
   const [data, setData] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (dateFrom === "" || dateTo === "" || id === "") {
-      notify_error("you must fill in all fields");
-      return;
-    }
-    notify_Info("Searching");
-    try {
-      const response = await api.getSnowData(dateFrom, dateTo, id, user.token);
-      if (!response) {
-        notify_error("no results");
-        return;
-      }
-      console.log(response);
-      const updatedData = [...data];
-      updatedData.unshift({
-        date: getCurrentDateAndHour(),
-        id: id,
-        countTrue: response.resp[0].COUNT,
-        countFalse: response.resp[1].COUNT,
-      });
-      setData(updatedData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
   return (
     <div className="snowPage-container">
-      <form onSubmit={handleSubmit}>
-        <Box>
-          <h1>Black Pages</h1>
-          <label>
-            Date From:
-            <input
-              className="input-date"
-              type="date"
-              value={dateFrom}
-              onChange={(e) => setDateFrom(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Date To:
-            <input
-              className="input-date"
-              type="date"
-              value={dateTo}
-              onChange={(e) => setDateTo(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            ID:
-            <input
-              type="text"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
-            />
-          </label>
-          <br />
+      <form className="form-container">
+        <h2 className="form-title">Black Pages</h2>
+        <div className="form-body">
+          <select
+            className="form-select"
+            name="platform"
+            id="platform"
+            form="cmp"
+          >
+            <option value={"Asdf"}>Select Platform</option>
+            <option value={"Asdf"}>Bing</option>
+            <option value={"Asdf"}>Facebook</option>
+            <option value={"Asdf"}>Bing(LEO)</option>
+          </select>
+          <select
+            className="form-select"
+            name="platform"
+            id="platform"
+            form="cmp"
+          >
+            <option value={"Asdf"}>Select Platform</option>
+            <option value={"Asdf"}>Bing</option>
+            <option value={"Asdf"}>Facebook</option>
+            <option value={"Asdf"}>Bing(LEO)</option>
+          </select>
           <button type="submit">Submit</button>
-        </Box>
+        </div>
       </form>
 
       <table className="table">
