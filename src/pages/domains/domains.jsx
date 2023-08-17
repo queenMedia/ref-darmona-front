@@ -24,7 +24,7 @@ const Domains = () => {
             id="platform"
             form="cmp"
           >
-            <option value={"Asdf"}>Select Platform</option>
+            <option value={"Asdf"}>Select Geo</option>
             <option value={"Asdf"}>Bing</option>
             <option value={"Asdf"}>Facebook</option>
             <option value={"Asdf"}>Bing(LEO)</option>
@@ -35,7 +35,7 @@ const Domains = () => {
             id="platform"
             form="cmp"
           >
-            <option value={"Asdf"}>Select Platform</option>
+            <option value={"Asdf"}>Select Language</option>
             <option value={"Asdf"}>Bing</option>
             <option value={"Asdf"}>Facebook</option>
             <option value={"Asdf"}>Bing(LEO)</option>
