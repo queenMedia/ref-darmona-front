@@ -3,21 +3,14 @@ import { Box } from "../../components/box/box";
 import { api } from "../../utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { validateLettersOnly } from "../../utils/validateInput";
 import { countryCodes } from "../../assets/data/countryCodes";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import { addCmp } from "../../store/slices/user";
 import { ThriveLink } from "../../components/thriveLink/thriveLink";
 import { SelectWP } from "../../components/selectWP/selectWP";
+import { bing_query, bing_query_map } from "../../assets/data/queryParametrs";
+import { QueryParameters } from "../../components/queryParameters/queryParameters";
 import "./addCmp.css";
-import {
-  bing_query,
-  bing_query_map,
-  fb_query,
-  fb_query_map,
-  bingLeo_query,
-  bingLeo_query_map,
-} from "../../assets/data/queryParametrs";
 
 const AddCmp = () => {
   const dispatch = useDispatch();
@@ -29,9 +22,7 @@ const AddCmp = () => {
   const [domain, setDomain] = useState("");
   const [geo, setGeo] = useState("AF");
   const [availableAliases, setAvailableAliases] = useState([]);
-  const [geoArray, setGeoArray] = useState({
-    0: [],
-  });
+  const [geoArray, setGeoArray] = useState({ 0: [] });
   const [whitePage, setWhitePage] = useState("");
   const [eps, setEps] = useState([
     {
@@ -110,23 +101,6 @@ const AddCmp = () => {
     }
   };
 
-  const addEps = () => {
-    const newEpsObject = {
-      geo: { grp: [], bl: false },
-      weight: 1,
-      ep: "",
-    };
-
-    const updatedEps = [...eps];
-    updatedEps[eps.length] = newEpsObject;
-    setEps(updatedEps);
-
-    setGeoArray((prevGeoArray) => ({
-      ...prevGeoArray,
-      [eps.length]: [],
-    }));
-  };
-
   const updateEp = (index, newEpValue) => {
     const updatedEps = [...eps];
     updatedEps[index].ep = newEpValue;
@@ -202,40 +176,7 @@ const AddCmp = () => {
             </select>
           </div>
         </Box>
-        <Box>
-          <h1>Query Parameters</h1>
-          <select
-            name="platform"
-            id="platform"
-            form="cmp"
-            onChange={(e) => setPlatform(e.target.value)}
-          >
-            <option
-              value={JSON.stringify({ query: bing_query, map: bing_query_map })}
-            >
-              Select Platform
-            </option>
-            <option
-              value={JSON.stringify({ query: bing_query, map: bing_query_map })}
-            >
-              Bing
-            </option>
-            <option
-              value={JSON.stringify({ query: fb_query, map: fb_query_map })}
-            >
-              Facebook
-            </option>
-            <option
-              value={JSON.stringify({
-                query: bingLeo_query,
-                map: bingLeo_query_map,
-              })}
-            >
-              Bing(LEO)
-            </option>
-            {/* <option value={bingLeo_query}>Google</option> */}
-          </select>
-        </Box>
+        <QueryParameters setPlatform={setPlatform} />
         <SelectWP setWhitePage={setWhitePage} />
         <ThriveLink />
 
