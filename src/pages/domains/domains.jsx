@@ -20,6 +20,13 @@ const Domains = () => {
     set(setishData.data);
   };
 
+  const handleSelectGeo = async (geo) => {
+    notify_Info("Searching for available languages");
+    setGeo(geo);
+    const resp = await getSetishData(setLanguages, geo);
+    console.log(resp);
+  };
+
   useEffect(() => {
     getSetishData(setGeos, "");
   }, []);
@@ -34,13 +41,13 @@ const Domains = () => {
             name="platform"
             id="platform"
             form="cmp"
-            onChange={(e) => setGeo(e.target.value)}
+            onChange={(e) => handleSelectGeo(e.target.value)}
           >
             <option value={"Asdf"}>Select Geo</option>
             {geos.map((i, index) => {
               return (
                 <option key={index} value={i}>
-                  {i}
+                  {i.split("/")[0]}
                 </option>
               );
             })}
@@ -50,12 +57,13 @@ const Domains = () => {
             name="platform"
             id="platform"
             form="cmp"
+            onChange={(e) => setLang(e.target.value)}
           >
             <option value={"Asdf"}>Select Language</option>
             {languages.map((i, index) => {
               return (
                 <option key={index} value={i}>
-                  {i}
+                  {i.split("/")[1]}
                 </option>
               );
             })}
@@ -67,10 +75,9 @@ const Domains = () => {
       <table className="table">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>ID</th>
-            <th>Passed</th>
-            <th>Did not pass</th>
+            <th>Link</th>
+            <th>Geo</th>
+            <th>Language</th>
           </tr>
         </thead>
         <tbody>
