@@ -10,7 +10,7 @@ const initialState = {
   blackPageDomains: [],
   cmps: [],
   role: "",
-  bearer: "",
+  token: "",
 };
 
 export const userSlice = createSlice({
