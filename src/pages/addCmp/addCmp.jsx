@@ -7,7 +7,7 @@ import { validateLettersOnly } from "../../utils/validateInput";
 import { countryCodes } from "../../assets/data/countryCodes";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import { addCmp } from "../../store/slices/user";
-import { generateThriveLink } from "../../utils/thrive";
+import { ThriveLink } from "../../components/thriveLink/thriveLink";
 import { SelectWP } from "../../components/selectWP/selectWP";
 import "./addCmp.css";
 import {
@@ -23,8 +23,6 @@ const AddCmp = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const [thrivePlatform, setThrivePlatform] = useState("");
-  const [thriveId, setThriveId] = useState(0);
   const [name, setName] = useState("");
   const [impressions, setImpressions] = useState("");
   const [alias, setAlias] = useState("");
@@ -163,21 +161,6 @@ const AddCmp = () => {
     setEps(updatedEps);
   };
 
-  const handleThriveLink = (thrivePlatform, thriveId, thriveIdDomain) => {
-    if (!thrivePlatform || !thriveId) {
-      notify_error("must choose platform and id first");
-      return;
-    }
-    const thriveLink = generateThriveLink(
-      thriveIdDomain,
-      thrivePlatform,
-      thriveId
-    );
-    console.log(thriveLink);
-    navigator.clipboard.writeText(thriveLink);
-    notify_success("Copied");
-  };
-
   return (
     <div className="addCmp-container">
       <form className="newCmp-form" onSubmit={handleSubmit} id="cmp">
@@ -254,32 +237,8 @@ const AddCmp = () => {
           </select>
         </Box>
         <SelectWP setWhitePage={setWhitePage} />
-        <Box>
-          <h1>Thrive Link</h1>
-          <div className="formBody">
-            <select onChange={(e) => setThrivePlatform(e.target.value)}>
-              <option value={"bing"}>Select Platform</option>
-              <option value={"bing"}>Bing</option>
-              <option value={"bingLeo"}>BingLeo</option>
-              <option value={"facebook"}>Facebook</option>
-              <option value={"google"}>Google</option>
-            </select>
-            <div className="geoSelect">
-              <input
-                type="number"
-                onChange={(e) => setThriveId(e.target.value)}
-                placeholder="Thrive Id"
-              />
-              <span
-                onClick={() =>
-                  handleThriveLink(thrivePlatform, thriveId, user.thriveId)
-                }
-              >
-                copy
-              </span>
-            </div>
-          </div>
-        </Box>
+        <ThriveLink />
+
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
