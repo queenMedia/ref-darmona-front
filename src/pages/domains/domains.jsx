@@ -1,17 +1,28 @@
-import React, { useState } from "react";
-import { Box } from "../../components/box/box";
+import React, { useState, useEffect } from "react";
 import { api } from "../../utils/api";
 import { useSelector, useDispatch } from "react-redux";
-import { getCurrentDateAndHour } from "../../utils/getDate";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import "./domains.css";
 
 const Domains = () => {
   const user = useSelector((state) => state.user);
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
-  const [id, setId] = useState("");
-  const [data, setData] = useState([]);
+
+  const [geos, setGeos] = useState([]);
+  const [languages, setLanguages] = useState([]);
+
+  const [selectedGeo, setGeo] = useState("");
+  const [selectedLang, setLang] = useState("");
+
+  const [tableData, setTable] = useState([]);
+
+  const getSetishData = async (set, path) => {
+    const setishData = await api.getSetishData(path, user.token);
+    set(setishData.data);
+  };
+
+  useEffect(() => {
+    getSetishData(setGeos, "");
+  }, []);
 
   return (
     <div className="snowPage-container">
@@ -23,11 +34,16 @@ const Domains = () => {
             name="platform"
             id="platform"
             form="cmp"
+            onChange={(e) => setGeo(e.target.value)}
           >
             <option value={"Asdf"}>Select Geo</option>
-            <option value={"Asdf"}>Bing</option>
-            <option value={"Asdf"}>Facebook</option>
-            <option value={"Asdf"}>Bing(LEO)</option>
+            {geos.map((i, index) => {
+              return (
+                <option key={index} value={i}>
+                  {i}
+                </option>
+              );
+            })}
           </select>
           <select
             className="form-select"
@@ -36,9 +52,13 @@ const Domains = () => {
             form="cmp"
           >
             <option value={"Asdf"}>Select Language</option>
-            <option value={"Asdf"}>Bing</option>
-            <option value={"Asdf"}>Facebook</option>
-            <option value={"Asdf"}>Bing(LEO)</option>
+            {languages.map((i, index) => {
+              return (
+                <option key={index} value={i}>
+                  {i}
+                </option>
+              );
+            })}
           </select>
           <button type="submit">Submit</button>
         </div>
@@ -54,8 +74,8 @@ const Domains = () => {
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 ? (
-            data?.map((item, index) => (
+          {tableData.length > 0 ? (
+            tableData?.map((item, index) => (
               <tr key={index}>
                 <td>{item.date}</td>
                 <td>{item.id}</td>
