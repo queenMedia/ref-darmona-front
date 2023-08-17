@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Campaigns from "../../assets/icons/cmps.jpeg";
-import Snow from "../../assets/icons/snow.jpeg";
+import Snow from "../../assets/icons/snow.svg";
 import Domains from "../../assets/icons/domains.svg";
 import SideUser from "../../assets/images/sideUser.jpeg";
 import "./sidebar.css";
@@ -15,8 +15,8 @@ export const Sidebar = () => {
 
   const items = [
     { name: "Campaigns", logo: Campaigns, path: "/cmplist" },
-    { name: "Snowflake", logo: Snow, path: "/snow" },
-    { name: "Domains", logo: Domains, path: "/domains" },
+    { name: "Snowflake", logo: Snow, path: "/snow", id: "sideLogo" },
+    { name: "Domains", logo: Domains, path: "/domains", id: "sideLogo" },
   ];
 
   function deleteAllCookies() {
@@ -52,7 +52,7 @@ export const Sidebar = () => {
               key={index}
               className="sidbar-tab"
             >
-              <img alt="logo" src={i.logo} />
+              <img id={i?.id || ""} alt="logo" src={i.logo} />
               <span>{i.name}</span>
             </div>
           );
