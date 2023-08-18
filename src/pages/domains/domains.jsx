@@ -11,10 +11,15 @@ const Domains = () => {
   const [selectedGeo, setGeo] = useState("");
   const [selectedLang, setLang] = useState("");
   const [tableData, setTable] = useState([]);
+  const [characters, setCharacters] = useState([]);
 
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
     set(setishData.data);
+  };
+  const getCharacterData = async (set, path) => {
+    const characters = await api.getCharacters(path, user.token);
+    set(characters.data);
   };
 
   const handleSelectGeo = async (geo) => {
@@ -30,6 +35,7 @@ const Domains = () => {
 
   useEffect(() => {
     getSetishData(setGeos, "");
+    getCharacterData(setCharacters, "prelanders/characters/");
   }, []);
 
   return (
@@ -60,11 +66,27 @@ const Domains = () => {
             form="cmp"
             onChange={(e) => setLang(e.target.value)}
           >
-            <option value={"Asdf"}>Select Language</option>
+            <option value={"Asdf"}>All Languages</option>
             {languages.map((i, index) => {
               return (
                 <option key={index} value={i}>
                   {i.split("/")[1]}
+                </option>
+              );
+            })}
+          </select>
+          <select
+            className="form-select"
+            name="platform"
+            id="platform"
+            form="cmp"
+            onChange={(e) => setLang(e.target.value)}
+          >
+            <option value={"Asdf"}>All Charachters</option>
+            {characters.map((i, index) => {
+              return (
+                <option key={index} value={i}>
+                  {i.split("/")[2].replace("_", " ").replace(".json", " ")}
                 </option>
               );
             })}

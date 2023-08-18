@@ -212,6 +212,27 @@ class Api {
       return undefined;
     }
   }
+  async getCharacters(path, token) {
+    try {
+      let config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: `${this.base}/getCharacters?path=${path}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const resp = await axios.request(config);
+      if (resp.status === 200) {
+        return resp.data;
+      } else {
+        return undefined;
+      }
+    } catch (e) {
+      return undefined;
+    }
+  }
 }
 
 export const api = new Api(baseUrl);
