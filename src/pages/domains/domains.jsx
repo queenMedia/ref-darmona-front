@@ -6,13 +6,10 @@ import "./domains.css";
 
 const Domains = () => {
   const user = useSelector((state) => state.user);
-
   const [geos, setGeos] = useState([]);
   const [languages, setLanguages] = useState([]);
-
   const [selectedGeo, setGeo] = useState("");
   const [selectedLang, setLang] = useState("");
-
   const [tableData, setTable] = useState([]);
 
   const getSetishData = async (set, path) => {
@@ -26,6 +23,10 @@ const Domains = () => {
     const resp = await getSetishData(setLanguages, geo);
     console.log(resp);
   };
+
+  const handleBpSubmit = async () =>{
+    
+  }
 
   useEffect(() => {
     getSetishData(setGeos, "");
