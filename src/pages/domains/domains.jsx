@@ -17,11 +17,13 @@ const Domains = () => {
   const [selectedLang, setLang] = useState("");
   const [tableData, setTable] = useState([]);
   const [characters, setCharacters] = useState([]);
+  const domain = "https://setish.org";
+  const params = "?character=mario_dragh&offer=immediate_edge";
 
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
     set(setishData.data);
-    return setishData.data
+    return setishData.data;
   };
 
   const getCharacterData = async (set, path) => {
@@ -33,13 +35,23 @@ const Domains = () => {
     notify_Info("Searching for available languages");
     const resp = await getSetishData(setLanguages, geo);
     setLang(resp[0]);
-    console.log({resp});
+    console.log({ resp });
   };
 
   const handleBpSubmit = async (e) => {
     e.preventDefault();
     console.log(selectedLang);
     await getSetishData(setTable, selectedLang);
+  };
+
+  const handleLink = (url) => {
+    let finaLink = "";
+    if (url.split("/")[2].includes("-")) {
+      finaLink = `${domain}/${url}`;
+    } else {
+      finaLink = `${domain}/${url}index.html${params}`;
+    }
+    return finaLink;
   };
 
   useEffect(() => {
@@ -117,9 +129,9 @@ const Domains = () => {
           {tableData.length > 0 ? (
             tableData?.map((item, index) => (
               <tr key={index}>
-                <td
-                  onClick={() => handleCopy(`https://setish.org/${item}`)}
-                >{`https://setish.org/${item}`}</td>
+                <td onClick={() => handleCopy(handleLink(item))}>
+                  {handleLink(item)}
+                </td>
                 <td>{selectedGeo.replace("/", " ")}</td>
                 <td>{selectedLang.split("/")[1]}</td>
               </tr>
