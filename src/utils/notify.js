@@ -41,6 +41,6 @@ export const handleCopy = (text = "") => {
     notify_error("nothing to copy");
     return;
   }
-  navigator.clipboard.writeText(text);
+  navigator.clipboard.writeText(decodeURI(text.replace(/\s+/g, '')));
   notify_success("Copied");
 };

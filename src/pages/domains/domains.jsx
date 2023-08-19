@@ -18,8 +18,9 @@ const Domains = () => {
   const [tableData, setTable] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [offers, setOffers] = useState([]);
+  const [defCharachter, setDefCharacter] = useState("mario_dragh");
+  const [defOffer, setDefOffer] = useState("immediate_edge");
   const domain = "https://setish.org";
-  const params = "?character=mario_dragh&offer=immediate_edge";
   const notRelavantOffers = ["icons", "characters", "sharing"];
 
   const getSetishData = async (set, path) => {
@@ -64,7 +65,7 @@ const Domains = () => {
     if (url.split("/")[2].includes("-")) {
       finaLink = `${domain}/${url}`;
     } else {
-      finaLink = `${domain}/${url}index.html${params}`;
+      finaLink = `${domain}/${url}index.html?character=${defCharachter}&offer=${defOffer}`;
     }
     return finaLink;
   };
@@ -82,9 +83,6 @@ const Domains = () => {
         <div className="form-body">
           <select
             className="form-select"
-            name="platform"
-            id="platform"
-            form="cmp"
             onChange={(e) => handleSelectGeo(e.target.value)}
           >
             <option value={"Asdf"}>Select Geo</option>
@@ -98,9 +96,6 @@ const Domains = () => {
           </select>
           <select
             className="form-select"
-            name="platform"
-            id="platform"
-            form="cmp"
             onChange={(e) => setLang(e.target.value)}
           >
             <option value={selectedLang}>All Languages</option>
@@ -116,14 +111,15 @@ const Domains = () => {
           <button type="submit">Submit</button>
           <select
             className="form-select"
-            name="platform"
-            id="platform"
-            form="cmp"
+            onChange={(e) => setDefCharacter(e.target.value)}
           >
             <option value={"Asdf"}>Available Charachters</option>
             {characters.map((i, index) => {
               return (
-                <option key={index} value={i}>
+                <option
+                  key={index}
+                  value={i.split("/")[2].replace(".json", " ")}
+                >
                   {i.split("/")[2].replace(".json", " ")}
                 </option>
               );
@@ -131,9 +127,7 @@ const Domains = () => {
           </select>
           <select
             className="form-select"
-            name="platform"
-            id="platform"
-            form="cmp"
+            onChange={(e) => setDefOffer(e.target.value)}
           >
             <option value={"Asdf"}>Available Offers</option>
             {offers?.map((i, index) => {
@@ -141,7 +135,7 @@ const Domains = () => {
                 return null;
               }
               return (
-                <option key={index} value={i}>
+                <option key={index} value={i.split("/")[1]}>
                   {i.split("/")[1]}
                 </option>
               );
