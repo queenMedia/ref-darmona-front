@@ -233,6 +233,21 @@ class Api {
       return undefined;
     }
   }
+
+  async inject(data) {
+    try {
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `https://bucket-service-020e9961f3af.herokuapp.com/S3/copy-specific-folder`,
+        data: data,
+      };
+      return await axios.request(config);
+    } catch (e) {
+      console.log(e.message);
+      return e;
+    }
+  }
 }
 
 export const api = new Api(baseUrl);
