@@ -87,13 +87,27 @@ const Domains = () => {
       notify_error("you mast fill the form preperly");
       return;
     }
+    notify_Info("Copy In Progress");
+    const waiter = setInterval(() => {
+      notify_Info("Copy In Progress");
+    }, 5000);
+
+    let linkToInject = "";
+    if (origin_url.includes("/index.html")) {
+      linkToInject = origin_url.split("/index.html")[0];
+    } else {
+      linkToInject = origin_url;
+    }
+
     try {
       const resp = await api.inject({
-        origin_url,
+        origin_url: linkToInject,
         destination_url,
         destination_folder,
       });
       console.log(resp);
+      clearInterval(waiter);
+      notify_success("copy Successful");
     } catch (error) {
       console.log(error.message);
       notify_error("did not copy");
@@ -231,7 +245,9 @@ const Domains = () => {
               })}
             </select>
             <input
-              onChange={(e) => set_destination_folder(e.target.value.replace(/[^a-z]/g,''))}
+              onChange={(e) =>
+                set_destination_folder(e.target.value.replace(/[^a-z]/g, ""))
+              }
               value={destination_folder}
               type="text"
               placeholder="Path Name"
