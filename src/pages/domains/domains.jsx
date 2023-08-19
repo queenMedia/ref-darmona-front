@@ -34,7 +34,7 @@ const Domains = () => {
   const handleSelectGeo = async (geo) => {
     notify_Info("Searching for available languages");
     const resp = await getSetishData(setLanguages, geo);
-    setGeo(geo)
+    setGeo(geo);
     setLang(resp[0]);
     console.log({ resp });
   };
@@ -119,28 +119,30 @@ const Domains = () => {
       </form>
 
       <table className="snowPage-table">
-        <thead>
-          <tr>
-            <th>Link</th>
-            <th>Geo</th>
-            <th>Language</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.length > 0 ? (
-            tableData?.map((item, index) => (
-              <tr key={index}>
-                <td onClick={() => handleCopy(handleLink(item))}>
-                  {handleLink(item)}
-                </td>
-                <td>{selectedGeo.replace("/", " ")}</td>
-                <td>{selectedLang.split("/")[1]}</td>
+        {tableData?.length > 0 ? (
+          <>
+            <thead>
+              <tr>
+                <th>Link</th>
+                <th>Geo</th>
+                <th>Language</th>
               </tr>
-            ))
-          ) : (
-            <></>
-          )}
-        </tbody>
+            </thead>
+            <tbody>
+              {tableData?.map((item, index) => (
+                <tr key={index}>
+                  <td className="snowPage-link" onClick={() => handleCopy(handleLink(item))}>
+                    {handleLink(item)}
+                  </td>
+                  <td>{selectedGeo.replace("/", " ")}</td>
+                  <td>{selectedLang.split("/")[1]}</td>
+                </tr>
+              ))}
+            </tbody>{" "}
+          </>
+        ) : (
+          <></>
+        )}
       </table>
     </div>
   );
