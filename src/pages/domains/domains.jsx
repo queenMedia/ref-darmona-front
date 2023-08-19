@@ -17,8 +17,10 @@ const Domains = () => {
   const [selectedLang, setLang] = useState("");
   const [tableData, setTable] = useState([]);
   const [characters, setCharacters] = useState([]);
+  const [offers, setOffers] = useState([]);
   const domain = "https://setish.org";
   const params = "?character=mario_dragh&offer=immediate_edge";
+  const notRelavantOffers = ["icons", "characters", "sharing"];
 
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
@@ -28,7 +30,14 @@ const Domains = () => {
 
   const getCharacterData = async (set, path) => {
     const characters = await api.getCharacters(path, user.token);
+    console.log(characters);
     set(characters.data);
+  };
+
+  const getOfferData = async (set, path) => {
+    const offers = await api.getCharacters(path, user.token);
+    console.log({ offers });
+    set(offers.data);
   };
 
   const handleSelectGeo = async (geo) => {
@@ -41,6 +50,11 @@ const Domains = () => {
 
   const handleBpSubmit = async (e) => {
     e.preventDefault();
+    if (selectedGeo === "" || selectedLang == "") {
+      notify_error("You must select a geo");
+      return;
+    }
+
     console.log(selectedLang);
     await getSetishData(setTable, selectedLang);
   };
@@ -58,6 +72,7 @@ const Domains = () => {
   useEffect(() => {
     getSetishData(setGeos, "");
     getCharacterData(setCharacters, "prelanders/characters/");
+    getOfferData(setOffers, "prelanders/");
   }, []);
 
   return (
@@ -98,23 +113,40 @@ const Domains = () => {
               );
             })}
           </select>
-          {/* <select
+          <button type="submit">Submit</button>
+          <select
             className="form-select"
             name="platform"
             id="platform"
             form="cmp"
-            onChange={(e) => setLang(e.target.value)}
           >
-            <option value={"Asdf"}>All Charachters</option>
+            <option value={"Asdf"}>Available Charachters</option>
             {characters.map((i, index) => {
               return (
                 <option key={index} value={i}>
-                  {i.split("/")[2].replace("_", " ").replace(".json", " ")}
+                  {i.split("/")[2].replace(".json", " ")}
                 </option>
               );
             })}
-          </select> */}
-          <button type="submit">Submit</button>
+          </select>
+          <select
+            className="form-select"
+            name="platform"
+            id="platform"
+            form="cmp"
+          >
+            <option value={"Asdf"}>Available Offers</option>
+            {offers?.map((i, index) => {
+              if (notRelavantOffers.includes(i.split("/")[1])) {
+                return null;
+              }
+              return (
+                <option key={index} value={i}>
+                  {i.split("/")[1]}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </form>
 
@@ -131,7 +163,10 @@ const Domains = () => {
             <tbody>
               {tableData?.map((item, index) => (
                 <tr key={index}>
-                  <td className="snowPage-link" onClick={() => handleCopy(handleLink(item))}>
+                  <td
+                    className="snowPage-link"
+                    onClick={() => handleCopy(handleLink(item))}
+                  >
                     {handleLink(item)}
                   </td>
                   <td>{selectedGeo.replace("/", " ")}</td>
