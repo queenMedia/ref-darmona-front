@@ -34,6 +34,7 @@ const Domains = () => {
   const handleSelectGeo = async (geo) => {
     notify_Info("Searching for available languages");
     const resp = await getSetishData(setLanguages, geo);
+    setGeo(geo)
     setLang(resp[0]);
     console.log({ resp });
   };
@@ -61,7 +62,7 @@ const Domains = () => {
 
   return (
     <div className="snowPage-container">
-      <form className="form-container" onSubmit={handleBpSubmit}>
+      <form className="snowPage-form" onSubmit={handleBpSubmit}>
         <h2 className="form-title">Black Pages</h2>
         <div className="form-body">
           <select
@@ -117,7 +118,7 @@ const Domains = () => {
         </div>
       </form>
 
-      <table className="table">
+      <table className="snowPage-table">
         <thead>
           <tr>
             <th>Link</th>
