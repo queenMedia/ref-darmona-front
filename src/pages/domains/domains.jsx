@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../utils/api";
 import { useSelector, useDispatch } from "react-redux";
-import { notify_error, notify_success, notify_Info } from "../../utils/notify";
+import {
+  notify_error,
+  notify_success,
+  notify_Info,
+  handleCopy,
+} from "../../utils/notify";
 import "./domains.css";
 
 const Domains = () => {
@@ -16,7 +21,9 @@ const Domains = () => {
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
     set(setishData.data);
+    return setishData.data
   };
+
   const getCharacterData = async (set, path) => {
     const characters = await api.getCharacters(path, user.token);
     set(characters.data);
@@ -24,14 +31,16 @@ const Domains = () => {
 
   const handleSelectGeo = async (geo) => {
     notify_Info("Searching for available languages");
-    setGeo(geo);
     const resp = await getSetishData(setLanguages, geo);
-    console.log(resp);
+    setLang(resp[0]);
+    console.log({resp});
   };
 
-  const handleBpSubmit = async () =>{
-    
-  }
+  const handleBpSubmit = async (e) => {
+    e.preventDefault();
+    console.log(selectedLang);
+    await getSetishData(setTable, selectedLang);
+  };
 
   useEffect(() => {
     getSetishData(setGeos, "");
@@ -40,7 +49,7 @@ const Domains = () => {
 
   return (
     <div className="snowPage-container">
-      <form className="form-container">
+      <form className="form-container" onSubmit={handleBpSubmit}>
         <h2 className="form-title">Black Pages</h2>
         <div className="form-body">
           <select
@@ -66,7 +75,8 @@ const Domains = () => {
             form="cmp"
             onChange={(e) => setLang(e.target.value)}
           >
-            <option value={"Asdf"}>All Languages</option>
+            <option value={selectedLang}>All Languages</option>
+
             {languages.map((i, index) => {
               return (
                 <option key={index} value={i}>
@@ -75,7 +85,7 @@ const Domains = () => {
               );
             })}
           </select>
-          <select
+          {/* <select
             className="form-select"
             name="platform"
             id="platform"
@@ -90,7 +100,7 @@ const Domains = () => {
                 </option>
               );
             })}
-          </select>
+          </select> */}
           <button type="submit">Submit</button>
         </div>
       </form>
@@ -107,10 +117,11 @@ const Domains = () => {
           {tableData.length > 0 ? (
             tableData?.map((item, index) => (
               <tr key={index}>
-                <td>{item.date}</td>
-                <td>{item.id}</td>
-                <td className="countFalse">{item.countFalse}</td>
-                <td className="countTrue">{item.countTrue}</td>
+                <td
+                  onClick={() => handleCopy(`https://setish.org/${item}`)}
+                >{`https://setish.org/${item}`}</td>
+                <td>{selectedGeo.replace("/", " ")}</td>
+                <td>{selectedLang.split("/")[1]}</td>
               </tr>
             ))
           ) : (

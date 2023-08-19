@@ -36,7 +36,7 @@ export const notify_Info = (text) =>
     theme: "dark",
   });
 
-export const handleCopy = (text) => {
+export const handleCopy = (text = "") => {
   if (text === "") {
     notify_error("nothing to copy");
     return;
