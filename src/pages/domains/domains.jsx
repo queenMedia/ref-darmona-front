@@ -175,9 +175,25 @@ const Domains = () => {
           )}
         </table>
       </div>
-      <div className="snowPage-container">
+      <div className="snowPage-container-sec">
         <h2 className="form-title">Injector</h2>
-        
+        <form action="">
+          <div className="form-body">
+            <input type="text" placeholder="Insert Link" />
+            <select className="form-select">
+              <option value={"Asdf"}>Select Domain</option>
+              {user.blackPageDomains.map((i, index) => {
+                return (
+                  <option key={index} value={i}>
+                    {i.split("/")[0]}
+                  </option>
+                );
+              })}
+            </select>
+            <input type="text" placeholder="Path Name" />
+            <button type="submit">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
   );
