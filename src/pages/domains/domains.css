@@ -64,8 +64,11 @@
 .snowPage-link {
   text-align: left;
 }
-.domain-cont{
+.domain-cont {
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+.open {
+  color: white;
 }
