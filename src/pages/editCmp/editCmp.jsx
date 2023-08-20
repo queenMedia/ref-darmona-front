@@ -90,7 +90,7 @@ const EditCmp = () => {
       notify_error("Must select first");
     }
   };
-  const deleteValueFromGeoArray = (key, valueToDelete) => {
+  const deleteGrp = (key, valueToDelete) => {
     const updatedEps = [...eps];
     updatedEps[key].geo.grp = updatedEps[key].geo.grp.filter(
       (i) => i !== valueToDelete
@@ -106,6 +106,11 @@ const EditCmp = () => {
     };
     const updatedEps = [...eps];
     updatedEps[eps.length] = newEpsObject;
+    setEps(updatedEps);
+  };
+  const deleteEps = (index) => {
+    const updatedEps = [...eps];
+    updatedEps.splice(index, 1);
     setEps(updatedEps);
   };
   return (
@@ -177,13 +182,16 @@ const EditCmp = () => {
                       <select disabled>
                         <option value={i}>{i}</option>
                       </select>
-                      <span onClick={() => deleteValueFromGeoArray(index, i)}>
-                        X
-                      </span>
+                      <span onClick={() => deleteGrp(index, i)}>X</span>
                     </div>
                   ))
                 ) : (
                   <></>
+                )}
+                {index === 0 ? (
+                  <span onClick={addEps}>Add Endpoint</span>
+                ) : (
+                  <span onClick={() => deleteEps(index)}>Delete Endpoint</span>
                 )}
               </div>
             </Box>
