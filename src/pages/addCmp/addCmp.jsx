@@ -22,7 +22,6 @@ const AddCmp = () => {
   const [domain, setDomain] = useState("");
   const [geo, setGeo] = useState("AF");
   const [availableAliases, setAvailableAliases] = useState([]);
-  const [geoArray, setGeoArray] = useState({ 0: [] });
   const [whitePage, setWhitePage] = useState("");
   const [eps, setEps] = useState([
     {
@@ -45,7 +44,6 @@ const AddCmp = () => {
       }
     }
     const parsedPlatform = JSON.parse(platform);
-    console.log("whitepage:", whitePage);
     const data = {
       _id: user._id,
       name,
@@ -59,11 +57,7 @@ const AddCmp = () => {
       dc_ep: whitePage,
       eps: eps,
     };
-    console.log(data);
-    for (let index = 0; index < eps.length; index++) {
-      const element = eps[index];
-      console.log(element.geo.grp);
-    }
+    console.log({data});
     const apiResp = await api.addCmp(data, user.token);
     if (apiResp?.name && apiResp?.name) {
       notify_success(`Campaign added succesfully`);
@@ -101,40 +95,47 @@ const AddCmp = () => {
     }
   };
 
+  //update black page by index
   const updateEp = (index, newEpValue) => {
     const updatedEps = [...eps];
     updatedEps[index].ep = newEpValue;
     setEps(updatedEps);
   };
-
-  const updateGrp = (index) => {
+  //add geos by index
+  const addGrp = (index) => {
     if (geo) {
       const updatedEps = [...eps];
       updatedEps[index].geo.grp.push(geo);
       setEps(updatedEps);
-      const updatedGeoArray = { ...geoArray };
-      updatedGeoArray[index].push(geo);
-      setGeoArray(updatedGeoArray);
       notify_success("geo added");
     } else {
       notify_error("Must select first");
     }
   };
-
-  const deleteValueFromGeoArray = (key, valueToDelete) => {
-    const updatedGeoArray = { ...geoArray };
-    updatedGeoArray[key] = updatedGeoArray[key].filter(
-      (item) => item !== valueToDelete
-    );
-    setGeoArray(updatedGeoArray);
-
+  //delete geos by index
+  const deleteGrp = (key, valueToDelete) => {
     const updatedEps = [...eps];
     updatedEps[key].geo.grp = updatedEps[key].geo.grp.filter(
       (i) => i !== valueToDelete
     );
     setEps(updatedEps);
+    notify_success(`deleted`);
   };
-
+  const addEps = () => {
+    const newEpsObject = {
+      geo: { grp: [], bl: false },
+      weight: 1,
+      ep: "",
+    };
+    const updatedEps = [...eps];
+    updatedEps[eps.length] = newEpsObject;
+    setEps(updatedEps);
+  };
+  const deleteEps = (index) => {
+    const updatedEps = [...eps];
+    updatedEps.splice(index, 1);
+    setEps(updatedEps);
+  };
   return (
     <div className="addCmp-container">
       <form className="newCmp-form" onSubmit={handleSubmit} id="cmp">
@@ -211,16 +212,16 @@ const AddCmp = () => {
                       </option>
                     ))}
                   </select>
-                  <span onClick={() => updateGrp(index)}>Add</span>
+                  <span onClick={() => addGrp(index)}>Add</span>
                 </div>
 
-                {geoArray[index]?.length > 0 ? (
-                  geoArray[index]?.map((i, key) => (
+                {item.geo.grp?.length > 0 ? (
+                  item.geo.grp?.map((i, key) => (
                     <div className="geoSelect" key={key}>
                       <select disabled>
                         <option value={i.code}>{i}</option>
                       </select>
-                      <span onClick={() => deleteValueFromGeoArray(index, i)}>
+                      <span onClick={() => deleteGrp(index, i)}>
                         X
                       </span>
                     </div>
@@ -228,11 +229,16 @@ const AddCmp = () => {
                 ) : (
                   <></>
                 )}
+                {index === 0 ? (
+                  <span onClick={addEps}>Add Endpoint</span>
+                ) : (
+                  <span onClick={() => deleteEps(index)}>Delete Endpoint</span>
+                )}
               </div>
             </Box>
           );
         })}
-        {/* <span onClick={addEps}>Add Endpoint</span> */}
+
         <button type="submit">Submit</button>
       </form>
     </div>
