@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "../../components/box/box";
 import { api } from "../../utils/api";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { countryCodes } from "../../assets/data/countryCodes";
-import { notify_error, notify_success } from "../../utils/notify";
+import { notify_error, notify_success, notify_Info } from "../../utils/notify";
+import { ThriveLink } from "../../components/thriveLink/thriveLink";
+import { SelectWP } from "../../components/selectWP/selectWP";
+import { bing_query, bing_query_map } from "../../assets/data/queryParametrs";
+import { QueryParameters } from "../../components/queryParameters/queryParameters";
+import { addCmp } from "../../store/slices/user";
 import "./duplicateCmp.css";
 
 const DuplcateCmp = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [availableAliases, setAvailableAliases] = useState([]);
+  const [domain, setDomain] = useState("");
   const [name, setName] = useState("");
   const [impressions, setImpressions] = useState(1);
   const [alias, setAlias] = useState("");
   const [geo, setGeo] = useState("");
   const [whitePage, setWhitePage] = useState("");
   const { id, cmpName } = useParams();
+  const [platform, setPlatform] = useState(
+    JSON.stringify({ query: bing_query, map: bing_query_map })
+  );
   const [eps, setEps] = useState([
     {
       geo: { grp: [], bl: false },
@@ -31,7 +42,6 @@ const DuplcateCmp = () => {
       navigate("/cmplist");
       return;
     }
-    setAlias(json.alias);
     setImpressions(json.imp.count);
     setWhitePage(json.dc_ep);
     setEps(json.eps);
@@ -44,6 +54,27 @@ const DuplcateCmp = () => {
     handleGetJson(cmpValue);
   }, []);
 
+  const handleGetAlias = async () => {
+    try {
+      if (domain) {
+        notify_Info(`Searching`);
+      } else {
+        notify_error("must choose domain first");
+        return;
+      }
+      const resp = await api.getAvailableAliases(user._id, domain, user.token);
+      console.log(resp);
+      if (resp.length < 1) {
+        notify_error("you are out of available aliases");
+        return;
+      }
+      setAvailableAliases(resp);
+      notify_success(`${resp.length} aliases are left`);
+    } catch (error) {
+      console.log(error.message);
+      notify_error("choose a different domain");
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     for (let index = 0; index < eps.length; index++) {
@@ -53,23 +84,34 @@ const DuplcateCmp = () => {
         return;
       }
     }
+    if (alias === "") {
+      notify_error("must Select new alias");
+      return;
+    }
+    const parsedPlatform = JSON.parse(platform);
     const data = {
       _id: user._id,
-      url: decodeURI(id),
       name,
       imp: { count: Number(impressions), recurring: true },
+      ctype: "url",
+      query: parsedPlatform.query,
+      query_map: parsedPlatform.map,
       alias,
-      dc_ep: encodeURI(whitePage),
+      ip: true,
+      track: true,
+      dc_ep: whitePage,
       eps: eps,
     };
-    for (let index = 0; index < data.eps.length; index++) {
-      const element = data.eps[index];
-      console.log(element.geo.grp);
-    }
     console.log({ data });
-    const apiResp = await api.updateCmp(data, user.token);
-    if (apiResp === 200) {
-      notify_success(`Campaign updated succesfully`);
+    const apiResp = await api.addCmp(data, user.token);
+    if (apiResp?.name && apiResp?.name) {
+      notify_success(`Campaign added succesfully`);
+      dispatch(
+        addCmp({
+          name: name,
+          url: apiResp.url,
+        })
+      );
       navigate("/cmplist");
     } else {
       notify_error(apiResp);
@@ -133,28 +175,45 @@ const DuplcateCmp = () => {
               required
               placeholder="Skip imppressions"
             />
-            <input
-              type="text"
-              value={alias}
-              required
-              placeholder="Alias"
-              disabled={true}
-            />
-            <input
-              type="text"
-              onChange={(e) => setWhitePage(e.target.value)}
-              value={whitePage}
-              required
-              id="whitePage"
-              placeholder="White Page"
-            />
+            <div className="geoSelect">
+              <select onChange={(e) => setDomain(e.target.value)}>
+                <option>Select Domain</option>
+                {user.aliases.map((i, index) => (
+                  <option key={index} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </select>
+              <span onClick={() => handleGetAlias()}>Search</span>
+            </div>
+            <select onChange={(e) => setAlias(e.target.value)}>
+              <option>Select Alaias</option>
+              {availableAliases.map((i, index) => (
+                <option key={index} value={i}>
+                  {i}
+                </option>
+              ))}
+            </select>
           </div>
         </Box>
+        <QueryParameters setPlatform={setPlatform} />
+        <SelectWP setWhitePage={setWhitePage} />
+        <ThriveLink />
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
               {index === 0 && <h1>Endpoints</h1>}
               <div className="formBody">
+                {index === 0 && (
+                  <input
+                    type="text"
+                    onChange={(e) => setWhitePage(encodeURI(e.target.value))}
+                    required
+                    id="whitePage"
+                    placeholder="White Page"
+                    value={whitePage}
+                  />
+                )}
                 <input
                   type="text"
                   onChange={(e) => updateEp(index, encodeURI(e.target.value))}
@@ -197,7 +256,6 @@ const DuplcateCmp = () => {
             </Box>
           );
         })}
-        {/* <span onClick={addEps}>Add Endpoint</span> */}
         <button type="submit">Submit</button>
       </form>
     </div>
