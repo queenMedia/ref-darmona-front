@@ -40,7 +40,17 @@ const Table = ({ data }) => {
                       )
                     }
                   />
-                  <img src={DupIcon} alt="" />
+                  <img
+                    src={DupIcon}
+                    alt=""
+                    onClick={() =>
+                      navigate(
+                        `/cmplist/duplicate/${encodeURIComponent(
+                          item.url
+                        )}/${encodeURIComponent(item.name)}`
+                      )
+                    }
+                  />
                 </td>
               </tr>
             );

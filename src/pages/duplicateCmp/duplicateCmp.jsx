@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { countryCodes } from "../../assets/data/countryCodes";
 import { notify_error, notify_success } from "../../utils/notify";
-import "./editCmp.css";
+import "./duplicateCmp.css";
 
-const EditCmp = () => {
+const DuplcateCmp = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -117,7 +117,7 @@ const EditCmp = () => {
     <div className="addCmp-container">
       <form className="newCmp-form" onSubmit={handleSubmit} id="cmp">
         <Box>
-          <h1>Edit information</h1>
+          <h1>Duplicate information</h1>
           <div className="formBody">
             <input
               type="text"
@@ -204,4 +204,4 @@ const EditCmp = () => {
   );
 };
 
-export default EditCmp;
+export default DuplcateCmp;

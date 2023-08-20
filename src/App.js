@@ -6,6 +6,7 @@ import SnowPage from "./pages/snow/snow";
 import AddCmp from "./pages/addCmp/addCmp";
 import EditCmp from "./pages/editCmp/editCmp";
 import Domains from "./pages/domains/domains";
+import DuplcateCmp from "./pages/duplicateCmp/duplicateCmp";
 import { api } from "./utils/api";
 import { getCookie } from "./utils/getc";
 import { useNavigate } from "react-router-dom";
@@ -79,6 +80,11 @@ function App() {
                     path="/cmplist/editcmp/:id/:cmpName"
                     exact
                     element={<EditCmp />}
+                  />
+                  <Route
+                    path="/cmplist/duplicate/:id/:cmpName"
+                    exact
+                    element={<DuplcateCmp />}
                   />
                   <Route path="/domains" exact element={<Domains />} />
                   <Route path="/snow" exact element={<SnowPage />} />
