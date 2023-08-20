@@ -210,6 +210,11 @@ const Domains = () => {
                     </td>
                     <td>{selectedGeo.replace("/", " ")}</td>
                     <td>{selectedLang.split("/")[1]}</td>
+                    <td>
+                      <a target="_blank" href={handleLink(item).replace(/\s+/g, '')}>
+                        Open
+                      </a>
+                    </td>
                   </tr>
                 ))}
               </tbody>{" "}
