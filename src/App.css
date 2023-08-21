@@ -73,7 +73,7 @@ button:hover {
   background-color: green;
 }
 select {
-  appearance: none;
+  appearance: none !important;
   outline: 0;
   border: 0;
   box-shadow: none;
@@ -98,7 +98,11 @@ select::-ms-expand {
   border-radius: 0.25em;
   overflow: hidden;
 }
-
+select:focus>option {
+  background-color: grey;
+  color: white;
+  /* selected */
+}
 .select::after {
   content: "\25BC";
   position: absolute;
