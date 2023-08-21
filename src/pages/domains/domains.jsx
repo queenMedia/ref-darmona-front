@@ -198,9 +198,9 @@ const Domains = () => {
             <>
               <thead>
                 <tr>
-                  <th>Link</th>
-                  <th>Geo</th>
-                  <th>Language</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
