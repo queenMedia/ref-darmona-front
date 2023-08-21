@@ -269,15 +269,14 @@ const Domains = () => {
             <button type="submit">Submit</button>
           </div>
         </form>
-        {finaLink && (
           <input
             className="finalLink"
             onClick={(e) => handleCopy(String(finaLink))}
             value={finaLink}
             type="text"
             readOnly
+            placeholder="injected link"
           />
-        )}
       </div>
     </div>
   );
