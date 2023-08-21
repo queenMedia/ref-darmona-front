@@ -102,6 +102,11 @@ select:focus>option:checked {
   background: yellow;
   /* selected */
 }
+select:focus>option {
+  background-color: grey;
+  color: white;
+  /* selected */
+}
 .select::after {
   content: "\25BC";
   position: absolute;
