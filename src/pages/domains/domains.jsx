@@ -20,7 +20,7 @@ const Domains = () => {
   const [offers, setOffers] = useState([]);
   const [defCharachter, setDefCharacter] = useState("mario_dragh");
   const [defOffer, setDefOffer] = useState("immediate_edge");
-  const [finaLink, setFinalLink] = useState("https://github.com/queenMedia/ref-darmona-front/commit/f0e939ee71908412fa039a20c60958b889820529");
+  const [finaLink, setFinalLink] = useState("");
   const domain = "https://setish.org";
   const notRelavantOffers = ["icons", "characters", "sharing"];
 
