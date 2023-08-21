@@ -275,7 +275,7 @@ const Domains = () => {
             value={finaLink}
             type="text"
             readOnly
-            placeholder="injected link"
+           
           />
       </div>
     </div>
