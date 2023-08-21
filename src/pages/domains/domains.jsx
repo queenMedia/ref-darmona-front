@@ -20,6 +20,7 @@ const Domains = () => {
   const [offers, setOffers] = useState([]);
   const [defCharachter, setDefCharacter] = useState("mario_dragh");
   const [defOffer, setDefOffer] = useState("immediate_edge");
+  const [finaLink, setFinalLink] = useState("https://github.com/queenMedia/ref-darmona-front/commit/f0e939ee71908412fa039a20c60958b889820529");
   const domain = "https://setish.org";
   const notRelavantOffers = ["icons", "characters", "sharing"];
 
@@ -106,8 +107,11 @@ const Domains = () => {
         destination_folder,
       });
       console.log(resp);
+      if (resp?.data?.message) {
+        setFinalLink(resp?.data?.message);
+      }
       clearInterval(waiter);
-      notify_success("copy Successful");
+      notify_success("Inject Successful");
     } catch (error) {
       console.log(error.message);
       notify_error("did not copy");
@@ -211,7 +215,11 @@ const Domains = () => {
                     <td>{selectedGeo.replace("/", " ")}</td>
                     <td>{selectedLang.split("/")[1]}</td>
                     <td>
-                      <a className="open" target="_blank" href={handleLink(item).replace(/\s+/g, '')}>
+                      <a
+                        className="open"
+                        target="_blank"
+                        href={handleLink(item).replace(/\s+/g, "")}
+                      >
                         Open
                       </a>
                     </td>
@@ -261,6 +269,15 @@ const Domains = () => {
             <button type="submit">Submit</button>
           </div>
         </form>
+        {finaLink && (
+          <input
+            className="finalLink"
+            onClick={(e) => handleCopy(String(finaLink))}
+            value={finaLink}
+            type="text"
+            readOnly
+          />
+        )}
       </div>
     </div>
   );

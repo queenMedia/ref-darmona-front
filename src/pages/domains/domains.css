@@ -72,3 +72,9 @@
 .open {
   color: white;
 }
+
+.finalLink {
+  margin-top: 15px;
+  border-bottom: none;
+  cursor: pointer;
+}
