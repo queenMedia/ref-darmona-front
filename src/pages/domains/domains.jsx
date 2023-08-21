@@ -147,7 +147,7 @@ const Domains = () => {
               className="form-select"
               onChange={(e) => setLang(e.target.value)}
             >
-              <option value={selectedLang}>All Languages</option>
+              <option value={selectedLang}>Select Language</option>
 
               {languages.map((i, index) => {
                 return (
@@ -157,12 +157,11 @@ const Domains = () => {
                 );
               })}
             </select>
-            <button type="submit">Submit</button>
             <select
               className="form-select"
               onChange={(e) => setDefCharacter(e.target.value)}
             >
-              <option value={"Asdf"}>Available Charachters</option>
+              <option value={"Asdf"}>Select Charachters</option>
               {characters.map((i, index) => {
                 return (
                   <option
@@ -178,7 +177,7 @@ const Domains = () => {
               className="form-select"
               onChange={(e) => setDefOffer(e.target.value)}
             >
-              <option value={"Asdf"}>Available Offers</option>
+              <option value={"Asdf"}>Select Offer</option>
               {offers?.map((i, index) => {
                 if (notRelavantOffers.includes(i.split("/")[1])) {
                   return null;
@@ -190,6 +189,7 @@ const Domains = () => {
                 );
               })}
             </select>
+            <button type="submit">Submit</button>
           </div>
         </form>
 
