@@ -79,14 +79,18 @@ const SnowPage = () => {
       </form>
 
       <table className="table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>ID</th>
-            <th>Passed</th>
-            <th>Did not pass</th>
-          </tr>
-        </thead>
+        {data.length > 0 ? (
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>ID</th>
+              <th>Passed</th>
+              <th>Did not pass</th>
+            </tr>
+          </thead>
+        ) : (
+          <></>
+        )}
         <tbody>
           {data.length > 0 ? (
             data?.map((item, index) => (
