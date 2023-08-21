@@ -98,10 +98,6 @@ select::-ms-expand {
   border-radius: 0.25em;
   overflow: hidden;
 }
-select:focus>option:checked {
-  background: yellow;
-  /* selected */
-}
 select:focus>option {
   background-color: grey;
   color: white;
