@@ -61,7 +61,7 @@ export const prelandersCharacters = [
   },
   {
     keyName: "andres_lopez",
-    geo: "costa-rica",
+    geo: "mexico",
   },
   {
     keyName: "alejandro_fernandez",
