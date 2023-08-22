@@ -32,6 +32,7 @@ const Domains = () => {
 
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
+    console.log(setishData.data);
     set(setishData.data);
     return setishData.data;
   };
@@ -53,6 +54,10 @@ const Domains = () => {
     const resp = await getSetishData(setLanguages, geo);
     setGeo(geo);
     setLang(resp[0]);
+    console.log({ geo });
+    const updatedCharacters = [...characters];
+    updatedCharacters = updatedCharacters?.filter((i) => i?.geo === geo);
+    setCharacters(updatedCharacters);
     console.log({ resp });
   };
 
@@ -165,10 +170,7 @@ const Domains = () => {
               <option value={"Asdf"}>Select Charachters</option>
               {characters.map((i, index) => {
                 return (
-                  <option
-                    key={index}
-                    value={i.keyName}
-                  >
+                  <option key={index} value={i.keyName}>
                     {i.keyName}
                   </option>
                 );
