@@ -8,7 +8,7 @@ import {
   handleCopy,
 } from "../../utils/notify";
 import "./domains.css";
-import { characters } from "../../assets/data/characters";
+import { prelandersCharacters } from "../../assets/data/characters";
 
 const Domains = () => {
   const user = useSelector((state) => state.user);
@@ -121,7 +121,7 @@ const Domains = () => {
 
   useEffect(() => {
     getSetishData(setGeos, "");
-    setCharacters(characters);
+    setCharacters(prelandersCharacters);
     getOfferData(setOffers, "prelanders/");
   }, []);
 
@@ -167,9 +167,9 @@ const Domains = () => {
                 return (
                   <option
                     key={index}
-                    value={i.split("/")[2].replace(".json", " ")}
+                    value={i.keyName}
                   >
-                    {i.split("/")[2].replace(".json", " ")}
+                    {i.keyName}
                   </option>
                 );
               })}
