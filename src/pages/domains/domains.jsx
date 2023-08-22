@@ -59,12 +59,9 @@ const Domains = () => {
     const updatedCharacters = prelandersCharacters?.filter(
       (i) => i?.geo === geo.split("/")[0]
     );
-    console.log({ updatedCharacters });
+    console.log(updatedCharacters);
     const crts = updatedCharacters.map((i) => i.keyName);
-    console.log({ crts });
-    setCharacters(crts);
-
-
+    setCharacters(updatedCharacters);
   };
 
   const handleBpSubmit = async (e) => {
