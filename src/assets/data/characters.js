@@ -74,36 +74,4 @@ export const prelandersCharacters = [
   { geo: "denmark", keyName: "mette_frederiksen" },
 ];
 
-("belgium");
 
-("canada");
-
-("chille");
-
-("denmark");
-
-("france");
-
-("germany");
-
-("italy");
-
-("mexico");
-
-("norway");
-
-("peru");
-
-("poland");
-
-("portugal");
-
-("singapore");
-
-("slovenia");
-
-("spain");
-
-("sweden");
-
-("switzerland");
