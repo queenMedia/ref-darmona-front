@@ -69,7 +69,7 @@ export const prelandersCharacters = [
   },
   {
     keyName: "ernesto_bartarelli",
-    geo: "costa-rica",
+    geo: "italy",
   },
   { geo: "denmark", keyName: "mette_frederiksen" },
 ];
