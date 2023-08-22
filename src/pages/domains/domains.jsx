@@ -32,7 +32,7 @@ const Domains = () => {
 
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
-    console.log(setishData.data);
+
     set(setishData.data);
     return setishData.data;
   };
@@ -45,7 +45,7 @@ const Domains = () => {
 
   const getOfferData = async (set, path) => {
     const offers = await api.getCharacters(path, user.token);
-    console.log({ offers });
+
     set(offers.data);
   };
 
@@ -55,10 +55,16 @@ const Domains = () => {
     setGeo(geo);
     setLang(resp[0]);
     console.log({ geo });
-    const updatedCharacters = [...characters];
-    updatedCharacters = updatedCharacters?.filter((i) => i?.geo === geo);
-    setCharacters(updatedCharacters);
-    console.log({ resp });
+
+    const updatedCharacters = prelandersCharacters?.filter(
+      (i) => i?.geo === geo.split("/")[0]
+    );
+    console.log({ updatedCharacters });
+    const crts = updatedCharacters.map((i) => i.keyName);
+    console.log({ crts });
+    setCharacters(crts);
+
+
   };
 
   const handleBpSubmit = async (e) => {
@@ -112,7 +118,7 @@ const Domains = () => {
         destination_url,
         destination_folder,
       });
-      console.log(resp);
+
       if (resp?.data?.message) {
         setFinalLink(resp?.data?.message);
       }
