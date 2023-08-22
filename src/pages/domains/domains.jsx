@@ -8,6 +8,7 @@ import {
   handleCopy,
 } from "../../utils/notify";
 import "./domains.css";
+import { characters } from "../../assets/data/characters";
 
 const Domains = () => {
   const user = useSelector((state) => state.user);
@@ -120,7 +121,7 @@ const Domains = () => {
 
   useEffect(() => {
     getSetishData(setGeos, "");
-    getCharacterData(setCharacters, "prelanders/characters/");
+    setCharacters(characters);
     getOfferData(setOffers, "prelanders/");
   }, []);
 
@@ -269,14 +270,13 @@ const Domains = () => {
             <button type="submit">Submit</button>
           </div>
         </form>
-          <input
-            className="finalLink"
-            onClick={(e) => handleCopy(String(finaLink))}
-            value={finaLink}
-            type="text"
-            readOnly
-           
-          />
+        <input
+          className="finalLink"
+          onClick={(e) => handleCopy(String(finaLink))}
+          value={finaLink}
+          type="text"
+          readOnly
+        />
       </div>
     </div>
   );
