@@ -16,6 +16,10 @@ export const prelandersCharacters = [
     geo: "costa-rica",
   },
   {
+    keyName: "anny_lewandowskiej",
+    geo: "poland",
+  },
+  {
     keyName: "giorgio_armani",
     geo: "italy",
   },
