@@ -115,7 +115,9 @@ const Domains = () => {
       });
 
       if (resp?.data?.message) {
-        setFinalLink(resp?.data?.message);
+        setFinalLink(
+          `${resp?.data?.message}/index.html?character=${defCharachter}&offer=${defOffer}`
+        );
       }
       clearInterval(waiter);
       notify_success("Inject Successful");
