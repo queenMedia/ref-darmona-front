@@ -28,9 +28,13 @@ const Domains = () => {
   const notRelavantOffers = ["icons", "characters", "sharing"];
 
   const getSetishData = async (set, path) => {
-    const setishData = await api.getSetishData(path, user.token);
-    set(setishData.data);
-    return setishData.data;
+    try {
+      const setishData = await api.getSetishData(path, user.token);
+      set(setishData.data);
+      return setishData.data;
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const getCharacterData = async (set, path) => {
@@ -40,9 +44,12 @@ const Domains = () => {
   };
 
   const getOfferData = async (set, path) => {
-    const offers = await api.getCharacters(path, user.token);
-
-    set(offers.data);
+    try {
+      const offers = await api.getCharacters(path, user.token);
+      set(offers.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const handleSelectGeo = async (geo) => {

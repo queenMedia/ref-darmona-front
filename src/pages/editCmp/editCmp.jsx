@@ -26,15 +26,16 @@ const EditCmp = () => {
 
   const handleGetJson = async (cmpValue) => {
     const json = await api.getCmp(cmpValue, user.token);
-    if (json === "file not found" || !json) {
+    console.log(json);
+    if (json === "file not found" || json.error.includes("Unauthorized")) {
       notify_error("file not found");
       navigate("/cmplist");
       return;
     }
-    setAlias(json.alias);
-    setImpressions(json.imp.count);
-    setWhitePage(json.dc_ep);
-    setEps(json.eps);
+    setAlias(json?.alias);
+    setImpressions(json?.imp?.count);
+    setWhitePage(json?.dc_ep);
+    setEps(json?.eps);
   };
 
   useEffect(() => {
