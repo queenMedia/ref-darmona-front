@@ -23,7 +23,7 @@ export const fb_query = {
   adset_name: { type: "pattern", cmp: "^[a-zA-Z0-9]+$" },
   campaign_id: { type: "pattern", cmp: "^[0-9]+$" },
   ad_id: { type: "pattern", cmp: "^[0-9]+$" },
-  campaign_name: { type: "pattern", cmp: "^[a-zA-Z0-9]+$" },
+  campaign_name: { type: "pattern", cmp: "^[a-zA-Z0-9 ]+$" },
   placement: { type: "pattern", cmp: "^[a-zA-Z0-9_]+$" },
   ad_name: { type: "pattern", cmp: "^[a-zA-Z0-9-]+$" },
   adset_id: { type: "pattern", cmp: "^[0-9]+$" },
