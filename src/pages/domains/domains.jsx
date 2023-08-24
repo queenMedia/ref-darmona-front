@@ -9,6 +9,7 @@ import {
 } from "../../utils/notify";
 import "./domains.css";
 import { prelandersCharacters } from "../../assets/data/characters";
+import BucketTable from "../../components/bucketTable/bucketTable";
 
 const Domains = () => {
   const user = useSelector((state) => state.user);
@@ -32,7 +33,6 @@ const Domains = () => {
 
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
-
     set(setishData.data);
     return setishData.data;
   };
@@ -314,6 +314,8 @@ const Domains = () => {
           )}
         </div>
       </div>
+
+      <BucketTable />
     </div>
   );
 };

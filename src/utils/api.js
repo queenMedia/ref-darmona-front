@@ -191,12 +191,12 @@ class Api {
     }
   }
 
-  async getSetishData(path, token) {
+  async getSetishData(path, token, bucketName = "") {
     try {
       let config = {
         method: "get",
         maxBodyLength: Infinity,
-        url: `${this.base}/getBlackPages?path=${path}`,
+        url: `${this.base}/getBlackPages?path=${path}&bucketName=${bucketName}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
