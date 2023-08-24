@@ -115,9 +115,7 @@ const Domains = () => {
       });
 
       if (resp?.data?.message) {
-        setFinalLink(
-          `${resp?.data?.message}index.html?character=${defCharachter}&offer=${defOffer}`
-        );
+        setFinalLink(`${resp?.data?.message}index.html`);
       }
       clearInterval(waiter);
       notify_success("Inject Successful");
@@ -131,7 +129,7 @@ const Domains = () => {
     getSetishData(setGeos, "");
     setCharacters(prelandersCharacters);
     getOfferData(setOffers, "prelanders/");
-  }, []);
+  }, [defCharachter, defOffer]);
 
   return (
     <div className="domain-cont">
@@ -234,82 +232,86 @@ const Domains = () => {
 
       <div className="snowPage-container-sec">
         <h2 className="form-title">Injector</h2>
-        <form className="snowPage-form" onSubmit={handleInject}>
-          <div className="form-body">
-            <input
-              onChange={(e) => set_origin_url(e.target.value)}
-              type="text"
-              placeholder="Insert Link"
-              required
-            />
-            <select
-              className="form-select"
-              onChange={(e) => set_destination_url(e.target.value)}
-              required
-            >
-              <option value={"Asdf"}>Select Domain</option>
-              {user.blackPageDomains.map((i, index) => {
-                return (
-                  <option key={index} value={i}>
-                    {i.split("/")[0]}
-                  </option>
-                );
-              })}
-            </select>
-            <input
-              onChange={(e) =>
-                set_destination_folder(e.target.value.replace(/[^a-z]/g, ""))
-              }
-              value={destination_folder}
-              type="text"
-              placeholder="Path Name"
-              required
-            />
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-        {finaLink ? (
-          <div>
-            <input
-              className="finalLink"
-              onClick={(e) => handleCopy(String(finaLink))}
-              value={finaLink}
-              type="text"
-              readOnly
-            />
-            <select
-              className="form-select"
-              onChange={(e) => setDefCharacter(e.target.value)}
-            >
-              <option value={"Asdf"}>Select Charachters</option>
-              {characters.map((i, index) => {
-                return (
-                  <option key={index} value={i.keyName}>
-                    {i.keyName}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              className="form-select"
-              onChange={(e) => setDefOffer(e.target.value)}
-            >
-              <option value={"Asdf"}>Select Offer</option>
-              {offers?.map((i, index) => {
-                if (notRelavantOffers.includes(i.split("/")[1])) {
-                  return null;
+        <div className="finalLink-container">
+          <form className="snowPage-form" onSubmit={handleInject}>
+            <div className="form-body">
+              <input
+                onChange={(e) => set_origin_url(e.target.value)}
+                type="text"
+                placeholder="Insert Link"
+                required
+              />
+              <select
+                className="form-select"
+                onChange={(e) => set_destination_url(e.target.value)}
+                required
+              >
+                <option value={"Asdf"}>Select Domain</option>
+                {user.blackPageDomains.map((i, index) => {
+                  return (
+                    <option key={index} value={i}>
+                      {i.split("/")[0]}
+                    </option>
+                  );
+                })}
+              </select>
+              <input
+                onChange={(e) =>
+                  set_destination_folder(e.target.value.replace(/[^a-z]/g, ""))
                 }
-                return (
-                  <option key={index} value={i.split("/")[1]}>
-                    {i.split("/")[1]}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
+                value={destination_folder}
+                type="text"
+                placeholder="Path Name"
+                required
+              />
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+          {finaLink ? (
+            <>
+              <span
+              className="finalLink"
+                value={finaLink}
+                onClick={(e) => handleCopy(String(finaLink))}
+              >
+                {handleLink(finaLink)}
+              </span>
+              <div className="finalLink-selects-res">
+                <select
+                  className="form-select"
+                  onChange={(e) => setDefCharacter(e.target.value)}
+                >
+                  <option value={"Asdf"}>Select Charachters</option>
+                  {characters.map((i, index) => {
+                    return (
+                      <option key={index} value={i.keyName}>
+                        {i.keyName}
+                      </option>
+                    );
+                  })}
+                </select>
+                <select
+                  className="form-select"
+                  onChange={(e) => setDefOffer(e.target.value)}
+                >
+                  <option value={"Asdf"}>Select Offer</option>
+                  {offers?.map((i, index) => {
+                    if (notRelavantOffers.includes(i.split("/")[1])) {
+                      return null;
+                    }
+                    return (
+                      <option key={index} value={i.split("/")[1]}>
+                        {i.split("/")[1]}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );
