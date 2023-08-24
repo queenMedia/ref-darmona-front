@@ -209,8 +209,6 @@ const Domains = () => {
                     >
                       {handleLink(item)}
                     </td>
-                    <td>{selectedGeo.replace("/", " ")}</td>
-                    <td>{selectedLang.split("/")[1]}</td>
                     <td>
                       <a
                         className="open"
