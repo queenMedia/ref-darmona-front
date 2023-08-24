@@ -73,8 +73,16 @@
   color: white;
 }
 
+.finalLink-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .finalLink {
-  margin-top: 15px;
-  border-bottom: none;
-  cursor: pointer;
+  margin-left: 8px;
+}
+.finalLink-selects-res{
+  display: flex;
+  gap: 10px;
 }
