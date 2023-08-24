@@ -74,11 +74,11 @@ const Domains = () => {
   };
 
   const handleLink = (url) => {
-    console.log({url});
+    console.log({ url });
     let finaLink = "";
     if (url.split("/")[2].includes("-")) {
       finaLink = `${domain}/${url}`;
-    }else if(url.includes("https")){
+    } else if (url.includes("https")) {
       finaLink = `${url}?character=${defCharachter}&offer=${defOffer}`;
     } else {
       finaLink = `${domain}/${url}index.html?character=${defCharachter}&offer=${defOffer}`;
@@ -271,9 +271,9 @@ const Domains = () => {
           {finaLink ? (
             <>
               <span
-              className="finalLink"
+                className="finalLink"
                 value={finaLink}
-                onClick={(e) => handleCopy(String(finaLink))}
+                onClick={(e) => handleCopy(handleLink(finaLink))}
               >
                 {handleLink(finaLink)}
               </span>
