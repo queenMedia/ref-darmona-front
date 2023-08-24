@@ -10,6 +10,7 @@ import {
 import "./domains.css";
 import { prelandersCharacters } from "../../assets/data/characters";
 import BucketTable from "../../components/bucketTable/bucketTable";
+import Injector from "../../components/injector/injector";
 
 const Domains = () => {
   const user = useSelector((state) => state.user);
@@ -22,14 +23,9 @@ const Domains = () => {
   const [offers, setOffers] = useState([]);
   const [defCharachter, setDefCharacter] = useState("mario_dragh");
   const [defOffer, setDefOffer] = useState("immediate_edge");
-  const [finaLink, setFinalLink] = useState("");
+
   const domain = "https://setish.org";
   const notRelavantOffers = ["icons", "characters", "sharing"];
-
-  // injection form
-  const [origin_url, set_origin_url] = useState("");
-  const [destination_url, set_destination_url] = useState("");
-  const [destination_folder, set_destination_folder] = useState("");
 
   const getSetishData = async (set, path) => {
     const setishData = await api.getSetishData(path, user.token);
@@ -84,48 +80,6 @@ const Domains = () => {
       finaLink = `${domain}/${url}index.html?character=${defCharachter}&offer=${defOffer}`;
     }
     return finaLink;
-  };
-
-  const handleInject = async (e) => {
-    e.preventDefault();
-    if (
-      origin_url === "" ||
-      !origin_url.includes("https://setish.org/") ||
-      destination_url === "" ||
-      !destination_url.includes(".com") ||
-      destination_folder === ""
-    ) {
-      notify_error("you mast fill the form preperly");
-      return;
-    }
-    notify_Info("Copy In Progress");
-    const waiter = setInterval(() => {
-      notify_Info("Copy In Progress");
-    }, 5000);
-
-    let linkToInject = "";
-    if (origin_url.includes("/index.html")) {
-      linkToInject = origin_url.split("/index.html")[0];
-    } else {
-      linkToInject = origin_url;
-    }
-
-    try {
-      const resp = await api.inject({
-        origin_url: linkToInject,
-        destination_url,
-        destination_folder,
-      });
-
-      if (resp?.data?.message) {
-        setFinalLink(`${resp?.data?.message}index.html`);
-      }
-      clearInterval(waiter);
-      notify_success("Inject Successful");
-    } catch (error) {
-      console.log(error.message);
-      notify_error("did not copy");
-    }
   };
 
   useEffect(() => {
@@ -231,90 +185,7 @@ const Domains = () => {
         </table>
       </div>
 
-      <div className="snowPage-container-sec">
-        <h2 className="form-title">Injector</h2>
-        <div className="finalLink-container">
-          <form className="snowPage-form" onSubmit={handleInject}>
-            <div className="form-body">
-              <input
-                onChange={(e) => set_origin_url(e.target.value)}
-                type="text"
-                placeholder="Insert Link"
-                required
-              />
-              <select
-                className="form-select"
-                onChange={(e) => set_destination_url(e.target.value)}
-                required
-              >
-                <option value={"Asdf"}>Select Domain</option>
-                {user.blackPageDomains.map((i, index) => {
-                  return (
-                    <option key={index} value={i}>
-                      {i.split("/")[0]}
-                    </option>
-                  );
-                })}
-              </select>
-              <input
-                onChange={(e) =>
-                  set_destination_folder(e.target.value.replace(/[^a-z]/g, ""))
-                }
-                value={destination_folder}
-                type="text"
-                placeholder="Path Name"
-                required
-              />
-              <button type="submit">Submit</button>
-            </div>
-          </form>
-          {finaLink ? (
-            <>
-              <span
-                className="finalLink"
-                value={finaLink}
-                onClick={(e) => handleCopy(handleLink(finaLink))}
-              >
-                {handleLink(finaLink)}
-              </span>
-              <div className="finalLink-selects-res">
-                <select
-                  className="form-select"
-                  onChange={(e) => setDefCharacter(e.target.value)}
-                >
-                  <option value={"Asdf"}>Select Charachters</option>
-                  {characters.map((i, index) => {
-                    return (
-                      <option key={index} value={i.keyName}>
-                        {i.keyName}
-                      </option>
-                    );
-                  })}
-                </select>
-                <select
-                  className="form-select"
-                  onChange={(e) => setDefOffer(e.target.value)}
-                >
-                  <option value={"Asdf"}>Select Offer</option>
-                  {offers?.map((i, index) => {
-                    if (notRelavantOffers.includes(i.split("/")[1])) {
-                      return null;
-                    }
-                    return (
-                      <option key={index} value={i.split("/")[1]}>
-                        {i.split("/")[1]}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
-      </div>
-
+      <Injector offers={offers} />
       <BucketTable />
     </div>
   );
