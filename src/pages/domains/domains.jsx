@@ -116,7 +116,7 @@ const Domains = () => {
 
       if (resp?.data?.message) {
         setFinalLink(
-          `${resp?.data?.message}/index.html?character=${defCharachter}&offer=${defOffer}`
+          `${resp?.data?.message}index.html?character=${defCharachter}&offer=${defOffer}`
         );
       }
       clearInterval(waiter);
@@ -202,13 +202,6 @@ const Domains = () => {
         <table className="snowPage-table">
           {tableData?.length > 0 ? (
             <>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
               <tbody>
                 {tableData?.map((item, index) => (
                   <tr key={index}>
@@ -275,13 +268,48 @@ const Domains = () => {
             <button type="submit">Submit</button>
           </div>
         </form>
-        <input
-          className="finalLink"
-          onClick={(e) => handleCopy(String(finaLink))}
-          value={finaLink}
-          type="text"
-          readOnly
-        />
+        {finaLink ? (
+          <div>
+            <input
+              className="finalLink"
+              onClick={(e) => handleCopy(String(finaLink))}
+              value={finaLink}
+              type="text"
+              readOnly
+            />
+            <select
+              className="form-select"
+              onChange={(e) => setDefCharacter(e.target.value)}
+            >
+              <option value={"Asdf"}>Select Charachters</option>
+              {characters.map((i, index) => {
+                return (
+                  <option key={index} value={i.keyName}>
+                    {i.keyName}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              className="form-select"
+              onChange={(e) => setDefOffer(e.target.value)}
+            >
+              <option value={"Asdf"}>Select Offer</option>
+              {offers?.map((i, index) => {
+                if (notRelavantOffers.includes(i.split("/")[1])) {
+                  return null;
+                }
+                return (
+                  <option key={index} value={i.split("/")[1]}>
+                    {i.split("/")[1]}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
