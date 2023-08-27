@@ -1,0 +1,88 @@
+.snowPage-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgb(45, 45, 45);
+  border-radius: 5px;
+  padding: 0px 25px;
+  box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+}
+.snowPage-container-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgb(45, 45, 45);
+  border-radius: 5px;
+  padding: 0px 25px 30px;
+  box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.snowPage-form {
+  width: 100%;
+}
+
+.form-title {
+  margin-bottom: 40px;
+}
+
+.form-body {
+  display: flex;
+  gap: 20px;
+}
+
+.form-select {
+  flex: 0;
+  padding: 0 10px 2px;
+  appearance: auto;
+}
+
+/* Table Styles */
+.snowPage-table {
+  border-collapse: separate;
+  border-spacing: 60px 0 !important;
+  display: block;
+  height: 400px; /* You can adjust this value based on your preference */
+  overflow-y: auto;
+  border-spacing: 0 5px;
+  width: 100%;
+  padding-bottom: 20px;
+}
+.snowPage-table > thead {
+  position: sticky;
+  /* box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); */
+  top: 0;
+  background-color: rgb(45, 45, 45);
+}
+.snowPage-table > thead > tr {
+  padding: 10px;
+}
+
+/* If you want to add a gap between rows */
+.snowPage-table tr {
+  border-bottom: 5px solid transparent;
+}
+.snowPage-link {
+  text-align: left;
+}
+.domain-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.open {
+  color: white;
+}
+
+.finalLink-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.finalLink {
+  margin-left: 8px;
+}
+.finalLink-selects-res{
+  display: flex;
+  gap: 10px;
+}
