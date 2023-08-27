@@ -27,7 +27,7 @@ const EditCmp = () => {
   const handleGetJson = async (cmpValue) => {
     const json = await api.getCmp(cmpValue, user.token);
     console.log(json);
-    if (json === "file not found" || json.error.includes("Unauthorized")) {
+    if (json === "file not found" || json?.error?.includes("Unauthorized")) {
       notify_error("file not found");
       navigate("/cmplist");
       return;
