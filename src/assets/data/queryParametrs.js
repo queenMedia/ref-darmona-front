@@ -54,7 +54,31 @@ export const bingLeo_query_map = {
   sub4: "aff_sub2",
   sub5: "aff_sub12",
   sub6: "aff_sub9",
-  sub8: "aff_sub10"
+  sub8: "aff_sub10",
 };
 
 export const google_query = [];
+
+export const taboola_query = {
+  aff_sub2: { type: "pattern", cmp: "^[0-9]+$" },
+  aff_sub3: { type: "pattern", cmp: "^[0-9a-zA-z.-]+$" },
+  aff_sub4: { type: "pattern", cmp: "^[0-9a-zA-z.,-/:?]+$" },
+  aff_sub6: { type: "pattern", cmp: "^[a-zA-z]$" },
+  aff_sub7: { type: "pattern", cmp: "^[0-9]+$" },
+  aff_sub8: { type: "pattern", cmp: "^[0-9a-zA-z-_+]+$" },
+  aff_sub9: { type: "pattern", cmp: "^[0-9]+$" },
+  aff_sub11: { type: "pattern", cmp: "^[0-9a-zA-z-_]$" },
+};
+export const taboola_query_map = {
+  sub1: "aff_sub",
+  sub2: "aff_sub2",
+  sub3: "aff_sub3",
+  sub4: "aff_sub4",
+  sub5: "aff_sub5",
+  sub6: "aff_sub6",
+  sub7: "aff_sub7",
+  sub8: "aff_sub8",
+  sub9: "aff_sub9",
+  sub10: "aff_sub10",
+  sub11: "aff_sub11",
+};

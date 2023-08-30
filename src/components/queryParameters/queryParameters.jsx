@@ -6,7 +6,7 @@ import {
   fb_query,
   fb_query_map,
   bingLeo_query,
-  bingLeo_query_map,
+  bingLeo_query_map,taboola_query,taboola_query_map
 } from "../../assets/data/queryParametrs";
 
 export const QueryParameters = (props) => {
@@ -39,6 +39,14 @@ export const QueryParameters = (props) => {
           })}
         >
           Bing(LEO)
+        </option>
+        <option
+          value={JSON.stringify({
+            query: taboola_query,
+            map: taboola_query_map,
+          })}
+        >
+          Taboola
         </option>
         {/* <option value={bingLeo_query}>Google</option> */}
       </select>
