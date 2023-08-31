@@ -67,13 +67,13 @@ const Bucket = ({ offers }) => {
     let finaLink = "";
     if (url.split("/")[2].includes("-")) {
       //old template
-      finaLink = `${domain}/${url}`;
+      finaLink = `https://${domain}/${url}`;
     } else if (url.includes("https")) {
       // just to add/change params
-      finaLink = `${url}?character=${defCharachter}&offer=${defOffer}`;
+      finaLink = `https://${url}?character=${defCharachter}&offer=${defOffer}`;
     } else {
       // new template
-      finaLink = `${domain}/${url}index.html?character=${defCharachter}&offer=${defOffer}`;
+      finaLink = `https://${domain}/${url}index.html?character=${defCharachter}&offer=${defOffer}`;
     }
     return finaLink.replace(/\s+/g, "");
   };
