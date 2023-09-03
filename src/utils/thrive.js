@@ -13,6 +13,9 @@ export const generateThriveLink = (domain, platform, id) => {
     case platform === "bingLeo":
       link = `https://${domain}/click?trvid=${id}&ad_id={{AD_ID}}&adset_id={{ADSET_ID}}&campaign_id={{CAMPAIGN_ID}}&ad_name={{AD_NAME}}&adset_name={{ADSET_NAME}}&campaign_name={{CAMPAIGN_NAME}}&placement={{PLACEMENT}}&site_source_name={{SITE_SOURCE_NAME}}`;
       break;
+    case platform === "taboola":
+      link = `https://${domain}/click?trvid=${id}&aff_sub={{AFF_SUB}}&aff_sub2={{AFF_SUB2}}&aff_sub3={{AFF_SUB3}}&aff_sub4={{AFF_SUB4}}&aff_sub5={{AFF_SUB5}}&aff_sub6={{AFF_SUB6}}&aff_sub7={{AFF_SUB7}}&aff_sub8={{AFF_SUB8}}&aff_sub9={{AFF_SUB9}}&aff_sub11={{AFF_SUB11}}`;
+      break;
     default:
       break;
   }

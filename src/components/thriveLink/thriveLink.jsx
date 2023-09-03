@@ -33,6 +33,7 @@ export const ThriveLink = () => {
           <option value={"bingLeo"}>BingLeo</option>
           <option value={"facebook"}>Facebook</option>
           <option value={"google"}>Google</option>
+          <option value={"taboola"}>Taboola</option>
         </select>
         <div className="geoSelect">
           <input
