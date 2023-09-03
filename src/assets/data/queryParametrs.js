@@ -61,12 +61,12 @@ export const google_query = [];
 
 export const taboola_query = {
   aff_sub2: { type: "pattern", cmp: "^[0-9]+$" },
-  aff_sub3: { type: "pattern", cmp: "^[0-9a-zA-z.-]+$" },
-  aff_sub6: { type: "pattern", cmp: "^[a-zA-z]$" },
+  aff_sub3: { type: "pattern", cmp: "^[0-9a-zA-z\\-.]+$" },
+  aff_sub6: { type: "pattern", cmp: "^[a-zA-z]+$" },
   aff_sub7: { type: "pattern", cmp: "^[0-9]+$" },
-  aff_sub8: { type: "pattern", cmp: "^[0-9a-zA-z-_+]+$" },
+  aff_sub8: { type: "pattern", cmp: "^[0-9a-zA-z_\\-+]+$" },
   aff_sub9: { type: "pattern", cmp: "^[0-9]+$" },
-  aff_sub11: { type: "pattern", cmp: "^[0-9a-zA-z-_]$" },
+  aff_sub11: { type: "pattern", cmp: "^[0-9a-zA-z_\\-]+$" },
 };
 export const taboola_query_map = {
   sub1: "aff_sub",
