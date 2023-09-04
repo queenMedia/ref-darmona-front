@@ -248,6 +248,20 @@ class Api {
       return e;
     }
   }
+
+  async getCharactersByGoe(geo) {
+    try {
+      let config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: `https://r-prelander-back-d08d492c6242.herokuapp.com/character/get-character-by-country?country=${geo}`,
+      };
+      return await axios.request(config);
+    } catch (error) {
+      console.log(error.message);
+      return undefined;
+    }
+  }
 }
 
 export const api = new Api(baseUrl);

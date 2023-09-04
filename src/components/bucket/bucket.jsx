@@ -8,7 +8,7 @@ import {
   handleCopy,
 } from "../../utils/notify";
 import "./bucket.css";
-import { prelandersCharacters } from "../../assets/data/characters";
+// import { prelandersCharacters } from "../../assets/data/characters";
 import { Select, GeoSelect, LangSelect } from "../../origins/select";
 import {
   affiliateDomains,
@@ -36,12 +36,11 @@ const Bucket = ({ offers }) => {
   const handleGeoSelect = async (geo) => {
     notify_Info("Searching for available languages");
     const resp = await getSetishData(setLanguages, geo, domain);
+    const charactersByGeo = await api.getCharactersByGoe(geo.split("/")[0]);
     setGeo(geo);
     setLang(resp[0]);
-    const updatedCharacters = prelandersCharacters?.filter(
-      (i) => i?.geo === geo.split("/")[0]
-    );
-    setCharacters(updatedCharacters);
+    console.log(charactersByGeo.data);
+    setCharacters(charactersByGeo.data.payload);
   };
 
   const handleBpSubmit = async (e) => {
