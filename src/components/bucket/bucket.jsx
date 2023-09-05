@@ -9,72 +9,60 @@ import {
 } from "../../utils/notify";
 import "./bucket.css";
 // import { prelandersCharacters } from "../../assets/data/characters";
-import { Select, GeoSelect, LangSelect } from "../../origins/select";
-import {
-  affiliateDomains,
-  managerDomains,
-} from "../../assets/data/commonDomains";
+import { Select } from "../../origins/select";
 
 const Bucket = ({ offers }) => {
   const user = useSelector((state) => state.user);
-  const [domain, setDomain] = useState("");
-  const [geos, setGeos] = useState([]);
-  const [languages, setLanguages] = useState([]);
-  const [selectedGeo, setGeo] = useState("");
-  const [selectedLang, setLang] = useState("");
-  const [tableData, setTable] = useState([]);
-  const [characters, setCharacters] = useState([]);
-  const [defCharachter, setDefCharacter] = useState("mario_dragh");
-  const [defOffer, setDefOffer] = useState("immediate_edge");
 
-  const handleDomainSelect = async (domainVal) => {
-    setDomain(domainVal);
-    notify_Info("searching locations");
-    await getSetishData(setGeos, "", domainVal);
+  const versions = ["new", "old"];
+  const [geos, setGeos] = useState([]);
+  const [characters, setCharacters] = useState([]);
+  const [tableData, setTable] = useState([]);
+
+  const [selectedVersion, setVersion] = useState("");
+  const [selectedGeo, setGeo] = useState("");
+  const [selectedCharachter, setCharacter] = useState("");
+
+  const handleVersionSelect = async (versionVal) => {
+    setVersion(versionVal);
+    notify_Info("searching Geos");
+    try {
+      const resp = await api.getGeobyVersionV2(versionVal);
+      console.log(resp);
+      setGeos(resp.data);
+    } catch (error) {
+      console.log(error);
+      notify_error("Failed");
+    }
   };
 
-  const handleGeoSelect = async (geo) => {
-    notify_Info("Searching for available languages");
-    const resp = await getSetishData(setLanguages, geo, domain);
-    const charactersByGeo = await api.getCharactersByGoe(geo.split("/")[0]);
-    setGeo(geo);
-    setLang(resp[0]);
-    console.log(charactersByGeo.data);
-    setCharacters(charactersByGeo.data.payload);
+  const handleGeoSelect = async (geoVal) => {
+    notify_Info("Searching for available Characters");
+    const charactersByGeo = await api.getCharactersByGeoV2(
+      selectedVersion,
+      geoVal
+    );
+    setGeo(geoVal);
+    setCharacter(charactersByGeo.data[0]);
+    setCharacters(charactersByGeo.data);
   };
 
   const handleBpSubmit = async (e) => {
     e.preventDefault();
-    if (selectedGeo === "" || selectedLang == "") {
-      notify_error("You must select and language");
+    if (
+      selectedGeo === "" ||
+      selectedCharachter === "" ||
+      selectedVersion === ""
+    ) {
+      notify_error("You must select all fields");
       return;
     }
-    await getSetishData(setTable, selectedLang, domain);
-  };
-
-  const getSetishData = async (set, path, bucketName) => {
-    try {
-      const setishData = await api.getSetishData(path, user.token, bucketName);
-      set(setishData.data);
-      return setishData.data;
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const handleLink = (url) => {
-    let finaLink = "";
-    if (url.split("/")[2].includes("-")) {
-      //old template
-      finaLink = `https://${domain}/${url}`;
-    } else if (url.includes("https")) {
-      // just to add/change params
-      finaLink = `https://${url}?character=${defCharachter}&offer=${defOffer}`;
-    } else {
-      // new template
-      finaLink = `https://${domain}/${url}index.html?character=${defCharachter}&offer=${defOffer}`;
-    }
-    return finaLink.replace(/\s+/g, "");
+    const resp = await api.getBPsV2(
+      selectedVersion,
+      selectedGeo,
+      selectedCharachter
+    );
+    setTable(resp.data);
   };
 
   return (
@@ -85,35 +73,21 @@ const Bucket = ({ offers }) => {
           <div className="form-body">
             <Select
               required={true}
-              data={
-                user?.role === "affiliate" ? affiliateDomains : managerDomains
-              }
-              title={"Select Domain"}
-              func={handleDomainSelect}
+              data={versions}
+              title={"Select Version"}
+              func={handleVersionSelect}
             />
-            <GeoSelect
-              required={true}
+            <Select
+              required={false}
               data={geos}
               title={"Select Geo"}
               func={handleGeoSelect}
             />
-            <LangSelect
-              required={false}
-              data={languages}
-              title={"Select Language"}
-              func={setLang}
-            />
             <Select
               required={false}
-              data={characters.map((i) => i.keyName)}
-              title={"Select Charachters"}
-              func={setDefCharacter}
-            />
-            <Select
-              required={false}
-              data={offers.map((i) => i.split("/")[1])}
-              title={"Select Offer"}
-              func={setDefOffer}
+              data={characters}
+              title={"Select Character"}
+              func={setCharacter}
             />
             <button type="submit">Submit</button>
           </div>
@@ -126,12 +100,15 @@ const Bucket = ({ offers }) => {
                 <tr key={index}>
                   <td
                     className="snowPage-link"
-                    onClick={() => handleCopy(handleLink(item))}
+                    onClick={() => handleCopy(item.stagingLink)}
                   >
-                    {handleLink(item)}
+                    {item.stagingLink}
                   </td>
+                  <td className="snowPage-link">{item.lang}</td>
+                  <td className="snowPage-link">{item.template}</td>
+                  <td className="snowPage-link">{item.offerPage}</td>
                   <td>
-                    <a className="open" target="_blank" href={handleLink(item)}>
+                    <a className="open" target="_blank" href={item.stagingLink}>
                       Open
                     </a>
                   </td>

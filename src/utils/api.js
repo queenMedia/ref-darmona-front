@@ -262,6 +262,44 @@ class Api {
       return undefined;
     }
   }
+
+  // V2
+  async getGeobyVersionV2(version) {
+    try {
+      return await axiosInstance(this.base).get(`/getGeos?version=${version}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (e) {
+      console.log(e, "e in getGeobyVersion");
+      return undefined;
+    }
+  }
+  async getCharactersByGeoV2(version, geo) {
+    try {
+      return await axiosInstance(this.base).get(`/getCharactersV2?version=${version}&geo=${geo}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (e) {
+      console.log(e, "e in getCharactersByGeo");
+      return undefined;
+    }
+  }
+  async getBPsV2(version, geo, celeb) {
+    try {
+      return await axiosInstance(this.base).get(`/getBlackPagesV2?version=${version}&geo=${geo}&celeb=${celeb}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (e) {
+      console.log(e, "e in getBPs");
+      return undefined;
+    }
+  }
 }
 
 export const api = new Api(baseUrl);
