@@ -22,7 +22,7 @@ const SnowPage = () => {
     notify_Info("Searching");
     try {
       const response = await api.getSnowData(dateFrom, dateTo, id, user.token);
-      if (!response) {
+      if (!response || response.resp.length < 1) {
         notify_error("no results");
         return;
       }
