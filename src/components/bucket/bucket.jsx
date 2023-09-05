@@ -15,10 +15,12 @@ const Bucket = ({ offers }) => {
   const user = useSelector((state) => state.user);
 
   const versions = ["new", "old"];
+  const domains = ["setish.org", "staging.setish.org"];
   const [geos, setGeos] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [tableData, setTable] = useState([]);
 
+  const [selectedDomain, setDomain] = useState("");
   const [selectedVersion, setVersion] = useState("");
   const [selectedGeo, setGeo] = useState("");
   const [selectedCharachter, setCharacter] = useState("");
@@ -73,6 +75,12 @@ const Bucket = ({ offers }) => {
           <div className="form-body">
             <Select
               required={true}
+              data={domains}
+              title={"Select Domain"}
+              func={setDomain}
+            />
+            <Select
+              required={true}
               data={versions}
               title={"Select Version"}
               func={handleVersionSelect}
@@ -102,13 +110,23 @@ const Bucket = ({ offers }) => {
                     className="snowPage-link"
                     onClick={() => handleCopy(item.stagingLink)}
                   >
-                    {item.stagingLink}
+                    {selectedDomain === "staging.setish.org"
+                      ? item.stagingLink
+                      : item.productionLink}
                   </td>
                   <td className="snowPage-link">{item.lang}</td>
                   <td className="snowPage-link">{item.template}</td>
                   <td className="snowPage-link">{item.offerPage}</td>
                   <td>
-                    <a className="open" target="_blank" href={item.stagingLink}>
+                    <a
+                      className="open"
+                      target="_blank"
+                      href={
+                        selectedDomain === "staging.setish.org"
+                          ? item.stagingLink
+                          : item.productionLink
+                      }
+                    >
                       Open
                     </a>
                   </td>
