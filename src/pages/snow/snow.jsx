@@ -32,7 +32,7 @@ const SnowPage = () => {
         date: getCurrentDateAndHour(),
         id: id,
         countTrue: response.resp[0].COUNT,
-        countFalse: response.resp[1].COUNT,
+        countFalse: response?.resp[1]?.COUNT || 0,
       });
       setData(updatedData);
     } catch (error) {
