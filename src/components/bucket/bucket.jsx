@@ -32,6 +32,10 @@ const Bucket = ({ offers }) => {
       const resp = await api.getGeobyVersionV2(versionVal);
       console.log(resp);
       setGeos(resp.data);
+      setCharacters([])
+      setTable([])
+      setCharacter("")
+      setGeo("")
     } catch (error) {
       console.log(error);
       notify_error("Failed");
@@ -86,13 +90,13 @@ const Bucket = ({ offers }) => {
               func={handleVersionSelect}
             />
             <Select
-              required={false}
+              required={true}
               data={geos}
               title={"Select Geo"}
               func={handleGeoSelect}
             />
             <Select
-              required={false}
+              required={true}
               data={characters}
               title={"Select Character"}
               func={setCharacter}

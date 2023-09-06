@@ -83,21 +83,9 @@ export const taboola_query_map = {
 };
 
 export const twitter_query = {
-  aff_sub1: { type: "pattern", cmp: "^[0-9]+$" },
-  aff_sub2: { type: "pattern", cmp: "^[0-9a-zA-z\\-.]+$" },
-  aff_sub3: { type: "pattern", cmp: "^[a-zA-z]+$" },
-  aff_sub4: { type: "pattern", cmp: "^[0-9]+$" },
-  aff_sub5: { type: "pattern", cmp: "^[0-9a-zA-z_\\-+]+$" },
-  aff_sub6: { type: "pattern", cmp: "^[0-9]+$" },
-  aff_sub7: { type: "pattern", cmp: "^[0-9a-zA-z_\\-]+$" },
+
 };
 
 export const twitter_query_map = {
-  sub1: "aff_sub1",
-  sub2: "aff_sub2",
-  sub3: "aff_sub3",
-  sub4: "aff_sub4",
-  sub5: "aff_sub5",
-  sub6: "aff_sub6",
-  sub7: "aff_sub7",
+
 };
