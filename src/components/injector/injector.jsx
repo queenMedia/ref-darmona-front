@@ -30,7 +30,7 @@ const Injector = ({ offers }) => {
       !destination_url.includes(".com") ||
       destination_folder === ""
     ) {
-      notify_error("you mast fill the form preperly");
+      notify_error("you must fill the form properly");
       return;
     }
     notify_Info("Copy In Progress");

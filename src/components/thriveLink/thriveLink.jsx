@@ -34,6 +34,7 @@ export const ThriveLink = () => {
           <option value={"facebook"}>Facebook</option>
           <option value={"google"}>Google</option>
           <option value={"taboola"}>Taboola</option>
+          <option value={"twitter"}>Twitter</option>
         </select>
         <div className="geoSelect">
           <input

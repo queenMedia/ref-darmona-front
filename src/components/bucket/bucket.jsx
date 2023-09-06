@@ -27,15 +27,15 @@ const Bucket = ({ offers }) => {
 
   const handleVersionSelect = async (versionVal) => {
     setVersion(versionVal);
-    notify_Info("searching Geos");
     try {
       const resp = await api.getGeobyVersionV2(versionVal);
       console.log(resp);
+      notify(resp?.data?.length, "geo's");
       setGeos(resp.data);
-      setCharacters([])
-      setTable([])
-      setCharacter("")
-      setGeo("")
+      setCharacters([]);
+      setTable([]);
+      setCharacter("");
+      setGeo("");
     } catch (error) {
       console.log(error);
       notify_error("Failed");
@@ -43,18 +43,19 @@ const Bucket = ({ offers }) => {
   };
 
   const handleGeoSelect = async (geoVal) => {
-    notify_Info("Searching for available Characters");
     const charactersByGeo = await api.getCharactersByGeoV2(
       selectedVersion,
       geoVal
     );
     setGeo(geoVal);
-    setCharacter(charactersByGeo.data[0]);
     setCharacters(charactersByGeo.data);
+    setCharacter("");
+    notify(charactersByGeo?.data?.length, "characters");
   };
 
   const handleBpSubmit = async (e) => {
     e.preventDefault();
+    console.log({ selectedGeo, selectedCharachter, selectedVersion });
     if (
       selectedGeo === "" ||
       selectedCharachter === "" ||
@@ -68,7 +69,16 @@ const Bucket = ({ offers }) => {
       selectedGeo,
       selectedCharachter
     );
-    setTable(resp.data);
+    notify(resp?.data?.length, "links");
+    setTable(resp?.data);
+  };
+
+  const notify = (length, type) => {
+    if (length === 0) {
+      notify_error(`found ${length} ${type}`);
+    } else {
+      notify_success(`found ${length} ${type}`);
+    }
   };
 
   return (
