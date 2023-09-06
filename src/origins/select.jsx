@@ -5,7 +5,7 @@ export const Select = ({ title, data, func, required }) => {
       onChange={(e) => func(e.target.value)}
       required={required}
     >
-      <option>{title}</option>
+      <option value="" disabled selected>{title}</option>
       {data?.map((i, index) => {
         return (
           <option key={index} value={i}>

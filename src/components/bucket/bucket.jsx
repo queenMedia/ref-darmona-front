@@ -14,7 +14,7 @@ import { Select } from "../../origins/select";
 const Bucket = ({ offers }) => {
   const user = useSelector((state) => state.user);
 
-  const versions = ["new", "old"];
+  const versions = [ "new", "old"];
   const domains = ["setish.org", "staging.setish.org"];
   const [geos, setGeos] = useState([]);
   const [characters, setCharacters] = useState([]);
@@ -49,7 +49,7 @@ const Bucket = ({ offers }) => {
     );
     setGeo(geoVal);
     setCharacters(charactersByGeo.data);
-    setCharacter("");
+    setCharacter(charactersByGeo.data[0]);
     notify(charactersByGeo?.data?.length, "characters");
   };
 
