@@ -27,10 +27,12 @@ export const Ctype = (props) => {
     try {
       if (!whiteImg || !blackImg || !destinationDom) {
         notify_error("an image or domain is missing");
+        return;
       }
       console.log({
         whiteImg,
         blackImg,
+        destinationDom,
       });
     } catch (error) {}
   };
