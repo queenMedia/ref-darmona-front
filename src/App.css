@@ -118,7 +118,7 @@ span {
 }
 .file-upload-select{
   border: 0.1px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .file-upload .file-upload-select {
 	display: block;
