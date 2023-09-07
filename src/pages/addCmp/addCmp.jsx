@@ -24,6 +24,7 @@ const AddCmp = () => {
   const [geo, setGeo] = useState("AF");
   const [availableAliases, setAvailableAliases] = useState([]);
   const [whitePage, setWhitePage] = useState("");
+  const [ctype, setCtype] = useState("");
   const [eps, setEps] = useState([
     {
       geo: { grp: [], bl: false },
@@ -178,10 +179,15 @@ const AddCmp = () => {
             </select>
           </div>
         </Box>
-        <Ctype />
+        
+        <Ctype setType={setCtype} />
         <QueryParameters setPlatform={setPlatform} />
-        <SelectWP setWhitePage={setWhitePage} />
-        <ThriveLink />
+        {ctype === "url" && (
+          <>
+            <SelectWP setWhitePage={setWhitePage} />
+            <ThriveLink />
+          </>
+        )}
 
         {eps?.map((item, index) => {
           return (
