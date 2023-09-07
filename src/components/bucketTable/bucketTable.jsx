@@ -17,7 +17,11 @@ const BucketTable = () => {
   const getDomainPages = async (e) => {
     e.preventDefault();
     const domainPages = await api.getSetishData("", user.token, domain);
-    setTable(domainPages.data);
+    if (!domainPages?.data) {
+      notify_error("did not find any pages in this domain");
+      return;
+    }
+    setTable(domainPages?.data);
   };
 
   return (
@@ -51,7 +55,9 @@ const BucketTable = () => {
                   <tr key={index}>
                     <td
                       className="snowPage-link"
-                      onClick={() => handleCopy(`https://${domain}/${item}index.html`)}
+                      onClick={() =>
+                        handleCopy(`https://${domain}/${item}index.html`)
+                      }
                     >
                       https://{domain}/{item}index.html
                     </td>
