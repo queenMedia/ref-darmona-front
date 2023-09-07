@@ -7,6 +7,7 @@ import { countryCodes } from "../../assets/data/countryCodes";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import { addCmp } from "../../store/slices/user";
 import { ThriveLink } from "../../components/thriveLink/thriveLink";
+import { Ctype } from "../../components/ctype/ctype";
 import { SelectWP } from "../../components/selectWP/selectWP";
 import { bing_query, bing_query_map } from "../../assets/data/queryParametrs";
 import { QueryParameters } from "../../components/queryParameters/queryParameters";
@@ -57,7 +58,7 @@ const AddCmp = () => {
       dc_ep: whitePage,
       eps: eps,
     };
-    console.log({data});
+    console.log({ data });
     const apiResp = await api.addCmp(data, user.token);
     if (apiResp?.name && apiResp?.name) {
       notify_success(`Campaign added succesfully`);
@@ -177,6 +178,7 @@ const AddCmp = () => {
             </select>
           </div>
         </Box>
+        <Ctype />
         <QueryParameters setPlatform={setPlatform} />
         <SelectWP setWhitePage={setWhitePage} />
         <ThriveLink />
@@ -221,9 +223,7 @@ const AddCmp = () => {
                       <select disabled>
                         <option value={i.code}>{i}</option>
                       </select>
-                      <span onClick={() => deleteGrp(index, i)}>
-                        X
-                      </span>
+                      <span onClick={() => deleteGrp(index, i)}>X</span>
                     </div>
                   ))
                 ) : (
