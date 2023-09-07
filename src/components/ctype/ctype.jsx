@@ -29,8 +29,8 @@ export const Ctype = (props) => {
         />
         {type === "tag" && (
           <div>
-            <ImageUploader title={"Upload White Image"} />
-            <ImageUploader title={"Upload Black Image"} />
+            <ImageUploader title={"White Img:"} />
+            <ImageUploader title={"Black Img:"} />
             <span><u><b>Get Links</b></u></span>
           </div>
         )}

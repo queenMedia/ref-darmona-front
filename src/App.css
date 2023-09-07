@@ -116,7 +116,10 @@ select:focus>option {
 span {
   cursor: pointer;
 }
-
+.file-upload-select{
+  border: 0.1px solid white;
+  border-radius: 10px;
+}
 .file-upload .file-upload-select {
 	display: block;
 	color: #dbdbdb;
@@ -126,16 +129,19 @@ span {
 	overflow: hidden;
 	position: relative;
 	border-radius: 6px;
-  margin-top: 10px;
+  margin-bottom: 5px;
 }
 .file-upload .file-upload-select .file-select-button {
-	background: #161f27;
+	background: #1a242f;
 	padding: 10px;
 	display: inline-block;
+
 }
 .file-upload .file-upload-select .file-select-name {
 	display: inline-block;
 	padding: 10px;
+
+
 }
 .file-upload .file-upload-select:hover .file-select-button {
 	background: #324759;
@@ -144,6 +150,7 @@ span {
 	-moz-transition: all 0.2s ease-in-out;
 	-webkit-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
+
 }
 .file-upload .file-upload-select input[type="file"] {
 	display: none;
