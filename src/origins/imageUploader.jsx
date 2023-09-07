@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
 export const ImageUploader = (props) => {
-  const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState("No file chosen...");
   const fileInputRef = useRef(null);
 
@@ -17,8 +16,7 @@ export const ImageUploader = (props) => {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         const base64String = reader.result;
-        console.log(base64String);
-        setImage(base64String);
+        props.setImage(base64String);
       };
     }
   };

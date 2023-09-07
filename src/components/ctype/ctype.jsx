@@ -31,6 +31,7 @@ export const Ctype = (props) => {
           <div>
             <ImageUploader title={"Upload White Image"} />
             <ImageUploader title={"Upload Black Image"} />
+            <span><u><b>Get Links</b></u></span>
           </div>
         )}
       </div>

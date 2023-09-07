@@ -1,5 +1,18 @@
 .ctype-body {
   display: flex;
   flex-direction: column;
+  flex-direction: column;
+	justify-content: center;
+	align-items: center;
   gap: 20px;
+
+}
+
+.ctype-body > div{
+  display: flex;
+  flex-direction: column;
+  flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  gap: 10px;
 }
