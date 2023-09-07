@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import ImageCompressor from 'image-compressor.js';
 
 export const ImageUploader = (props) => {
   const [fileName, setFileName] = useState("No file chosen...");
@@ -13,6 +13,7 @@ export const ImageUploader = (props) => {
     const file = e.target.files[0];
     if (file) {
       setFileName(file.name);
+      props.setImgName(file.name);
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {

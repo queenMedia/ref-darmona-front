@@ -4,6 +4,7 @@ import { Select } from "../../origins/select";
 import { ImageUploader } from "../../origins/imageUploader";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import { useSelector, useDispatch } from "react-redux";
+import { api } from "../../utils/api";
 import "./ctype.css";
 
 export const Ctype = (props) => {
@@ -11,6 +12,8 @@ export const Ctype = (props) => {
   const [type, setType] = useState("");
   const [whiteImg, setWhiteImg] = useState("");
   const [blackImg, setBlackImg] = useState("");
+  const [whiteImgName, setWhiteImgName] = useState("");
+  const [blackImgName, setBlackImgName] = useState("");
   const [destinationDom, setDestinationDom] = useState("");
   const user = useSelector((state) => state.user);
 
@@ -34,6 +37,13 @@ export const Ctype = (props) => {
         blackImg,
         destinationDom,
       });
+      const resp = await api.uploadImg(
+        user.token,
+        whiteImgName,
+        whiteImg,
+        destinationDom
+      );
+      console.log(resp);
     } catch (error) {}
   };
 
@@ -55,8 +65,16 @@ export const Ctype = (props) => {
               title={"Select Domain"}
               func={setDestinationDom}
             />
-            <ImageUploader title={"White Img:"} setImage={setWhiteImg} />
-            <ImageUploader title={"Black Img:"} setImage={setBlackImg} />
+            <ImageUploader
+              title={"White Img:"}
+              setImage={setWhiteImg}
+              setImgName={setWhiteImgName}
+            />
+            <ImageUploader
+              title={"Black Img:"}
+              setImage={setBlackImg}
+              setImgName={setBlackImgName}
+            />
             <span>
               <u>
                 <b onClick={handleGetLinks}>Get Links</b>

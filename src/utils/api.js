@@ -278,11 +278,14 @@ class Api {
   }
   async getCharactersByGeoV2(version, geo) {
     try {
-      return await axiosInstance(this.base).get(`/getCharactersV2?version=${version}&geo=${geo}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      return await axiosInstance(this.base).get(
+        `/getCharactersV2?version=${version}&geo=${geo}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     } catch (e) {
       console.log(e, "e in getCharactersByGeo");
       return undefined;
@@ -290,13 +293,35 @@ class Api {
   }
   async getBPsV2(version, geo, celeb) {
     try {
-      return await axiosInstance(this.base).get(`/getBlackPagesV2?version=${version}&geo=${geo}&celeb=${celeb}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      return await axiosInstance(this.base).get(
+        `/getBlackPagesV2?version=${version}&geo=${geo}&celeb=${celeb}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     } catch (e) {
       console.log(e, "e in getBPs");
+      return undefined;
+    }
+  }
+
+  async uploadImg(token, key, base64Image, bucketName) {
+    try {
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `${this.base}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: { key, base64Image, bucketName },
+      };
+      return await axios.request(config);
+    } catch (error) {
+      console.log(error.message);
       return undefined;
     }
   }
