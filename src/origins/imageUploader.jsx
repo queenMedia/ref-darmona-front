@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import ImageCompressor from 'image-compressor.js';
 
 export const ImageUploader = (props) => {
   const [fileName, setFileName] = useState("No file chosen...");
