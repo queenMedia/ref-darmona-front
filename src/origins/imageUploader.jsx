@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
+
 export const ImageUploader = (props) => {
   const [fileName, setFileName] = useState("No file chosen...");
   const fileInputRef = useRef(null);
@@ -34,6 +35,7 @@ export const ImageUploader = (props) => {
         <div className="file-select-button">{props.title}</div>
         <div className="file-select-name">{fileName}</div>
         <input
+          required={true}
           type="file"
           name="file-upload-input"
           id="file-upload-input"
