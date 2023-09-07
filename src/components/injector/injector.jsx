@@ -91,7 +91,7 @@ const Injector = ({ offers }) => {
               />
               <Select
                 required={true}
-                data={user?.blackPageDomains}
+                data={user?.blackPageDomains.filter(i => i !== "staging.setish.org")}
                 title={"Select Domain"}
                 func={set_destination_url}
               />
