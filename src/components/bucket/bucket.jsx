@@ -14,7 +14,7 @@ import { Select } from "../../origins/select";
 const Bucket = ({ offers }) => {
   const user = useSelector((state) => state.user);
 
-  const versions = [ "new", "old"];
+  const versions = ["new", "old"];
   const domains = ["setish.org", "staging.setish.org"];
   const [geos, setGeos] = useState([]);
   const [characters, setCharacters] = useState([]);
@@ -122,7 +122,13 @@ const Bucket = ({ offers }) => {
                 <tr key={index}>
                   <td
                     className="snowPage-link"
-                    onClick={() => handleCopy(item.stagingLink)}
+                    onClick={() =>
+                      handleCopy(
+                        selectedDomain === "staging.setish.org"
+                          ? item.stagingLink
+                          : item.productionLink
+                      )
+                    }
                   >
                     {selectedDomain === "staging.setish.org"
                       ? item.stagingLink
