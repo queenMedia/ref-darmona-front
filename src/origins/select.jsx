@@ -1,7 +1,7 @@
-export const Select = ({ title, data, func, required }) => {
+export const Select = ({ title, data, func, required, className="form-select" }) => {
   return (
     <select
-      className="form-select"
+      className={className}
       onChange={(e) => func(e.target.value)}
       required={required}
     >

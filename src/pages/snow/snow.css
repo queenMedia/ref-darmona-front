@@ -7,8 +7,14 @@
 .input-date {
 }
 .countTrue {
-  background-color: red
+  background-color: red;
 }
 .countFalse {
   background-color: green;
+}
+.selectWidth {
+  flex: 0;
+  padding: 0 10px 2px;
+  appearance: auto;
+  min-width: 480px;
 }

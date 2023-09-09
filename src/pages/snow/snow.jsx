@@ -4,6 +4,7 @@ import { api } from "../../utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentDateAndHour } from "../../utils/getDate";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
+import { Select } from "../../origins/select";
 import "./snow.css";
 
 const SnowPage = () => {
@@ -12,6 +13,18 @@ const SnowPage = () => {
   const [dateTo, setDateTo] = useState("");
   const [id, setId] = useState("");
   const [data, setData] = useState([]);
+  const [idList, setIdList] = useState([]);
+
+  function getCmpValue(url) {
+    // Create a URL object
+    const urlObj = new URL(url);
+
+    // Use URLSearchParams to get the "cmp" value
+    const params = new URLSearchParams(urlObj.search);
+
+    // Return the value of "cmp"
+    return params.get("cmp");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,16 +34,25 @@ const SnowPage = () => {
     }
     notify_Info("Searching");
     try {
-      const response = await api.getSnowData(dateFrom, dateTo, id, user.token);
-      if (!response || response.resp.length < 1) {
+      const onlyId = getCmpValue(id);
+      const response = await api.getSnowData(
+        dateFrom,
+        dateTo,
+        onlyId,
+        user.token
+      );
+      if (!response) {
         notify_error("no results");
         return;
+      }
+      if (response?.resp?.length < 1) {
+        response?.resp?.push({ SKIP: false, COUNT: 0 });
       }
       console.log(response);
       const updatedData = [...data];
       updatedData.unshift({
         date: getCurrentDateAndHour(),
-        id: id,
+        id: onlyId,
         countTrue: response.resp[0].COUNT,
         countFalse: response?.resp[1]?.COUNT || 0,
       });
@@ -38,6 +60,11 @@ const SnowPage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handleAliasSelect = (alias) => {
+    const filterd = user?.cmps?.filter((i) => i.url.includes(alias));
+    setIdList(filterd.map((i) => i.url));
   };
 
   return (
@@ -65,14 +92,21 @@ const SnowPage = () => {
             />
           </label>
           <br />
-          <label>
-            ID:
-            <input
-              type="text"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
-            />
-          </label>
+          <Select
+            className="selectWidth"
+            required={true}
+            data={user.aliases}
+            title={"Select Domain"}
+            func={handleAliasSelect}
+          />
+          <br />
+          <Select
+            className="selectWidth"
+            required={true}
+            data={idList}
+            title={"Select Link"}
+            func={setId}
+          />
           <br />
           <button type="submit">Submit</button>
         </Box>
