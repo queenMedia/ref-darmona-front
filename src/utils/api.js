@@ -190,6 +190,27 @@ class Api {
       return undefined;
     }
   }
+  async getSnowRows(from, to, id, token) {
+    try {
+      let config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: `${this.base}/getRows?from=${from}&to=${to}&cmp=${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const resp = await axios.request(config);
+      if (resp.status === 200) {
+        return resp.data;
+      } else {
+        return undefined;
+      }
+    } catch (e) {
+      return undefined;
+    }
+  }
 
   async getSetishData(path, token, bucketName = "") {
     try {
