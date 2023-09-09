@@ -71,7 +71,7 @@ const SnowPage = () => {
     <div className="snowPage-container">
       <form onSubmit={handleSubmit}>
         <Box>
-          <h1>Search information</h1>
+          <h1>Skip information</h1>
           <label>
             Date From:
             <input
