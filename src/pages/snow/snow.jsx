@@ -145,7 +145,7 @@ const SnowPage = () => {
         </table>
       </div>
       <GetSnowRows />
-      <CountByDateAndParam />
+      {user.role === "topg" ? <CountByDateAndParam /> : <></>}
     </>
   );
 };
