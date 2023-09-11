@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { Box } from "../box/box";
 import { api } from "../../utils/api";
-import { useSelector, useDispatch } from "react-redux";
-import { getCurrentDateAndHour } from "../../utils/getDate";
-import { notify_error, notify_success, notify_Info } from "../../utils/notify";
-import { Select } from "../../origins/select";
-import { snowColums } from "../../assets/data/snowColums";
-import { handleCopy } from "../../utils/notify";
+import { useSelector } from "react-redux";
+import { notify_error, notify_Info } from "../../utils/notify";
+
 import "./getSnowRows.css";
 
 const GetById = () => {
@@ -42,30 +39,32 @@ const GetById = () => {
             onChange={(e) => setCmpId(e.target.value)}
           />
           <br />
-          <br />
-          <br />
+         
           <button type="submit">Submit</button>
         </Box>
       </form>
 
-      <div>
+      {data?.user !== undefined ? (
         <div>
-          <strong>user:</strong> RonyDerra
+          <div>
+            <strong>user:</strong> {data.user}
+          </div>
+          <div>
+            <strong>cmpName:</strong> {data.cmpName}
+          </div>
+          <div>
+            <strong>cmpUrl:</strong> {data.cmpUrl}
+          </div>
+          <div>
+            <strong>cmpId:</strong> {data.cmpId}
+          </div>
+          <div>
+            <strong>createdAt:</strong> {data.createdAt}
+          </div>
         </div>
-        <div>
-          <strong>cmpName:</strong> ronystagingtest
-        </div>
-        <div>
-          <strong>cmpUrl:</strong>{" "}
-          https://bnor.gasrstar.com/?cmp=5a20f72a-b1c9-4638-bddf-5d88f192e323
-        </div>
-        <div>
-          <strong>cmpId:</strong> 5a20f72a-b1c9-4638-bddf-5d88f192e323
-        </div>
-        <div>
-          <strong>createdAt:</strong> 2023-09-11T17:33:08.894Z
-        </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
