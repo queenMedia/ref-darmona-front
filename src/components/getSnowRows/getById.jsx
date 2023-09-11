@@ -56,6 +56,9 @@ const GetById = () => {
             <strong>Domain:</strong> {data.cmpUrl.replace('http://','').replace('https://','').split(/[/?#]/)[0]}
           </div>
           <div>
+            <strong>Url:</strong> {data.cmpUrl}
+          </div>
+          <div>
             <strong>Cmp Id:</strong> {data.cmpId}
           </div>
           <div>
