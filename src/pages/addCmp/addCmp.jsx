@@ -182,7 +182,7 @@ const AddCmp = () => {
         
         <Ctype setType={setCtype} />
         <QueryParameters setPlatform={setPlatform} />
-        {ctype === "url" && (
+        {ctype !== "tag" && (
           <>
             <SelectWP setWhitePage={setWhitePage} />
             <ThriveLink />
