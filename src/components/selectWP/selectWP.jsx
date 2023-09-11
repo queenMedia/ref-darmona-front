@@ -15,6 +15,7 @@ export const SelectWP = (props) => {
   const handleDomainSelect = async (selectedDomain) => {
     try {
       const data = await api.getWhitePages(selectedDomain, "", "", user.token);
+      console.log(data);
       if (data?.length < 1) {
         notify_Info("did not find any pages on this domain");
         return;
