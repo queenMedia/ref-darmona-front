@@ -6,6 +6,7 @@ import { getCurrentDateAndHour } from "../../utils/getDate";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import { Select } from "../../origins/select";
 import GetSnowRows from "../../components/getSnowRows/getSnowRows";
+import CountByDateAndParam from "../../components/getSnowRows/countByDateAndParam";
 import "./snow.css";
 
 const SnowPage = () => {
@@ -144,6 +145,7 @@ const SnowPage = () => {
         </table>
       </div>
       <GetSnowRows />
+      <CountByDateAndParam />
     </>
   );
 };

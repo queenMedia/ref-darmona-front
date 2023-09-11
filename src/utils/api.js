@@ -211,6 +211,27 @@ class Api {
       return undefined;
     }
   }
+  async countByDateAndParam(from, to, by, token) {
+    try {
+      let config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: `${this.base}/countByDateAndParam?from=${from}&to=${to}&by=${by}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const resp = await axios.request(config);
+      if (resp.status === 200) {
+        return resp.data;
+      } else {
+        return undefined;
+      }
+    } catch (e) {
+      return undefined;
+    }
+  }
 
   async getSetishData(path, token, bucketName = "") {
     try {
