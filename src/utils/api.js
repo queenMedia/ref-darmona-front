@@ -367,6 +367,18 @@ class Api {
       return undefined;
     }
   }
+  async getCmpId(cmpId) {
+    try {
+      return await axiosInstance(this.base).get(`/bycmpId?cmpId=${cmpId}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (e) {
+      console.log(e, "e in getUser");
+      return undefined;
+    }
+  }
 }
 
 export const api = new Api(baseUrl);
