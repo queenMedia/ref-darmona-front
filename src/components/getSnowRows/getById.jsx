@@ -45,23 +45,24 @@ const GetById = () => {
       </form>
 
       {data?.user !== undefined ? (
-        <div>
+        <div className="details-container">
           <div>
-            <strong>user:</strong> {data.user}
+            <strong>User:</strong> {data.user}
           </div>
           <div>
-            <strong>cmpName:</strong> {data.cmpName}
+            <strong>Cmp Name:</strong> {data.cmpName}
           </div>
           <div>
-            <strong>cmpUrl:</strong> {data.cmpUrl}
+            <strong>Domain:</strong> {data.cmpUrl.replace('http://','').replace('https://','').split(/[/?#]/)[0]}
           </div>
           <div>
-            <strong>cmpId:</strong> {data.cmpId}
+            <strong>Cmp Id:</strong> {data.cmpId}
           </div>
           <div>
-            <strong>createdAt:</strong> {data.createdAt}
+            <strong>Created At:</strong> {data.createdAt.split("T")[0]}
           </div>
         </div>
+        
       ) : (
         <></>
       )}
