@@ -15,6 +15,7 @@ const CountByDateAndParam = () => {
   const [dateTo, setDateTo] = useState("");
   const [by, setBy] = useState("");
   const [data, setData] = useState([]);
+  const [sortBy, setSortBy] = useState("not_passed");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ const CountByDateAndParam = () => {
         dateFrom,
         dateTo,
         by,
+        sortBy,
         user.token
       );
       if (!response || response?.resp?.length < 1) {

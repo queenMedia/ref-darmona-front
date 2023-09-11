@@ -211,12 +211,12 @@ class Api {
       return undefined;
     }
   }
-  async countByDateAndParam(from, to, by, token) {
+  async countByDateAndParam(from, to, by, sortBy, token) {
     try {
       let config = {
         method: "get",
         maxBodyLength: Infinity,
-        url: `${this.base}/countByDateAndParam?from=${from}&to=${to}&by=${by}`,
+        url: `${this.base}/countByDateAndParam?from=${from}&to=${to}&by=${by}&sort=${sortBy}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
