@@ -7,6 +7,7 @@ import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import { Select } from "../../origins/select";
 import GetSnowRows from "../../components/getSnowRows/getSnowRows";
 import CountByDateAndParam from "../../components/getSnowRows/countByDateAndParam";
+import GetById from "../../components/getSnowRows/getById";
 import "./snow.css";
 
 const SnowPage = () => {
@@ -145,7 +146,14 @@ const SnowPage = () => {
         </table>
       </div>
       <GetSnowRows />
-      {user.role === "topg" ? <CountByDateAndParam /> : <></>}
+      {user.role === "topg" ? (
+        <>
+          <GetById />
+          <CountByDateAndParam />
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
