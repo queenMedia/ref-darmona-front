@@ -12,17 +12,26 @@ export const SelectWP = (props) => {
   const [languageList, setLanguages] = useState([]);
   const [topicList, setTopics] = useState([]);
 
+  const [selectedType, setSelectedType] = useState("");
+  const [htmlLinks, setHtmlLinks] = useState([]);
+  const types = ["url", "html"];
+
   const handleDomainSelect = async (selectedDomain) => {
     try {
+      if (selectedType === "") {
+        notify_error("you must select a link type");
+        return;
+      }
       const data = await api.getWhitePages(selectedDomain, "", "", user.token);
-      console.log(data);
       if (data?.length < 1) {
         notify_Info("did not find any pages on this domain");
         return;
       } else {
         notify_Info(`${data.length} pages found`);
       }
-      setWpData(data);
+      console.log(data);
+      const filterdData = data.filter((i) => i.linkType === selectedType);
+      setWpData(filterdData);
       const uniqueLanguages = [...new Set(data.map((item) => item.language))];
       setLanguages(uniqueLanguages);
     } catch (error) {
@@ -59,28 +68,66 @@ export const SelectWP = (props) => {
     props.setWhitePage(encodeURI(obj.link));
   };
 
+  const handleSelectType = async (type) => {
+    try {
+      setSelectedType(type);
+      if (type === "url") {
+        return;
+      } else {
+        const resp = await api.getWhitePageHtmlType(user.token);
+        console.log(resp);
+        notify_Info(`${resp.length} pages found`);
+        setHtmlLinks(resp);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleLinkSelect = (htmlLink) => {
+    setLink(htmlLink);
+    props.setWhitePage(htmlLink);
+  };
+
   return (
     <Box>
       <h1>White Page</h1>
       <div className="formBody">
-        <select onChange={(e) => handleDomainSelect(e.target.value)}>
-          <option>Select Domain</option>;
-          {user.aliases.map((item, index) => {
+        <select onChange={(e) => handleSelectType(e.target.value)}>
+          <option>Select Type</option>;
+          {types.map((item, index) => {
             return <option key={index}>{item}</option>;
           })}
         </select>
-        <select onChange={(e) => handleLangSelect(e.target.value)}>
-          {<option>Select Language</option>}
-          {languageList.map((item, index) => {
-            return <option key={index}>{item}</option>;
-          })}
-        </select>
-        <select onChange={(e) => handleTopicSelect(e.target.value)}>
-          {<option>Select Topic</option>}
-          {topicList.map((item, index) => {
-            return <option key={index}>{item}</option>;
-          })}
-        </select>
+        {selectedType === "url" ? (
+          <>
+            <select onChange={(e) => handleDomainSelect(e.target.value)}>
+              <option>Select Domain</option>;
+              {user.aliases.map((item, index) => {
+                return <option key={index}>{item}</option>;
+              })}
+            </select>
+            <select onChange={(e) => handleLangSelect(e.target.value)}>
+              {<option>Select Language</option>}
+              {languageList.map((item, index) => {
+                return <option key={index}>{item}</option>;
+              })}
+            </select>
+            <select onChange={(e) => handleTopicSelect(e.target.value)}>
+              {<option>Select Topic</option>}
+              {topicList.map((item, index) => {
+                return <option key={index}>{item}</option>;
+              })}
+            </select>{" "}
+          </>
+        ) : (
+          <select onChange={(e) => handleLinkSelect(e.target.value)}>
+            {<option>Select Html Page</option>}
+            {htmlLinks.map((item, index) => {
+              return <option key={index}>{item.link}</option>;
+            })}
+          </select>
+        )}
         <input onClick={(e) => handleCopy(link)} value={link} readOnly />
       </div>
     </Box>

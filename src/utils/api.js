@@ -169,6 +169,27 @@ class Api {
       return undefined;
     }
   }
+  async getWhitePageHtmlType(token) {
+    try {
+      let config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: `${this.base}/getWhitePageHtmlType`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const resp = await axios.request(config);
+      if (resp.status === 200) {
+        return resp.data;
+      } else {
+        return undefined;
+      }
+    } catch (e) {
+      return undefined;
+    }
+  }
   async getSnowData(from, to, id, token) {
     try {
       let config = {
