@@ -57,7 +57,31 @@ export const bingLeo_query_map = {
   sub8: "aff_sub10",
 };
 
-export const google_query = [];
+export const google_query = {
+  aff_sub1: { type: "pattern", cmp: "^[0-9]{9,}$" },
+  aff_sub2: { type: "pattern", cmp: "^[0-9]{10,}$" },
+  aff_sub7: { type: "pattern", cmp: "^[0-9]{4,}$" },
+  aff_sub10: { type: "pattern", cmp: "^[a-z]$" },
+  aff_sub13: { type: "pattern", cmp: "^[0-9]{10,}$" },
+};
+export const google_query_map = {
+  sub1: "aff_sub1",
+  sub2: "aff_sub2",
+  sub3: "aff_sub3",
+  sub4: "aff_sub4",
+  sub5: "aff_sub5",
+  sub6: "aff_sub6",
+  sub7: "aff_sub7",
+  sub8: "aff_sub8",
+  sub9: "aff_sub9",
+  sub10: "aff_sub10",
+  sub11: "aff_sub11",
+  sub12: "aff_sub12",
+  sub13: "aff_sub13",
+  sub14: "aff_sub14",
+  sub15: "aff_sub15",
+  sub16: "aff_sub16",
+};
 
 export const taboola_query = {
   aff_sub2: { type: "pattern", cmp: "^[0-9]+$" },
@@ -82,10 +106,6 @@ export const taboola_query_map = {
   sub11: "aff_sub11",
 };
 
-export const twitter_query = {
+export const twitter_query = {};
 
-};
-
-export const twitter_query_map = {
-
-};
+export const twitter_query_map = {};
