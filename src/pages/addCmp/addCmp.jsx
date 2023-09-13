@@ -15,7 +15,7 @@ import "./addCmp.css";
 
 const AddCmp = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.user);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [impressions, setImpressions] = useState("");
@@ -32,11 +32,9 @@ const AddCmp = () => {
       ep: "",
     },
   ]);
-  const [platform, setPlatform] = useState(
-    JSON.stringify({ query: bing_query, map: bing_query_map })
-  );
+  const [platform, setPlatform] = useState(JSON.stringify({ query: bing_query, map: bing_query_map }));
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     for (let index = 0; index < eps.length; index++) {
       const element = eps[index];
@@ -103,8 +101,9 @@ const AddCmp = () => {
     updatedEps[index].ep = newEpValue;
     setEps(updatedEps);
   };
+
   //add geos by index
-  const addGrp = (index) => {
+  const addGrp = index => {
     if (geo) {
       const updatedEps = [...eps];
       updatedEps[index].geo.grp.push(geo);
@@ -114,15 +113,15 @@ const AddCmp = () => {
       notify_error("Must select first");
     }
   };
+  
   //delete geos by index
   const deleteGrp = (key, valueToDelete) => {
     const updatedEps = [...eps];
-    updatedEps[key].geo.grp = updatedEps[key].geo.grp.filter(
-      (i) => i !== valueToDelete
-    );
+    updatedEps[key].geo.grp = updatedEps[key].geo.grp.filter(i => i !== valueToDelete);
     setEps(updatedEps);
     notify_success(`deleted`);
   };
+
   const addEps = () => {
     const newEpsObject = {
       geo: { grp: [], bl: false },
@@ -133,33 +132,23 @@ const AddCmp = () => {
     updatedEps[eps.length] = newEpsObject;
     setEps(updatedEps);
   };
-  const deleteEps = (index) => {
+
+  const deleteEps = index => {
     const updatedEps = [...eps];
     updatedEps.splice(index, 1);
     setEps(updatedEps);
   };
+
   return (
     <div className="addCmp-container">
       <form className="newCmp-form" onSubmit={handleSubmit} id="cmp">
         <Box>
           <h1>Campaign information</h1>
           <div className="formBody">
-            <input
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              required
-              placeholder="Campaign Name"
-            />
-            <input
-              type="number"
-              onChange={(e) => setImpressions(e.target.value)}
-              value={impressions}
-              required
-              placeholder="Skip imppressions"
-            />
+            <input type="text" onChange={e => setName(e.target.value)} value={name} required placeholder="Campaign Name" />
+            <input type="number" onChange={e => setImpressions(e.target.value)} value={impressions} required placeholder="Skip imppressions" />
             <div className="geoSelect">
-              <select onChange={(e) => setDomain(e.target.value)}>
+              <select onChange={e => setDomain(e.target.value)}>
                 <option>Select Domain</option>
                 {user.aliases.map((i, index) => (
                   <option key={index} value={i}>
@@ -169,7 +158,7 @@ const AddCmp = () => {
               </select>
               <span onClick={() => handleGetAlias()}>Search</span>
             </div>
-            <select onChange={(e) => setAlias(e.target.value)}>
+            <select onChange={e => setAlias(e.target.value)}>
               <option>Select Alaias</option>
               {availableAliases.map((i, index) => (
                 <option key={index} value={i}>
@@ -179,7 +168,7 @@ const AddCmp = () => {
             </select>
           </div>
         </Box>
-        
+
         <Ctype setType={setCtype} />
         <QueryParameters setPlatform={setPlatform} />
         {ctype !== "tag" && (
@@ -194,26 +183,12 @@ const AddCmp = () => {
             <Box key={index}>
               {index === 0 && <h1>Endpoints</h1>}
               <div className="formBody">
-                {index === 0 && (
-                  <input
-                    type="text"
-                    onChange={(e) => setWhitePage(encodeURI(e.target.value))}
-                    required
-                    id="whitePage"
-                    placeholder="White Page"
-                    value={whitePage}
-                  />
-                )}
+                {index === 0 && <input type="text" onChange={e => setWhitePage(encodeURI(e.target.value))} required id="whitePage" placeholder="White Page" value={whitePage} />}
 
-                <input
-                  type="text"
-                  onChange={(e) => updateEp(index, encodeURI(e.target.value))}
-                  required
-                  placeholder="Black Page"
-                />
+                <input type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} required placeholder="Black Page" />
 
                 <div className="geoSelect">
-                  <select onChange={(e) => setGeo(e.target.value)}>
+                  <select onChange={e => setGeo(e.target.value)}>
                     {countryCodes.map((i, index) => (
                       <option key={index} value={i.code}>
                         {i.name}
@@ -235,11 +210,7 @@ const AddCmp = () => {
                 ) : (
                   <></>
                 )}
-                {index === 0 ? (
-                  <span onClick={addEps}>Add Endpoint</span>
-                ) : (
-                  <span onClick={() => deleteEps(index)}>Delete Endpoint</span>
-                )}
+                {index === 0 ? <span onClick={addEps}>Add Endpoint</span> : <span onClick={() => deleteEps(index)}>Delete Endpoint</span>}
               </div>
             </Box>
           );
