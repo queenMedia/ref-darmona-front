@@ -29,9 +29,7 @@ function App() {
       user.data.token = cookie;
       dispatch(setUser(user.data));
       setUserExist(true);
-      navigate(
-        window.location.pathname === "/" ? "/cmplist" : window.location.pathname
-      );
+      navigate(window.location.pathname === "/" ? "/cmplist" : window.location.pathname);
     } else {
       navigate("/");
       setUserExist(false);
@@ -41,6 +39,8 @@ function App() {
   useEffect(() => {
     const username = localStorage.getItem("username");
     const password = localStorage.getItem("password");
+    const cookie = getCookie("jwt");
+    console.log({ username, password, cookie });
     if (username && password) {
       handleLogin(username, password);
     } else {
@@ -59,33 +59,14 @@ function App() {
             </div>
             <div className="main">
               <header className="header">
-                <ToastContainer
-                  position="top-right"
-                  autoClose={5000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme="dark"
-                />
+                <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
               </header>
               <main className="content">
                 <Routes>
                   <Route path="/cmplist" exact element={<CmpList />} />
                   <Route path="/cmplist/addnew" exact element={<AddCmp />} />
-                  <Route
-                    path="/cmplist/editcmp/:id/:cmpName"
-                    exact
-                    element={<EditCmp />}
-                  />
-                  <Route
-                    path="/cmplist/duplicate/:id/:cmpName"
-                    exact
-                    element={<DuplcateCmp />}
-                  />
+                  <Route path="/cmplist/editcmp/:id/:cmpName" exact element={<EditCmp />} />
+                  <Route path="/cmplist/duplicate/:id/:cmpName" exact element={<DuplcateCmp />} />
                   <Route path="/domains" exact element={<Domains />} />
                   <Route path="/snow" exact element={<SnowPage />} />
                 </Routes>
