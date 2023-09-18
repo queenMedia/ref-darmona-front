@@ -8,7 +8,7 @@ import { notify_error, notify_success } from "../../utils/notify";
 import "./editCmp.css";
 
 const EditCmp = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.user);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [impressions, setImpressions] = useState(1);
@@ -24,8 +24,8 @@ const EditCmp = () => {
     },
   ]);
 
-  const handleGetJson = async (cmpValue) => {
-    const json = await api.getCmp(cmpValue, user.token);
+  const handleGetJson = async id => {
+    const json = await api.getCmp(id, user.token);
     console.log(json);
     if (json === "file not found" || json?.error?.includes("Unauthorized")) {
       notify_error("file not found");
@@ -40,12 +40,10 @@ const EditCmp = () => {
 
   useEffect(() => {
     setName(cmpName);
-    const url = new URL(id);
-    const cmpValue = url.searchParams.get("cmp");
-    handleGetJson(cmpValue);
+    handleGetJson(id);
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     for (let index = 0; index < eps.length; index++) {
       const element = eps[index];
@@ -81,7 +79,7 @@ const EditCmp = () => {
     updatedEps[index].ep = newEpValue;
     setEps(updatedEps);
   };
-  const updateGrp = (index) => {
+  const updateGrp = index => {
     if (geo) {
       const updatedEps = [...eps];
       updatedEps[index].geo.grp.push(geo);
@@ -93,9 +91,7 @@ const EditCmp = () => {
   };
   const deleteGrp = (key, valueToDelete) => {
     const updatedEps = [...eps];
-    updatedEps[key].geo.grp = updatedEps[key].geo.grp.filter(
-      (i) => i !== valueToDelete
-    );
+    updatedEps[key].geo.grp = updatedEps[key].geo.grp.filter(i => i !== valueToDelete);
     setEps(updatedEps);
     notify_success(`deleted`);
   };
@@ -109,7 +105,7 @@ const EditCmp = () => {
     updatedEps[eps.length] = newEpsObject;
     setEps(updatedEps);
   };
-  const deleteEps = (index) => {
+  const deleteEps = index => {
     const updatedEps = [...eps];
     updatedEps.splice(index, 1);
     setEps(updatedEps);
@@ -119,55 +115,36 @@ const EditCmp = () => {
       <form className="newCmp-form" onSubmit={handleSubmit} id="cmp">
         <Box>
           <h1>Edit information</h1>
-          <div className="formBody">
-            <input
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              required
-              placeholder="Name"
-            />
-            <input
-              type="number"
-              onChange={(e) => setImpressions(e.target.value)}
-              value={impressions}
-              required
-              placeholder="Skip imppressions"
-            />
-            <input
-              type="text"
-              value={alias}
-              required
-              placeholder="Alias"
-              disabled={true}
-            />
-            <input
-              type="text"
-              onChange={(e) => setWhitePage(e.target.value)}
-              value={whitePage}
-              required
-              id="whitePage"
-              placeholder="White Page"
-            />
+          <div className="edit-formBody">
+            <div>
+              <input type="text" id="name" onChange={e => setName(e.target.value)} value={name} required placeholder="Name" />
+              <label htmlFor="name">Campaign Name</label>
+            </div>
+            <div>
+              <input type="number" id="impressions" onChange={e => setImpressions(e.target.value)} value={impressions} required placeholder="Skip impressions" />
+              <label htmlFor="impressions">Skip Impressions</label>
+            </div>
+            <div>
+              <input type="text" id="alias" value={alias} required placeholder="Alias" disabled={true} />
+              <label htmlFor="alias">Alias(disabled)</label>
+            </div>
+            <div>
+              <input type="text" id="whitePage" onChange={e => setWhitePage(e.target.value)} value={whitePage} required placeholder="White Page" />
+              <label htmlFor="whitePage">White Page</label>
+            </div>
           </div>
         </Box>
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
               {index === 0 && <h1>Endpoints</h1>}
-              <div className="formBody">
-                <input
-                  type="text"
-                  onChange={(e) => updateEp(index, encodeURI(e.target.value))}
-                  value={decodeURI(item.ep)}
-                  required
-                  placeholder="Black Page"
-                />
+              <div className="edit-formBody">
+                <div className="edit-blackPage">
+                  <input id="blackPage" type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} value={decodeURI(item.ep)} required placeholder="Black Page" />
+                  <label htmlFor="blackPage">Black Page</label>
+                </div>
                 <div className="geoSelect">
-                  <select
-                    onChange={(e) => setGeo(e.target.value)}
-                    className="geoSelect-text"
-                  >
+                  <select onChange={e => setGeo(e.target.value)} className="geoSelect-text">
                     {countryCodes.map((i, index) => (
                       <option key={index} value={i.code}>
                         {i.name}
@@ -189,11 +166,7 @@ const EditCmp = () => {
                 ) : (
                   <></>
                 )}
-                {index === 0 ? (
-                  <span onClick={addEps}>Add Endpoint</span>
-                ) : (
-                  <span onClick={() => deleteEps(index)}>Delete Endpoint</span>
-                )}
+                {index === 0 ? <span onClick={addEps}>Add Endpoint</span> : <span onClick={() => deleteEps(index)}>Delete Endpoint</span>}
               </div>
             </Box>
           );

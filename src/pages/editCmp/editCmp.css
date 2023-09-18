@@ -14,21 +14,29 @@
 .newCmp-form > input {
   margin: 15px;
 }
-.formBody {
+
+.edit-formBody {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 0 200px 0 200px;
+}
+.edit-blackPage{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.edit-formBody > div > label {
+  font-size: x-small;
 }
 .geoSelect {
   display: flex;
   flex-direction: row;
   gap: 15px;
 }
-.geoSelect-text:hover{
+.geoSelect-text:hover {
   color: green;
-  
 }
-.geoSelect:hover{
+.geoSelect:hover {
   color: green;
 }
