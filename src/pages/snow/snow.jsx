@@ -66,8 +66,8 @@ const SnowPage = () => {
   };
 
   const handleAliasSelect = (alias) => {
-    const filterd = user?.cmps?.filter((i) => i.url.includes(alias));
-    setIdList(filterd.map((i) => i.url));
+    const filterd = user?.cmps?.filter((i) => i.cmpUrl.includes(alias));
+    setIdList(filterd.map((i) => i.cmpUrl));
   };
 
   return (
