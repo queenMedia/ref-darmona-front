@@ -71,7 +71,7 @@ const EditCmp = () => {
       notify_success(`Campaign updated succesfully`);
       navigate("/cmplist");
     } else {
-      notify_error(apiResp);
+      notify_error(apiResp || "Failed to Edit");
     }
   };
   const updateEp = (index, newEpValue) => {
