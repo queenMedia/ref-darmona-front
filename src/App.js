@@ -65,8 +65,8 @@ function App() {
                 <Routes>
                   <Route path="/cmplist" exact element={<CmpList />} />
                   <Route path="/cmplist/addnew" exact element={<AddCmp />} />
-                  <Route path="/cmplist/editcmp/:id/:cmpName" exact element={<EditCmp />} />
-                  <Route path="/cmplist/duplicate/:id/:cmpName" exact element={<DuplcateCmp />} />
+                  <Route path="/cmplist/editcmp/:id/:cmpName/:status" exact element={<EditCmp />} />
+                  <Route path="/cmplist/duplicate/:id/:cmpName/:status" exact element={<DuplcateCmp />} />
                   <Route path="/domains" exact element={<Domains />} />
                   <Route path="/snow" exact element={<SnowPage />} />
                 </Routes>

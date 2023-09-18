@@ -12,11 +12,12 @@ const EditCmp = () => {
   const user = useSelector(state => state.user);
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [cmpStatus, setCmpStatus] = useState("");
   const [impressions, setImpressions] = useState(1);
   const [alias, setAlias] = useState("");
   const [geo, setGeo] = useState("");
   const [whitePage, setWhitePage] = useState("");
-  const { id, cmpName } = useParams();
+  const { id, cmpName, status } = useParams();
   const [eps, setEps] = useState([
     {
       geo: { grp: [], bl: false },
@@ -41,6 +42,7 @@ const EditCmp = () => {
 
   useEffect(() => {
     setName(cmpName);
+    setCmpStatus(status);
     handleGetJson(id);
   }, []);
 
@@ -61,12 +63,12 @@ const EditCmp = () => {
       alias,
       dc_ep: encodeURI(whitePage),
       eps: eps,
+      status:cmpStatus
     };
     for (let index = 0; index < data.eps.length; index++) {
       const element = data.eps[index];
       console.log(element.geo.grp);
     }
-    console.log({ data });
     const apiResp = await api.updateCmp(data, user.token);
     if (apiResp === 200) {
       notify_success(`Campaign updated succesfully`);
@@ -132,6 +134,10 @@ const EditCmp = () => {
             <div>
               <input type="text" id="whitePage" onChange={e => setWhitePage(e.target.value)} value={whitePage} required placeholder="White Page" />
               <label htmlFor="whitePage">White Page</label>
+            </div>
+            <div>
+              <input type="text" id="status" onChange={e => setCmpStatus(e.target.value)} value={cmpStatus} required placeholder="Status" />
+              <label htmlFor="whitePage">Status</label>
             </div>
           </div>
         </Box>
