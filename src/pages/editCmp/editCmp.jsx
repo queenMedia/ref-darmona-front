@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { countryCodes } from "../../assets/data/countryCodes";
 import { notify_error, notify_success } from "../../utils/notify";
+import { ThriveLink } from "../../components/thriveLink/thriveLink";
 import "./editCmp.css";
 
 const EditCmp = () => {
@@ -114,7 +115,7 @@ const EditCmp = () => {
     <div className="addCmp-container">
       <form className="newCmp-form" onSubmit={handleSubmit} id="cmp">
         <Box>
-          <h1>Edit information</h1>
+          <h1>Edit Campaign</h1>
           <div className="edit-formBody">
             <div>
               <input type="text" id="name" onChange={e => setName(e.target.value)} value={name} required placeholder="Name" />
@@ -134,6 +135,7 @@ const EditCmp = () => {
             </div>
           </div>
         </Box>
+        <ThriveLink />
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
