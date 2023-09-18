@@ -29,7 +29,7 @@ const Table = ({ data }) => {
             return (
               <tr key={index}>
                 <td onClick={() => handleCopy(item.cmpName)}>{item.cmpName}</td>
-                <td onClick={() => handleCopy(item.domain)}>{item.domain}</td>
+                <td onClick={() => handleCopy(`https://${item.domain}`)}>https://{item.domain}</td>
                 <td onClick={() => handleCopy(item.cmpId)}>{item.cmpId}</td>
                 <td onClick={() => handleCopy(item.status)}>{item.status}</td>
                 <td>
