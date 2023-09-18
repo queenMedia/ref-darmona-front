@@ -33,14 +33,11 @@ class Api {
 
   async getUser(id) {
     try {
-      return await axiosInstance(this.base).get(
-        `/getUser?_id=${encodeURIComponent(id)}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      return await axiosInstance(this.base).get(`/getUser?_id=${encodeURIComponent(id)}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (e) {
       console.log(e, "e in getUser");
       return undefined;
@@ -58,6 +55,7 @@ class Api {
 
   async addCmp(data, token) {
     try {
+      console.log(data);
       let config = {
         method: "post",
         maxBodyLength: Infinity,
@@ -70,11 +68,16 @@ class Api {
         data: data,
       };
       const resp = await axios.request(config);
+      console.log({resp});
       if (resp.status === 200) {
-        return resp.data.cmps[resp.data.cmps.length - 1];
+        return resp.data;
       }
     } catch (e) {
-      return e.response.data;
+      if (e?.response?.data) {
+        return e.response.data;
+      } else {
+        return undefined;
+      }
     }
   }
 
@@ -146,7 +149,8 @@ class Api {
         return resp.data;
       }
     } catch (e) {
-      return e.response.data;
+      console.log(e.response.data);
+      return undefined;
     }
   }
 
@@ -348,14 +352,11 @@ class Api {
 
   async getCharactersByGeoV2(version, geo) {
     try {
-      return await axiosInstance(this.base).get(
-        `/getCharactersV2?version=${version}&geo=${geo}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      return await axiosInstance(this.base).get(`/getCharactersV2?version=${version}&geo=${geo}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (e) {
       console.log(e, "e in getCharactersByGeo");
       return undefined;
@@ -364,14 +365,11 @@ class Api {
 
   async getBPsV2(version, geo, celeb) {
     try {
-      return await axiosInstance(this.base).get(
-        `/getBlackPagesV2?version=${version}&geo=${geo}&celeb=${celeb}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      return await axiosInstance(this.base).get(`/getBlackPagesV2?version=${version}&geo=${geo}&celeb=${celeb}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (e) {
       console.log(e, "e in getBPs");
       return undefined;
@@ -396,7 +394,7 @@ class Api {
       return undefined;
     }
   }
-  
+
   async getCmpId(cmpId) {
     try {
       return await axiosInstance(this.base).get(`/bycmpId?cmpId=${cmpId}`, {

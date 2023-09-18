@@ -7,7 +7,7 @@ import "./table.css";
 
 const Table = ({ data }) => {
   const navigate = useNavigate();
-  const handleCopy = (text) => {
+  const handleCopy = text => {
     navigator.clipboard.writeText(text);
     notify_success("Copied");
   };
@@ -18,6 +18,8 @@ const Table = ({ data }) => {
         <tr>
           <th>Campaign Name</th>
           <th>Link</th>
+          <th>Id</th>
+          <th>Status</th>
           <th></th>
         </tr>
       </thead>
@@ -26,31 +28,13 @@ const Table = ({ data }) => {
           data?.map((item, index) => {
             return (
               <tr key={index}>
-                <td>{item.name}</td>
-                <td onClick={() => handleCopy(item.url)}>{item.url}</td>
+                <td onClick={() => handleCopy(item.cmpName)}>{item.cmpName}</td>
+                <td onClick={() => handleCopy(item.domain)}>{item.domain}</td>
+                <td onClick={() => handleCopy(item.cmpId)}>{item.cmpId}</td>
+                <td onClick={() => handleCopy(item.status)}>{item.status}</td>
                 <td>
-                  <img
-                    src={EditIcon}
-                    alt=""
-                    onClick={() =>
-                      navigate(
-                        `/cmplist/editcmp/${encodeURIComponent(
-                          item.url
-                        )}/${encodeURIComponent(item.name)}`
-                      )
-                    }
-                  />
-                  <img
-                    src={DupIcon}
-                    alt=""
-                    onClick={() =>
-                      navigate(
-                        `/cmplist/duplicate/${encodeURIComponent(
-                          item.url
-                        )}/${encodeURIComponent(item.name)}`
-                      )
-                    }
-                  />
+                  <img src={EditIcon} alt="" onClick={() => navigate(`/cmplist/editcmp/${encodeURIComponent(item.url)}/${encodeURIComponent(item.name)}`)} />
+                  <img src={DupIcon} alt="" onClick={() => navigate(`/cmplist/duplicate/${encodeURIComponent(item.url)}/${encodeURIComponent(item.name)}`)} />
                 </td>
               </tr>
             );

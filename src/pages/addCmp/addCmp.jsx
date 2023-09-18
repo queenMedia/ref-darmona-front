@@ -57,19 +57,13 @@ const AddCmp = () => {
       dc_ep: whitePage,
       eps: eps,
     };
-    console.log({ data });
     const apiResp = await api.addCmp(data, user.token);
-    if (apiResp?.name && apiResp?.name) {
+    if (apiResp?.cmpName) {
       notify_success(`Campaign added succesfully`);
-      dispatch(
-        addCmp({
-          name: name,
-          url: apiResp.url,
-        })
-      );
+      dispatch(addCmp(apiResp));
       navigate("/cmplist");
     } else {
-      notify_error(apiResp);
+      notify_error(apiResp || "Contact Developers");
     }
   };
 
@@ -82,8 +76,7 @@ const AddCmp = () => {
         return;
       }
       const resp = await api.getAvailableAliases(user._id, domain, user.token);
-      console.log(resp);
-      if (resp.length < 1) {
+      if (!resp || resp.length < 1) {
         notify_error("you are out of available aliases");
         return;
       }
@@ -113,7 +106,7 @@ const AddCmp = () => {
       notify_error("Must select first");
     }
   };
-  
+
   //delete geos by index
   const deleteGrp = (key, valueToDelete) => {
     const updatedEps = [...eps];
