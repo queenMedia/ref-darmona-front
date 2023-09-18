@@ -33,8 +33,8 @@ const Table = ({ data }) => {
                 <td onClick={() => handleCopy(item.cmpId)}>{item.cmpId}</td>
                 <td onClick={() => handleCopy(item.status)}>{item.status}</td>
                 <td>
-                  <img src={EditIcon} alt="" onClick={() => navigate(`/cmplist/editcmp/${encodeURIComponent(item.url)}/${encodeURIComponent(item.name)}`)} />
-                  <img src={DupIcon} alt="" onClick={() => navigate(`/cmplist/duplicate/${encodeURIComponent(item.url)}/${encodeURIComponent(item.name)}`)} />
+                  <img src={EditIcon} alt="" onClick={() => navigate(`/cmplist/editcmp/${encodeURIComponent(item.cmpUrl)}/${encodeURIComponent(item.cmpName)}`)} />
+                  <img src={DupIcon} alt="" onClick={() => navigate(`/cmplist/duplicate/${encodeURIComponent(item.cmpUrl)}/${encodeURIComponent(item.cmpName)}`)} />
                 </td>
               </tr>
             );
