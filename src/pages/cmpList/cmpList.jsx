@@ -14,7 +14,7 @@ const CmpList = () => {
   const handleSearch = () => {
     if (search) {
       const filterd = allCmps.filter((i) => {
-        if (i.name.toLowerCase().includes(String(search).toLowerCase())) {
+        if (i.cmpName.toLowerCase().includes(String(search).toLowerCase())) {
           return true;
         }
       });
