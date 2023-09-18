@@ -102,6 +102,7 @@ class Api {
       return undefined;
     }
   }
+
   async getCmp(data, token) {
     try {
       let config = {
@@ -126,6 +127,7 @@ class Api {
       }
     }
   }
+
   async getAvailableAliases(_id, domain, token) {
     try {
       let config = {
@@ -169,6 +171,7 @@ class Api {
       return undefined;
     }
   }
+
   async getWhitePageHtmlType(token) {
     try {
       let config = {
@@ -190,6 +193,7 @@ class Api {
       return undefined;
     }
   }
+
   async getSnowData(from, to, id, token) {
     try {
       let config = {
@@ -211,6 +215,7 @@ class Api {
       return undefined;
     }
   }
+
   async getSnowRows(from, to, id, token) {
     try {
       let config = {
@@ -232,6 +237,7 @@ class Api {
       return undefined;
     }
   }
+
   async countByDateAndParam(from, to, by, sortBy, token) {
     try {
       let config = {
@@ -275,6 +281,7 @@ class Api {
       return undefined;
     }
   }
+
   async getCharacters(path, token) {
     try {
       let config = {
@@ -325,7 +332,6 @@ class Api {
       return undefined;
     }
   }
-
   // V2
   async getGeobyVersionV2(version) {
     try {
@@ -339,6 +345,7 @@ class Api {
       return undefined;
     }
   }
+
   async getCharactersByGeoV2(version, geo) {
     try {
       return await axiosInstance(this.base).get(
@@ -354,6 +361,7 @@ class Api {
       return undefined;
     }
   }
+
   async getBPsV2(version, geo, celeb) {
     try {
       return await axiosInstance(this.base).get(
@@ -388,6 +396,7 @@ class Api {
       return undefined;
     }
   }
+  
   async getCmpId(cmpId) {
     try {
       return await axiosInstance(this.base).get(`/bycmpId?cmpId=${cmpId}`, {
