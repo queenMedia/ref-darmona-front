@@ -33,3 +33,6 @@ tr {
 tr:hover {
   background-color: green;
 }
+th{
+  min-width: 70px
+}
