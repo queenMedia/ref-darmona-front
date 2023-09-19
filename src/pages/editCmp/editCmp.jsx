@@ -8,6 +8,8 @@ import { notify_error, notify_success } from "../../utils/notify";
 import { ThriveLink } from "../../components/thriveLink/thriveLink";
 import { useDispatch } from "react-redux";
 import { updateCmps } from "../../store/slices/user";
+import { cmpStatusOption } from "../../assets/data/commonDomains";
+import { Select } from "../../origins/select";
 import "./editCmp.css";
 
 const EditCmp = () => {
@@ -148,8 +150,19 @@ const EditCmp = () => {
               <label htmlFor="whitePage">White Page</label>
             </div>
             <div>
-              <input type="text" id="status" onChange={e => setCmpStatus(e.target.value)} value={cmpStatus} required placeholder="Status" />
-              <label htmlFor="whitePage">Status</label>
+              <select style={{ width: `100%` }} onChange={e => setCmpStatus(e.target.value)} required id="Select">
+                <option value="" disabled selected>
+                  {status}
+                </option>
+                {cmpStatusOption?.map((i, index) => {
+                  return (
+                    <option key={index} value={i}>
+                      {i}
+                    </option>
+                  );
+                })}
+              </select>
+              <label htmlFor="Select">Status</label>
             </div>
           </div>
         </Box>
