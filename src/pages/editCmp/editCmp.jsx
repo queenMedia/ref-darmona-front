@@ -6,10 +6,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { countryCodes } from "../../assets/data/countryCodes";
 import { notify_error, notify_success } from "../../utils/notify";
 import { ThriveLink } from "../../components/thriveLink/thriveLink";
+import { useDispatch } from "react-redux";
+import { updateCmps } from "../../store/slices/user";
 import "./editCmp.css";
 
 const EditCmp = () => {
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [cmpStatus, setCmpStatus] = useState("");
@@ -17,6 +21,7 @@ const EditCmp = () => {
   const [alias, setAlias] = useState("");
   const [geo, setGeo] = useState("");
   const [whitePage, setWhitePage] = useState("");
+  const [cmp, setStoreCmp] = useState("");
   const { id, cmpName, status } = useParams();
   const [eps, setEps] = useState([
     {
@@ -28,7 +33,6 @@ const EditCmp = () => {
 
   const handleGetJson = async id => {
     const json = await api.getCmp(id, user.token);
-    console.log(json);
     if (json === "file not found" || json?.error?.includes("Unauthorized")) {
       notify_error("file not found");
       navigate("/cmplist");
@@ -43,6 +47,8 @@ const EditCmp = () => {
   useEffect(() => {
     setName(cmpName);
     setCmpStatus(status);
+    const findStoreCmp = user.cmps.find(i => i.cmpId === id);
+    setStoreCmp(findStoreCmp);
     handleGetJson(id);
   }, []);
 
@@ -63,15 +69,21 @@ const EditCmp = () => {
       alias,
       dc_ep: encodeURI(whitePage),
       eps: eps,
-      status:cmpStatus
+      status: cmpStatus,
     };
     for (let index = 0; index < data.eps.length; index++) {
       const element = data.eps[index];
       console.log(element.geo.grp);
     }
     const apiResp = await api.updateCmp(data, user.token);
+    console.log({ apiResp });
     if (apiResp === 200) {
       notify_success(`Campaign updated succesfully`);
+      const cmpIndx = user.cmps.findIndex(i => i.cmpId === id);
+      const copiedArray = JSON.parse(JSON.stringify(user.cmps));
+      copiedArray[cmpIndx].status = cmpStatus;
+      copiedArray[cmpIndx].cmpName = name;
+      dispatch(updateCmps(copiedArray));
       navigate("/cmplist");
     } else {
       notify_error(apiResp || "Failed to Edit");

@@ -20,8 +20,8 @@ const Login = (props) => {
       localStorage.setItem("username", username);
       localStorage.setItem("password", password);
       const cookie = getCookie("jwt");
-      console.log(document.cookie);
-      console.log({cookie});
+      // console.log(document.cookie);
+      // console.log({cookie});
       user.data.token = cookie;
       dispatch(setUser(user.data));
       navigate("/cmplist");

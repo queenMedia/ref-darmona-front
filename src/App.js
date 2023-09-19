@@ -40,7 +40,7 @@ function App() {
     const username = localStorage.getItem("username");
     const password = localStorage.getItem("password");
     const cookie = getCookie("jwt");
-    console.log({ username, password, cookie });
+    // console.log({ username, password, cookie });
     if (username && password) {
       handleLogin(username, password);
     } else {
