@@ -25,6 +25,10 @@ export const userSlice = createSlice({
       const payload = action.payload;
       state.cmps.push(payload);
     },
+    updateCmps: (state, action) => {
+      const payload = action.payload;
+      state.cmps = payload;
+    },
     logout: (state, action) => {
       state = initialState;
     },
@@ -32,6 +36,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, addCmp ,logout } = userSlice.actions;
+export const { setUser, addCmp, logout, updateCmps } = userSlice.actions;
 
 export default userSlice.reducer;
