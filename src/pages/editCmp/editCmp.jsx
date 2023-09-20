@@ -151,7 +151,7 @@ const EditCmp = () => {
             </div>
             <div>
               <select style={{ width: `100%` }} onChange={e => setCmpStatus(e.target.value)} required id="Select">
-                <option value="" disabled selected>
+                <option value={status} disabled selected>
                   {status}
                 </option>
                 {cmpStatusOption?.map((i, index) => {
