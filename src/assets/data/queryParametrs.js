@@ -109,3 +109,7 @@ export const taboola_query_map = {
 export const twitter_query = {};
 
 export const twitter_query_map = {};
+
+export const tiktok_query = {};
+
+export const tiktok_query_map = {};

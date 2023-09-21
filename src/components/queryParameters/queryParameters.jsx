@@ -11,6 +11,8 @@ import {
   taboola_query_map,
   twitter_query,
   twitter_query_map,
+  tiktok_query,
+  tiktok_query_map,
   google_query,
   google_query_map,
 } from "../../assets/data/queryParametrs";
@@ -27,6 +29,7 @@ export const QueryParameters = props => {
         <option value={JSON.stringify({ query: taboola_query, map: taboola_query_map })}>Taboola</option>
         <option value={JSON.stringify({ query: twitter_query, map: twitter_query_map })}>Twitter</option>
         <option value={JSON.stringify({ query: google_query, map: google_query_map })}>Google</option>
+        <option value={JSON.stringify({ query: tiktok_query, map: tiktok_query_map })}>TikTok</option>
       </select>
     </Box>
   );

@@ -19,6 +19,9 @@ export const generateThriveLink = (domain, platform, id) => {
     case platform === "twitter":
       link = `https://${domain}/click?trvid=${id}`;
       break;
+    case platform === "tiktok":
+      link = `https://${domain}/click?trvid=${id}`;
+      break;
     default:
       break;
   }
