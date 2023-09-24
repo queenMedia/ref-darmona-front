@@ -46,7 +46,7 @@ class Api {
 
   async updateUser(id, data) {
     try {
-      return await axiosInstance(this.base).post("/updateUser", { id, data });
+      return await axiosInstance(this.base).put("/updateUser", { id, data });
     } catch (e) {
       console.log(e, "e in updateUser");
       return undefined;
@@ -404,6 +404,31 @@ class Api {
       });
     } catch (e) {
       console.log(e, "e in getUser");
+      return undefined;
+    }
+  }
+
+  async updateCmpDoc(data, token) {
+    try {
+      let config = {
+        method: "put",
+        maxBodyLength: Infinity,
+        url: `${this.base}/updateCmpDoc`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Cookie: `jwt=${token}`,
+        },
+        data: data,
+      };
+      const resp = await axios.request(config);
+      if (resp.status === 200) {
+        return resp;
+      } else {
+        return undefined;
+      }
+    } catch (e) {
+      console.log(e.response);
       return undefined;
     }
   }
