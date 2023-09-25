@@ -40,6 +40,7 @@ const Table = ({ data }) => {
     <table className="table">
       <thead>
         <tr>
+          <th>Date</th>
           <th>Campaign Name</th>
           <th>Link</th>
           <th>Id</th>
@@ -52,9 +53,10 @@ const Table = ({ data }) => {
           data?.map((item, index) => {
             return (
               <tr key={index}>
+                 <td onClick={() => handleCopy(item.cmpName)}>{String(item.createdAt)?.split("T")[0]}</td>
                 <td onClick={() => handleCopy(item.cmpName)}>{item.cmpName}</td>
                 <td onClick={() => handleCopy(`https://${item.domain}`)}>https://{item.domain}</td>
-                <td onClick={() => handleCopy(item.cmpId)}>{item.cmpId}</td>
+                <td onClick={() => handleCopy(item.cmpId)}>{item.cmpId?.slice(0, 15) + '...' + item.cmpId?.slice(-4)}</td>
                 <td>
                   <select style={{ width: `100%` }} onChange={e => handleStatusChange(item._id, e.target.value)}>
                     <option value={item.status} disabled selected>
