@@ -432,6 +432,21 @@ class Api {
       return undefined;
     }
   }
+
+  async CheckDomAvailability(domainName , token) {
+    try {
+      return await axiosInstance(this.base).get(`/checkAvailability?domainName=${domainName}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          // Cookie: `jwt=${token}`,
+        },
+      });
+    } catch (e) {
+      console.log(e, "e in getUser");
+      return undefined;
+    }
+  }
 }
 
 export const api = new Api(baseUrl);
