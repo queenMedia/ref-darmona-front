@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import BucketTable from "../../components/bucketTable/bucketTable";
 import Injector from "../../components/injector/injector";
 import CheckDomAvailability from "../../components/checkDomAvailability/checkDomAvailability";
+import BuyDomain from "../../components/buyDomain/buyDomain";
 import Bucket from "../../components/bucket/bucket";
 import "./domains.css";
 
@@ -30,7 +31,8 @@ const Domains = () => {
 
   return (
     <div className="domain-cont">
-      <CheckDomAvailability offers={offers} />
+      <CheckDomAvailability />
+      {/* <BuyDomain /> */}
       <Bucket offers={offers} />
       <Injector offers={offers} />
       <BucketTable />

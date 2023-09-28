@@ -15,7 +15,7 @@ const CheckDomAvailability = () => {
             notify_error("domain must include a dot")
             return
         }
-        const resp = await api.CheckDomAvailability(domain, user.token)
+        const resp = await api.checkDomAvailability(domain, user.token)
         if (!resp.data.results[0]?.purchasable) {
             notify_Info("Domain is not available")
             return

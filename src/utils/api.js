@@ -433,7 +433,7 @@ class Api {
     }
   }
 
-  async CheckDomAvailability(domainName , token) {
+  async checkDomAvailability(domainName , token) {
     try {
       return await axiosInstance(this.base).get(`/checkAvailability?domainName=${domainName}`, {
         headers: {
