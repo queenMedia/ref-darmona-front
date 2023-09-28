@@ -28,7 +28,7 @@ const BucketTable = () => {
     <div className="domain-cont">
       <div className="snowPage-container">
         <form className="snowPage-form" onSubmit={getDomainPages}>
-          <h2 className="form-title">Domain Pages</h2>
+          <h2 className="form-title">Prelander Links</h2>
           <div className="form-body">
             <select
               className="form-select"

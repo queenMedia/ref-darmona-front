@@ -85,7 +85,7 @@ const Bucket = ({ offers }) => {
     <div className="domain-cont">
       <div className="snowPage-container">
         <form className="snowPage-form" onSubmit={handleBpSubmit}>
-          <h2 className="form-title">Black Pages</h2>
+          <h2 className="form-title">Setish Pages</h2>
           <div className="form-body">
             <Select
               required={true}
