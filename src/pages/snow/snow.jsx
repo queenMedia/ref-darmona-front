@@ -44,6 +44,7 @@ const SnowPage = () => {
         onlyId,
         user.token
       );
+      console.log(response);
       if (!response) {
         notify_error("no results");
         return;
@@ -56,8 +57,8 @@ const SnowPage = () => {
       updatedData.unshift({
         date: getCurrentDateAndHour(),
         id: onlyId,
-        countTrue: response.resp[0].COUNT,
-        countFalse: response?.resp[1]?.COUNT || 0,
+        passed: response.resp[0].PASSED || 0,
+        notPassed: response?.resp[1]?.NOT_PASSED || 0,
       });
       setData(updatedData);
     } catch (error) {
@@ -67,6 +68,7 @@ const SnowPage = () => {
 
   const handleAliasSelect = (alias) => {
     const filterd = user?.cmps?.filter((i) => i.cmpUrl.includes(alias));
+    setId(filterd[0].cmpUrl)
     setIdList(filterd.map((i) => i.cmpUrl));
   };
 
@@ -135,8 +137,8 @@ const SnowPage = () => {
                 <tr key={index}>
                   <td>{item.date}</td>
                   <td>{item.id}</td>
-                  <td className="countFalse">{item.countFalse}</td>
-                  <td className="countTrue">{item.countTrue}</td>
+                  <td className="countFalse">{item.passed}</td>
+                  <td className="countTrue">{item.notPassed}</td>
                 </tr>
               ))
             ) : (
