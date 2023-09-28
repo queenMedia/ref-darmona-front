@@ -9,10 +9,23 @@ const BuyDomain = () => {
     const [domain, setDomain] = useState("");
 
     const buyDomain = async (e) => {
-        e.preventDefault();
-        if (domain === "" || !domain.includes(".")) {
-            notify_error("domain must include a dot")
-            return
+        try {
+            e.preventDefault();
+            if (domain === "" || !domain.includes(".")) {
+                notify_error("domain must include a dot")
+                return
+            }
+            const resp = await api.buyDomain(user.token, domain)
+            // if (condition) {
+                
+            // }
+            console.log(resp.response.data);
+            if (resp.data) {
+
+            }
+        } catch (error) {
+            console.log("got here");
+            console.log();
         }
 
     };

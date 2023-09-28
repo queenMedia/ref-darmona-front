@@ -68,7 +68,7 @@ class Api {
         data: data,
       };
       const resp = await axios.request(config);
-      console.log({resp});
+      console.log({ resp });
       if (resp.status === 200) {
         return resp.data;
       }
@@ -433,7 +433,7 @@ class Api {
     }
   }
 
-  async checkDomAvailability(domainName , token) {
+  async checkDomAvailability(domainName, token) {
     try {
       return await axiosInstance(this.base).get(`/checkAvailability?domainName=${domainName}`, {
         headers: {
@@ -445,6 +445,25 @@ class Api {
     } catch (e) {
       console.log(e, "e in getUser");
       return undefined;
+    }
+  }
+
+  async buyDomain(token, domainName) {
+    try {
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `${this.base}/buyDomain`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: { domainName },
+      };
+      return await axios.request(config);
+    } catch (e) {
+      console.log("hereee");
+      return e;
     }
   }
 }
