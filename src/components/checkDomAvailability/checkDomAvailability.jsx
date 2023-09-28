@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, } from "react";
 import { api } from "../../utils/api";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    notify_error,
-    notify_success,
-    notify_Info,
-    handleCopy,
-} from "../../utils/notify";
+import { useSelector, } from "react-redux";
+import { notify_Info, notify_error } from "../../utils/notify";
 import "./checkDomAvailability.css";
-import { prelandersCharacters } from "../../assets/data/characters";
-import { Select } from "../../origins/select";
 
 const CheckDomAvailability = () => {
     const user = useSelector((state) => state.user);
@@ -18,6 +11,10 @@ const CheckDomAvailability = () => {
 
     const checkAvailability = async (e) => {
         e.preventDefault();
+        if (domain === "" || !domain.includes(".")) {
+            notify_error("domain must include a dot")
+            return
+        }
         const resp = await api.CheckDomAvailability(domain, user.token)
         if (!resp.data.results[0]?.purchasable) {
             notify_Info("Domain is not available")
