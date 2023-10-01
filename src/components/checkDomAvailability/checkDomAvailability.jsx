@@ -11,17 +11,17 @@ const CheckDomAvailability = () => {
 
     const checkAvailability = async (e) => {
         e.preventDefault();
-        if (domain === "" || !domain.includes(".")) {
+        if (domain === "") {
             notify_error("domain must include a dot")
             return
         }
         const resp = await api.checkDomAvailability(domain, user.token)
-        if (!resp.data.results[0]?.purchasable) {
-            notify_Info("Domain is not available")
+        console.log(resp?.data?.results);
+        if (resp?.data?.results?.length < 1) {
+            notify_Info("keyword is not available")
             return
         }
-        setDomainData(resp.data.results[0])
-        console.log(resp.data.results[0]);
+        setDomainData(resp.data.results)
     };
 
     return (
@@ -40,25 +40,32 @@ const CheckDomAvailability = () => {
                             <button type="submit">Search</button>
                         </div>
                     </form>
-                    {domainData?.domainName ? (
-                        <div className="details-container">
-                            <div>
-                                <strong>Domain Name:</strong> {domainData.domainName}
-                            </div>
-                            <div>
-                                <strong>Purchasable:</strong> {String(domainData.purchasable)}
-                            </div>
-                            <div>
-                                <strong>Purchase Price:</strong> {domainData.purchasePrice}$
-                            </div>
-                            <div>
-                                <strong>Renewal Price:</strong> {domainData.renewalPrice}$
-                            </div>
-                        </div>
-
-                    ) : (
-                        <></>
-                    )}
+                    <table className="snowPage-table">
+                        {domainData?.length > 0 ? (
+                            <>
+                                <thead>
+                                    <tr>
+                                        <th>Domain Name</th>
+                                        <th>Purchasable</th>
+                                        <th>Purchase Price</th>
+                                        <th>Renewal Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {domainData?.map((item, index) => (
+                                        <tr key={index}>
+                                            <td className="snowPage-link">{item.domainName}</td>
+                                            <td className="snowPage-link">{String(item.purchasable || false)}</td>
+                                            <td className="snowPage-link">{item.purchasePrice || "0"}$</td>
+                                            <td className="snowPage-link">{item.renewalPrice || "0"}$</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </>
+                        ) : (
+                            <></>
+                        )}
+                    </table>
                 </div>
             </div>
         </div>
