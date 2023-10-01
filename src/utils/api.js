@@ -462,8 +462,8 @@ class Api {
       };
       return await axios.request(config);
     } catch (e) {
-      console.log("hereee");
-      return e;
+      console.log(e.message);
+      return undefined
     }
   }
 }

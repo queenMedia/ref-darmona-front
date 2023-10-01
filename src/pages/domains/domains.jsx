@@ -32,7 +32,7 @@ const Domains = () => {
   return (
     <div className="domain-cont">
       <CheckDomAvailability />
-      {/* <BuyDomain /> */}
+      <BuyDomain />
       <Bucket offers={offers} />
       <Injector offers={offers} />
       <BucketTable />

@@ -1,7 +1,7 @@
 import React, { useState, } from "react";
 import { api } from "../../utils/api";
 import { useSelector, } from "react-redux";
-import { notify_Info, notify_error } from "../../utils/notify";
+import { notify_Info, notify_error, notify_success } from "../../utils/notify";
 import "./buyDomain.css";
 
 const BuyDomain = () => {
@@ -16,18 +16,17 @@ const BuyDomain = () => {
                 return
             }
             const resp = await api.buyDomain(user.token, domain)
-            // if (condition) {
-                
-            // }
-            console.log(resp.response.data);
-            if (resp.data) {
-
+            console.log(resp);
+            if (!resp) {
+                notify_error("Domain not available")
+                return
+            } else {
+                notify_success("Domain purchased successfully")
             }
         } catch (error) {
-            console.log("got here");
-            console.log();
+            console.log(error.message);
+            notify_error("Domain not available")
         }
-
     };
 
     return (
