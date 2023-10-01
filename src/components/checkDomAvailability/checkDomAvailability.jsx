@@ -1,7 +1,7 @@
 import React, { useState, } from "react";
 import { api } from "../../utils/api";
 import { useSelector, } from "react-redux";
-import { notify_Info, notify_error } from "../../utils/notify";
+import { notify_Info, notify_error, notify_success, handleCopy } from "../../utils/notify";
 import "./checkDomAvailability.css";
 
 const CheckDomAvailability = () => {
@@ -11,6 +11,7 @@ const CheckDomAvailability = () => {
 
     const checkAvailability = async (e) => {
         e.preventDefault();
+        notify_Info("Searching...")
         if (domain === "") {
             notify_error("domain must include a dot")
             return
@@ -18,9 +19,10 @@ const CheckDomAvailability = () => {
         const resp = await api.checkDomAvailability(domain, user.token)
         console.log(resp?.data?.results);
         if (resp?.data?.results?.length < 1) {
-            notify_Info("keyword is not available")
+            notify_error("keyword is not available")
             return
         }
+        notify_success(`found ${resp?.data?.results?.length} domains`)
         setDomainData(resp.data.results)
     };
 
@@ -54,7 +56,7 @@ const CheckDomAvailability = () => {
                                 <tbody>
                                     {domainData?.map((item, index) => (
                                         <tr key={index}>
-                                            <td className="snowPage-link">{item.domainName}</td>
+                                            <td onClick={() => handleCopy(item.domainName)} className="snowPage-link">{item.domainName}</td>
                                             <td className="snowPage-link">{String(item.purchasable || false)}</td>
                                             <td className="snowPage-link">{item.purchasePrice || "0"}$</td>
                                             <td className="snowPage-link">{item.renewalPrice || "0"}$</td>
