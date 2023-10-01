@@ -147,7 +147,7 @@ const AddCmp = () => {
             <div className="geoSelect">
               <select onChange={e => setDomain(e.target.value)}>
                 <option>Select Domain</option>
-                <option value={"*"}>Find availabel root Domain</option>
+                {user.username !== "Bravo" && <option value={"*"}>Find availabel root Domain</option>}
                 {user.aliases.map((i, index) => (
                   <option key={index} value={i}>
                     {i}
