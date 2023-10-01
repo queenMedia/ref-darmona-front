@@ -4,7 +4,7 @@ import { api } from "../../utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { countryCodes } from "../../assets/data/countryCodes";
-import { notify_error, notify_success, notify_Info } from "../../utils/notify";
+import { notify_error, notify_success, notify_Info, handleCopy } from "../../utils/notify";
 import { addCmp } from "../../store/slices/user";
 import { ThriveLink } from "../../components/thriveLink/thriveLink";
 import { Ctype } from "../../components/ctype/ctype";
@@ -87,6 +87,10 @@ const AddCmp = () => {
       notify_error("choose a different domain");
     }
   };
+  const handleCopyAndSet = (i) => {
+    handleCopy(i)
+    setAlias(i)
+  };
 
   //update black page by index
   const updateEp = (index, newEpValue) => {
@@ -143,6 +147,7 @@ const AddCmp = () => {
             <div className="geoSelect">
               <select onChange={e => setDomain(e.target.value)}>
                 <option>Select Domain</option>
+                <option value={"*"}>Find availabel root Domain</option>
                 {user.aliases.map((i, index) => (
                   <option key={index} value={i}>
                     {i}
@@ -151,7 +156,7 @@ const AddCmp = () => {
               </select>
               <span onClick={() => handleGetAlias()}>Search</span>
             </div>
-            <select onChange={e => setAlias(e.target.value)}>
+            <select onChange={e => handleCopyAndSet(e.target.value)}>
               <option>Select Alaias</option>
               {availableAliases.map((i, index) => (
                 <option key={index} value={i}>
