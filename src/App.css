@@ -5,7 +5,7 @@
   color: white;
 }
 .sidebar {
-  border-right: 1px solid rgb(45, 45, 45);
+  /* border-right: 1px solid rgb(45, 45, 45); */
   display: table-cell;
   width: 13%;
   vertical-align: top;
