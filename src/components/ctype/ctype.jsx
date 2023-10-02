@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "../box/box";
-import { Select } from "../../origins/select";
-import { ImageUploader } from "../../origins/imageUploader";
+import { Select } from "../../origins/select/select.jsx";
+import { ImageUploader } from "../../origins/fileUploader/imageUploader";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
 import { useSelector, useDispatch } from "react-redux";
 import { api } from "../../utils/api";
@@ -44,7 +44,7 @@ export const Ctype = (props) => {
         destinationDom
       );
       console.log(resp);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (

@@ -39,8 +39,6 @@ function App() {
   useEffect(() => {
     const username = localStorage.getItem("username");
     const password = localStorage.getItem("password");
-    const cookie = getCookie("jwt");
-    // console.log({ username, password, cookie });
     if (username && password) {
       handleLogin(username, password);
     } else {
@@ -53,7 +51,6 @@ function App() {
     <>
       {userExist === true ? (
         <div className="app-container">
-
           <header >
             <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
           </header>
@@ -62,6 +59,7 @@ function App() {
             <aside>
               <Sidebar />
             </aside>
+
             <div className="content">
               <Routes>
                 <Route path="/cmplist" exact element={<CmpList />} />
@@ -73,7 +71,6 @@ function App() {
               </Routes>
             </div>
           </main>
-
         </div>
       ) : userExist === false ? (
         <div className="login-container">

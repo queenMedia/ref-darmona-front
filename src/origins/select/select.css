@@ -1,0 +1,38 @@
+select {
+    appearance: none !important;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(136, 136, 136);
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  .select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    border-radius: 0.25em;
+    overflow: hidden;
+  }
+  select:focus>option {
+    background-color: grey;
+    color: white;
+  }
+  .select::after {
+    content: "\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background-color: brown;
+    transition: 0.25s all ease;
+    pointer-events: none;
+  }

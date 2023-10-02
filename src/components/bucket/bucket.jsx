@@ -9,7 +9,7 @@ import {
 } from "../../utils/notify";
 import "./bucket.css";
 // import { prelandersCharacters } from "../../assets/data/characters";
-import { Select } from "../../origins/select";
+import { Select } from "../../origins/select/select.jsx";
 
 const Bucket = ({ offers }) => {
   const user = useSelector((state) => state.user);

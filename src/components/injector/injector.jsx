@@ -9,7 +9,7 @@ import {
 } from "../../utils/notify";
 import "./injector.css";
 import { prelandersCharacters } from "../../assets/data/characters";
-import { Select } from "../../origins/select";
+import { Select } from "../../origins/select/select.jsx";
 
 const Injector = ({ offers }) => {
   const user = useSelector((state) => state.user);

@@ -9,7 +9,7 @@ import { ThriveLink } from "../../components/thriveLink/thriveLink";
 import { useDispatch } from "react-redux";
 import { updateCmps } from "../../store/slices/user";
 import { cmpStatusOption } from "../../assets/data/commonDomains";
-import { Select } from "../../origins/select";
+import { Select } from "../../origins/select/select.jsx";
 import "./editCmp.css";
 
 const EditCmp = () => {

@@ -4,7 +4,7 @@ import { api } from "../../utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentDateAndHour } from "../../utils/getDate";
 import { notify_error, notify_success, notify_Info } from "../../utils/notify";
-import { Select } from "../../origins/select";
+import { Select } from "../../origins/select/select.jsx";
 import GetSnowRows from "../../components/getSnowRows/getSnowRows";
 import CountByDateAndParam from "../../components/getSnowRows/countByDateAndParam";
 import GetById from "../../components/getSnowRows/getById";

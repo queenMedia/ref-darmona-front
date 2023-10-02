@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./imageUploader.css"
 
 export const ImageUploader = (props) => {
   const [fileName, setFileName] = useState("No file chosen...");
