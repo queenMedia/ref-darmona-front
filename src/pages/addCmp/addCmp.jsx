@@ -11,6 +11,7 @@ import { Ctype } from "../../components/ctype/ctype";
 import { SelectWP } from "../../components/selectWP/selectWP";
 import { bing_query, bing_query_map } from "../../assets/data/queryParametrs";
 import { QueryParameters } from "../../components/queryParameters/queryParameters";
+import { Select, ComplexSelect } from "../../origins/select/select";
 import "./addCmp.css";
 
 const AddCmp = () => {
@@ -144,26 +145,23 @@ const AddCmp = () => {
           <div className="formBody">
             <input type="text" onChange={e => setName(e.target.value)} value={name} required placeholder="Campaign Name" />
             <input type="number" onChange={e => setImpressions(e.target.value)} value={impressions} required placeholder="Skip imppressions" />
-            <div className="geoSelect">
-              <select onChange={e => setDomain(e.target.value)}>
-                <option>Select Domain</option>
-                {user.username !== "Bravo" && <option value={"*"}>Find availabel root Domain</option>}
-                {user.aliases.map((i, index) => (
-                  <option key={index} value={i}>
-                    {i}
-                  </option>
-                ))}
-              </select>
+            <div className="selectWithBtn">
+              <Select
+                required={true}
+                data={user.aliases}
+                customOption={"*"}
+                customOptionText={"Find availabel root Domain"}
+                title={"Select Domain"}
+                func={setDomain}
+              />
               <span onClick={() => handleGetAlias()}>Search</span>
             </div>
-            <select onChange={e => handleCopyAndSet(e.target.value)}>
-              <option>Select Alaias</option>
-              {availableAliases.map((i, index) => (
-                <option key={index} value={i}>
-                  {i}
-                </option>
-              ))}
-            </select>
+            <Select
+              required={true}
+              data={availableAliases}
+              title={"Select Alaias"}
+              func={handleCopyAndSet}
+            />
           </div>
         </Box>
 
@@ -185,20 +183,19 @@ const AddCmp = () => {
 
                 <input type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} required placeholder="Black Page" />
 
-                <div className="geoSelect">
-                  <select onChange={e => setGeo(e.target.value)}>
-                    {countryCodes.map((i, index) => (
-                      <option key={index} value={i.code}>
-                        {i.name}
-                      </option>
-                    ))}
-                  </select>
+                <div className="selectWithBtn">
+                  <ComplexSelect
+                    required={true}
+                    data={countryCodes}
+                    title={"Select Geo"}
+                    func={setGeo}
+                  />
                   <span onClick={() => addGrp(index)}>Add</span>
                 </div>
 
                 {item.geo.grp?.length > 0 ? (
                   item.geo.grp?.map((i, key) => (
-                    <div className="geoSelect" key={key}>
+                    <div className="selectWithBtn" key={key}>
                       <select disabled>
                         <option value={i.code}>{i}</option>
                       </select>
