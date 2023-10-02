@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { updateCmps } from "../../store/slices/user";
 import { cmpStatusOption } from "../../assets/data/commonDomains";
 import { Select } from "../../origins/select/select.jsx";
+import { SelectWP } from "../../components/selectWP/selectWP";
 import "./editCmp.css";
 
 const EditCmp = () => {
@@ -166,6 +167,7 @@ const EditCmp = () => {
             </div>
           </div>
         </Box>
+        <SelectWP setWhitePage={setWhitePage} />
         <ThriveLink />
         {eps?.map((item, index) => {
           return (
