@@ -7,7 +7,9 @@ import {
   notify_Info,
   handleCopy,
 } from "../../utils/notify";
+import { Select } from "../../origins/select/select.jsx"
 import "./bucketTable.css";
+
 
 const BucketTable = () => {
   const user = useSelector((state) => state.user);
@@ -16,6 +18,7 @@ const BucketTable = () => {
 
   const getDomainPages = async (e) => {
     e.preventDefault();
+    notify_Info("searching")
     const domainPages = await api.getSetishData("", user.token, domain);
     if (!domainPages?.data) {
       notify_error("did not find any pages in this domain");
@@ -30,19 +33,12 @@ const BucketTable = () => {
         <form className="snowPage-form" onSubmit={getDomainPages}>
           <h2 className="form-title">Prelander Links</h2>
           <div className="form-body">
-            <select
-              className="form-select"
-              onChange={(e) => setDomain(e.target.value)}
-            >
-              <option value={"Asdf"}>Select Domain</option>
-              {user.blackPageDomains.map((i, index) => {
-                return (
-                  <option key={index} value={i}>
-                    {i}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              required={true}
+              data={user.blackPageDomains}
+              title={"Select Domain"}
+              func={setDomain}
+            />
             <button type="submit">Submit</button>
           </div>
         </form>
