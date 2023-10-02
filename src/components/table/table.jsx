@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { cmpStatusOption } from "../../assets/data/commonDomains";
 import { useSelector } from "react-redux";
 import { api } from "../../utils/api";
-
+import { SelectWithFuncParam } from "../../origins/select/select";
 import "./table.css";
 
 const Table = ({ data }) => {
@@ -53,23 +53,19 @@ const Table = ({ data }) => {
           data?.map((item, index) => {
             return (
               <tr key={index}>
-                 <td onClick={() => handleCopy(item.cmpName)}>{String(item.createdAt)?.split("T")[0]}</td>
+                <td onClick={() => handleCopy(item.cmpName)}>{String(item.createdAt)?.split("T")[0]}</td>
                 <td onClick={() => handleCopy(item.cmpName)}>{item.cmpName}</td>
                 <td onClick={() => handleCopy(`https://${item.domain}`)}>https://{item.domain}</td>
                 <td onClick={() => handleCopy(item.cmpId)}>{item.cmpId?.slice(0, 15) + '...' + item.cmpId?.slice(-4)}</td>
                 <td>
-                  <select className={item.status.replace(" ","")} style={{ width: `100%` }} onChange={e => handleStatusChange(item._id, e.target.value)}>
-                    <option value={item.status} disabled selected>
-                      {item.status}
-                    </option>
-                    {cmpStatusOption?.map((i, index) => {
-                      return (
-                        <option key={index} value={i}>
-                          {i}
-                        </option>
-                      );
-                    })}
-                  </select>
+                  <SelectWithFuncParam
+                    className={item.status.replace(" ", "")}
+                    required={true}
+                    data={cmpStatusOption}
+                    title={item.status}
+                    func={handleStatusChange}
+                    funcParam={item._id}
+                  />
                 </td>
                 <td>
                   <img src={EditIcon} alt="" onClick={() => navigate(`/cmplist/editcmp/${encodeURIComponent(item.cmpId)}/${encodeURIComponent(item.cmpName)}/${item.status || "no status"}`)} />
