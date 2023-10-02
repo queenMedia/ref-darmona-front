@@ -58,7 +58,7 @@ const Table = ({ data }) => {
                 <td onClick={() => handleCopy(`https://${item.domain}`)}>https://{item.domain}</td>
                 <td onClick={() => handleCopy(item.cmpId)}>{item.cmpId?.slice(0, 15) + '...' + item.cmpId?.slice(-4)}</td>
                 <td>
-                  <select style={{ width: `100%` }} onChange={e => handleStatusChange(item._id, e.target.value)}>
+                  <select className={item.status.replace(" ","")} style={{ width: `100%` }} onChange={e => handleStatusChange(item._id, e.target.value)}>
                     <option value={item.status} disabled selected>
                       {item.status}
                     </option>

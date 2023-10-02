@@ -55,7 +55,7 @@
 .logout:hover {
   position: fixed;
   bottom: 10px;
-  background-color: green;
+  background-color: #666767;
 }
 #sideLogo {
   width: 20px;
