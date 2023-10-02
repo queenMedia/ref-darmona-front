@@ -40,10 +40,10 @@ export const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-      <div className="side-user">
+      {/* <div className="side-user">
         <img src={SideUser} alt="SideUser" />
         <span>{cmps.username}</span>
-      </div>
+      </div> */}
       <div className="sidbar-tab-container">
         {items.map((i, index) => {
           return (

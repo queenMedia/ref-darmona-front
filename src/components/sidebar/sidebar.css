@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   align-content: center;
-  margin-top: 15px;
 }
 .side-user {
   display: flex;
@@ -11,7 +10,7 @@
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   gap: 5px;
   font-weight: 600;
   font-size: larger;

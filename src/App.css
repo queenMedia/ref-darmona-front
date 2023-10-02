@@ -1,24 +1,31 @@
 .app-container {
-  display: table;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   color: white;
 }
-.sidebar {
+
+header {
+  width: 100%;
+  padding: 30px;
+}
+
+main{
+  display: flex;
+}
+aside {
   /* border-right: 1px solid rgb(45, 45, 45); */
   display: table-cell;
   width: 13%;
   vertical-align: top;
+  padding-top: 30px;
 }
-.main {
+.content {
   padding: 40px;
   display: table-cell;
   width: 87%;
   vertical-align: top;
-}
-
-.header {
-  padding: 30px;
 }
 
 .content {
