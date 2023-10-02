@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box } from "../box/box";
 import { useSelector } from "react-redux";
 import { notify_error, notify_Info, handleCopy } from "../../utils/notify";
+import { Select } from "../../origins/select/select"
 import { api } from "../../utils/api";
 
 export const SelectWP = (props) => {
@@ -93,40 +94,40 @@ export const SelectWP = (props) => {
     <Box>
       <h1>White Page</h1>
       <div className="formBody">
-        <select onChange={(e) => handleSelectType(e.target.value)}>
-          <option>Select Type</option>;
-          {types.map((item, index) => {
-            return <option key={index}>{item}</option>;
-          })}
-        </select>
+        <Select
+          required={true}
+          data={types}
+          title={"Select Type"}
+          func={handleSelectType}
+        />
         {selectedType === "url" ? (
           <>
-            <select onChange={(e) => handleDomainSelect(e.target.value)}>
-              <option>Select Domain</option>;
-              {user.aliases.map((item, index) => {
-                return <option key={index}>{item}</option>;
-              })}
-            </select>
-            <select onChange={(e) => handleLangSelect(e.target.value)}>
-              {<option>Select Language</option>}
-              {languageList.map((item, index) => {
-                return <option key={index}>{item}</option>;
-              })}
-            </select>
-            <select onChange={(e) => handleTopicSelect(e.target.value)}>
-              {<option>Select Topic</option>}
-              {topicList.map((item, index) => {
-                return <option key={index}>{item}</option>;
-              })}
-            </select>{" "}
+            <Select
+              required={true}
+              data={user.aliases}
+              title={"Select Domain"}
+              func={handleDomainSelect}
+            />
+            <Select
+              required={true}
+              data={languageList}
+              title={"Select Language"}
+              func={handleLangSelect}
+            />
+            <Select
+              required={true}
+              data={topicList}
+              title={"Select Topic"}
+              func={handleTopicSelect}
+            />
           </>
         ) : (
-          <select onChange={(e) => handleLinkSelect(e.target.value)}>
-            {<option>Select Html Page</option>}
-            {htmlLinks.map((item, index) => {
-              return <option key={index}>{item.link}</option>;
-            })}
-          </select>
+          <Select
+            required={true}
+            data={htmlLinks.map(i => i.link)}
+            title={"Select Html Page"}
+            func={handleLinkSelect}
+          />
         )}
         <input onClick={(e) => handleCopy(link)} value={link} readOnly />
       </div>
