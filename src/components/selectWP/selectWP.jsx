@@ -95,7 +95,7 @@ export const SelectWP = (props) => {
       <h1>White Page</h1>
       <div className="formBody">
         <Select
-          required={true}
+          required={props.required}
           data={types}
           title={"Select Type"}
           func={handleSelectType}
@@ -103,19 +103,19 @@ export const SelectWP = (props) => {
         {selectedType === "url" ? (
           <>
             <Select
-              required={true}
+              required={props.required}
               data={user.aliases}
               title={"Select Domain"}
               func={handleDomainSelect}
             />
             <Select
-              required={true}
+              required={props.required}
               data={languageList}
               title={"Select Language"}
               func={handleLangSelect}
             />
             <Select
-              required={true}
+              required={props.required}
               data={topicList}
               title={"Select Topic"}
               func={handleTopicSelect}
@@ -123,7 +123,7 @@ export const SelectWP = (props) => {
           </>
         ) : (
           <Select
-            required={true}
+            required={props.required}
             data={htmlLinks.map(i => i.link)}
             title={"Select Html Page"}
             func={handleLinkSelect}

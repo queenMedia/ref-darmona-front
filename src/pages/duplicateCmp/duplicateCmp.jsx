@@ -197,7 +197,7 @@ const DuplcateCmp = () => {
           </div>
         </Box>
         <QueryParameters setPlatform={setPlatform} />
-        <SelectWP setWhitePage={setWhitePage} />
+        <SelectWP setWhitePage={setWhitePage} required={false} />
         <ThriveLink />
         {eps?.map((item, index) => {
           return (

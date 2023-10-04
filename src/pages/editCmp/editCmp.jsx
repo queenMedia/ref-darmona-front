@@ -167,7 +167,7 @@ const EditCmp = () => {
             </div>
           </div>
         </Box>
-        <SelectWP setWhitePage={setWhitePage} />
+        <SelectWP setWhitePage={setWhitePage} required={false} />
         <ThriveLink />
         {eps?.map((item, index) => {
           return (
