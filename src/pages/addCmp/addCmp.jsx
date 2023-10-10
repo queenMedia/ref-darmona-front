@@ -12,6 +12,7 @@ import { SelectWP } from "../../components/selectWP/selectWP";
 import { bing_query, bing_query_map } from "../../assets/data/queryParametrs";
 import { QueryParameters } from "../../components/queryParameters/queryParameters";
 import { Select, ComplexSelect } from "../../origins/select/select";
+import { Input } from "../../origins/input/input";
 import "./addCmp.css";
 
 const AddCmp = () => {
@@ -26,6 +27,7 @@ const AddCmp = () => {
   const [availableAliases, setAvailableAliases] = useState([]);
   const [whitePage, setWhitePage] = useState("");
   const [ctype, setCtype] = useState("");
+  const [platform, setPlatform] = useState(JSON.stringify({ query: bing_query, map: bing_query_map }));
   const [eps, setEps] = useState([
     {
       geo: { grp: [], bl: false },
@@ -33,7 +35,6 @@ const AddCmp = () => {
       ep: "",
     },
   ]);
-  const [platform, setPlatform] = useState(JSON.stringify({ query: bing_query, map: bing_query_map }));
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -88,6 +89,7 @@ const AddCmp = () => {
       notify_error("choose a different domain");
     }
   };
+
   const handleCopyAndSet = (i) => {
     handleCopy(i)
     setAlias(i)
@@ -143,8 +145,20 @@ const AddCmp = () => {
         <Box>
           <h1>Campaign information</h1>
           <div className="formBody">
-            <input type="text" onChange={e => setName(e.target.value)} value={name} required placeholder="Campaign Name" />
-            <input type="number" onChange={e => setImpressions(e.target.value)} value={impressions} required placeholder="Skip imppressions" />
+            <Input
+              type={"text"}
+              handleChange={setName}
+              defValue={name}
+              required={true}
+              placeholder={"Campaign Name"}
+            />
+            <Input
+              type={"number"}
+              handleChange={setImpressions}
+              defValue={impressions}
+              required={true}
+              placeholder={"Skip imppressions"}
+            />
             <div className="selectWithBtn">
               <Select
                 required={true}
@@ -169,7 +183,7 @@ const AddCmp = () => {
         <QueryParameters setPlatform={setPlatform} />
         {ctype !== "tag" && (
           <>
-            <SelectWP setWhitePage={setWhitePage} />
+            <SelectWP setWhitePage={setWhitePage} required={true} />
             <ThriveLink />
           </>
         )}
@@ -179,10 +193,22 @@ const AddCmp = () => {
             <Box key={index}>
               {index === 0 && <h1>Endpoints</h1>}
               <div className="formBody">
-                {index === 0 && <input type="text" onChange={e => setWhitePage(encodeURI(e.target.value))} required id="whitePage" placeholder="White Page" value={whitePage} />}
-
-                <input type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} required placeholder="Black Page" />
-
+                {index === 0 &&
+                  <Input
+                    type={"text"}
+                    defValue={whitePage}
+                    handleChange={setWhitePage}
+                    required={true}
+                    placeholder={"White Page"}
+                  />}
+                <Input
+                  type={"text"}
+                  handleChange={updateEp}
+                  param={index}
+                  required={true}
+                  defValue={eps[index]?.ep}
+                  placeholder={"Black Page"}
+                />
                 <div className="selectWithBtn">
                   <ComplexSelect
                     required={true}
@@ -193,18 +219,14 @@ const AddCmp = () => {
                   <span onClick={() => addGrp(index)}>Add</span>
                 </div>
 
-                {item.geo.grp?.length > 0 ? (
-                  item.geo.grp?.map((i, key) => (
-                    <div className="selectWithBtn" key={key}>
-                      <select disabled>
-                        <option value={i.code}>{i}</option>
-                      </select>
-                      <span onClick={() => deleteGrp(index, i)}>X</span>
-                    </div>
-                  ))
-                ) : (
-                  <></>
-                )}
+                {item.geo.grp?.map((i, key) => (
+                  <div className="selectWithBtn" key={key}>
+                    <select disabled>
+                      <option value={i.code}>{i}</option>
+                    </select>
+                    <span onClick={() => deleteGrp(index, i)}>X</span>
+                  </div>
+                ))}
                 {index === 0 ? <span onClick={addEps}>Add Endpoint</span> : <span onClick={() => deleteEps(index)}>Delete Endpoint</span>}
               </div>
             </Box>

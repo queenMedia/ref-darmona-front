@@ -6,8 +6,9 @@ export const Select = ({ title, data, func, required, className = "form-select",
       className={className}
       onChange={(e) => func(e.target.value)}
       required={required}
+      defaultValue={""}
     >
-      <option value="" disabled selected>{title}</option>
+      <option value="" disabled >{title}</option>
       {customOption && <option value={customOption} >{customOptionText}</option>}
       {data?.map((i, index) => {
         return (
@@ -25,8 +26,9 @@ export const SelectWithFuncParam = ({ title, data, func, funcParam, required, cl
       className={className}
       onChange={(e) => func(funcParam, e.target.value,)}
       required={required}
+      defaultValue={""}
     >
-      <option value="" disabled selected>{title}</option>
+      <option value="" disabled >{title}</option>
       {customOption && <option value={customOption} >{customOptionText}</option>}
       {data?.map((i, index) => {
         return (
@@ -44,8 +46,9 @@ export const ComplexSelect = ({ title, data, func, required, className = "form-s
       className={className}
       onChange={(e) => func(e.target.value)}
       required={required}
+      defaultValue={""}
     >
-      <option value="" disabled selected>{title}</option>
+      <option value="" disabled >{title}</option>
       {customOption && <option value={customOption} >{customOptionText}</option>}
       {data?.map((i, index) => {
         return (
