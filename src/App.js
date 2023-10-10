@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./store/slices/user";
 import { Sidebar } from "./components/sidebar/sidebar";
 import { ToastContainer } from "react-toastify";
+import AutoLogout from "./utils/AutoLogout"
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -51,29 +52,31 @@ function App() {
   return (
     <>
       {userExist === true ? (
-        <div className="app-container">
-          <header >
-            <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
-          </header>
+        <AutoLogout>
+          <div className="app-container">
+            <header >
+              <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
+            </header>
 
-          <main>
-            <aside>
-              <Sidebar />
-            </aside>
+            <main>
+              <aside>
+                <Sidebar />
+              </aside>
 
-            <div className="content">
-              <Routes>
-                <Route path="/cmplist" exact element={<CmpList />} />
-                <Route path="/cmplist/addnew" exact element={<AddCmp />} />
-                <Route path="/cmplist/editcmp/:id/:cmpName/:status" exact element={<EditCmp />} />
-                <Route path="/cmplist/duplicate/:id/:cmpName/:status" exact element={<DuplcateCmp />} />
-                <Route path="/domains" exact element={<Domains />} />
-                <Route path="/snow" exact element={<SnowPage />} />
-                <Route path="/params" exact element={<Params />} />
-              </Routes>
-            </div>
-          </main>
-        </div>
+              <div className="content">
+                <Routes>
+                  <Route path="/cmplist" exact element={<CmpList />} />
+                  <Route path="/cmplist/addnew" exact element={<AddCmp />} />
+                  <Route path="/cmplist/editcmp/:id/:cmpName/:status" exact element={<EditCmp />} />
+                  <Route path="/cmplist/duplicate/:id/:cmpName/:status" exact element={<DuplcateCmp />} />
+                  <Route path="/domains" exact element={<Domains />} />
+                  <Route path="/snow" exact element={<SnowPage />} />
+                  <Route path="/params" exact element={<Params />} />
+                </Routes>
+              </div>
+            </main>
+          </div>
+        </AutoLogout>
       ) : userExist === false ? (
         <div className="login-container">
           <Login setUserExist={setUserExist} />
