@@ -17,6 +17,7 @@ export const Sidebar = () => {
     { name: "Campaigns", logo: Campaigns, path: "/cmplist" },
     { name: "Snowflake", logo: Snow, path: "/snow", id: "sideLogo" },
     { name: "Domains", logo: Domains, path: "/domains", id: "sideLogo" },
+    { name: "Params", logo: Snow, path: "/params", id: "sideLogo" },
   ];
 
   function deleteAllCookies() {

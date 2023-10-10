@@ -6,6 +6,7 @@ import SnowPage from "./pages/snow/snow";
 import AddCmp from "./pages/addCmp/addCmp";
 import EditCmp from "./pages/editCmp/editCmp";
 import Domains from "./pages/domains/domains";
+import Params from "./pages/params/params";
 import DuplcateCmp from "./pages/duplicateCmp/duplicateCmp";
 import { api } from "./utils/api";
 import { getCookie } from "./utils/getc";
@@ -68,6 +69,7 @@ function App() {
                 <Route path="/cmplist/duplicate/:id/:cmpName/:status" exact element={<DuplcateCmp />} />
                 <Route path="/domains" exact element={<Domains />} />
                 <Route path="/snow" exact element={<SnowPage />} />
+                <Route path="/params" exact element={<Params />} />
               </Routes>
             </div>
           </main>
