@@ -24,7 +24,7 @@ const Params = () => {
         <div className="domain-cont">
             <div className="snowPage-container">
                 <form className="snowPage-form" onSubmit={handleSearch}>
-                    <h2 className="form-title">Setish Pages</h2>
+                    <h2 className="form-title">Platform Params</h2>
                     <div className="form-body">
                         <Select
                             required={true}
