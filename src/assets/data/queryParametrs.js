@@ -20,12 +20,12 @@ export const bing_query_map = {
 };
 export const fb_query = {
   site_source_name: { type: "pattern", cmp: "^[a-z]+$" },
-  adset_name: { type: "pattern", cmp: "^[a-zA-Z0-9]+$" },
+  adset_name: { type: "pattern", cmp: "^[a-zA-Z0-9+_ ]+$" },
+  ad_name: { type: "pattern", cmp: "^[a-zA-Z0-9+_ ]+$" },
+  campaign_name: { type: "pattern", cmp: "^[a-zA-Z0-9+_ ]+$" },
   campaign_id: { type: "pattern", cmp: "^[0-9]+$" },
   ad_id: { type: "pattern", cmp: "^[0-9]+$" },
-  campaign_name: { type: "pattern", cmp: "^[a-zA-Z0-9 ]+$" },
   placement: { type: "pattern", cmp: "^[a-zA-Z0-9_]+$" },
-  ad_name: { type: "pattern", cmp: "^[a-zA-Z0-9-]+$" },
   adset_id: { type: "pattern", cmp: "^[0-9]+$" },
 };
 export const fb_query_map = {
