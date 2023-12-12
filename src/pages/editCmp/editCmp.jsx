@@ -11,6 +11,7 @@ import { updateCmps } from "../../store/slices/user";
 import { cmpStatusOption } from "../../assets/data/commonDomains";
 import { Select } from "../../origins/select/select.jsx";
 import { SelectWP } from "../../components/selectWP/selectWP";
+import { QueryParameters } from "../../components/queryParameters/queryParameters";
 import "./editCmp.css";
 
 const EditCmp = () => {
@@ -26,6 +27,7 @@ const EditCmp = () => {
   const [whitePage, setWhitePage] = useState("");
   const [cmp, setStoreCmp] = useState("");
   const { id, cmpName, status } = useParams();
+  const [platform, setPlatform] = useState("");
   const [eps, setEps] = useState([
     {
       geo: { grp: [], bl: false },
@@ -74,6 +76,11 @@ const EditCmp = () => {
       eps: eps,
       status: cmpStatus,
     };
+    if (platform !== "") {
+      data.query = JSON.parse(platform).query
+      data.query_map = JSON.parse(platform).map
+    }
+
     for (let index = 0; index < data.eps.length; index++) {
       const element = data.eps[index];
       console.log(element.geo.grp);
@@ -167,6 +174,7 @@ const EditCmp = () => {
             </div>
           </div>
         </Box>
+        <QueryParameters setPlatform={setPlatform} />
         <SelectWP setWhitePage={setWhitePage} required={false} />
         <ThriveLink />
         {eps?.map((item, index) => {
