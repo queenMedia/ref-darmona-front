@@ -19,6 +19,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 0 200px 0 200px;
+  width: inherit;
 }
 .geoSelect {
   display: flex;
