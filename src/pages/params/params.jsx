@@ -25,7 +25,7 @@ const Params = () => {
             {params.map((i, index) =>
                 <div className="params-container" key={index}>
                     <h2>{i.platform}</h2>
-                    <b> <u> Params:</u></b> <p onClick={() => handleCopy(i.params)}>{i.params}</p>
+                    <b> <u> Params:</u></b> <p onClick={() => handleCopy(i.params)}>{i.params}</p><hr/>
                     <b> <u>Test Link:</u></b><p onClick={() => handleCopy(i.testLink)}>{i.testLink}</p>
                 </div>
             )
