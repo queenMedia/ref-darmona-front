@@ -11,5 +11,6 @@
     overflow: hidden; /* This ensures that any content that overflows the box will be hidden */
     white-space: normal; /* This will wrap text as normal */
     margin-right: 15px; /* This can ensure there is some space on the right of the container, if needed */
-cursor: pointer;
+    cursor: pointer;
+    margin-top: 5px;
 }
