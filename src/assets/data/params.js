@@ -1,7 +1,7 @@
 export const params = [
     {
         platform: "Bing Leo",
-        params: "aff_sub1={{AFF_SUB1}}&aff_sub2={{AFF_SUB2}}&aff_sub5={{AFF_SUB5}}&aff_sub7={{AFF_SUB7}}&aff_sub8={{AFF_SUB8}}&aff_sub9={{AFF_SUB9}}&aff_sub10={{AFF_SUB10}}&aff_sub12={{AFF_SUB12}}&aff_sub14={{AFF_SUB14}}",
+        params: "aff_sub1={CampaignId}&aff_sub2={AdGroupId}&aff_sub3={feeditemid}&aff_sub4={extensionid}&aff_sub5={TargetId}&aff_sub6={loc_interest_ms}&aff_sub7={loc_physical_ms}&aff_sub8={MatchType}&aff_sub9={Network}&aff_sub10={Device}&aff_sub11={devicemodel}&aff_sub12={msclkid}&aff_sub13={creative}&aff_sub14={keyword:default}&aff_sub15={placement}&aff_sub16={target}",
         testLink: "aff_sub1=530533945&aff_sub2=530533945&aff_sub7=530533945&aff_sub8=c&aff_sub9=D&aff_sub10=s&aff_sub12=default234&msclkid=msclkid3452&querystring=search&feeditemid=1350202764551474"
     },
     {
