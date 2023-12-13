@@ -12,10 +12,10 @@ export const params = [
         platform: "Facebook", params: "ad_id={{ad.id}}&adset_id={{adset.id}}&campaign_id={{campaign.id}}&ad_name={{ad.name}}&adset_name={{adset.name}}&campaign_name={{campaign.name}}&placement={{placement}}&site_source_name={{site_source_name}}", testLink: "?ad_id=6342754821659&adset_id=6342754821259&campaign_id=6342754820859&ad_name=X1&adset_name=35plus&campaign_name=ConvPE&placement=Facebook_Mobile_Feed&site_source_name=fb&fbclid=IwAR3_D4HnlvVAHUYiHm_o0QcNnTzkH82cPmuD4Cunz5KBaNgpuiydRqFkKiE_aem_th_AWlj6Efu-Ur66LVhspqr9fmvwXzjEh9SbHu-Aw3UBTQTCYoIX0cKzgtPBRpcV0q_Drwhmr2aLE7cHT8r8_S-SMXz"
     },
     {
-        platform: "TikTok", params: "campaignid={CampaignId}&targetid={TargetId}&matchtype={MatchType}&network={Network}&device={Device}&adid={AdId}&keyword={keyword:default}&msclkid={msclkid}&querystring={QueryString}&feeditemid={feeditemid}", testLink: ""
+        platform: "TikTok", params: "", testLink: ""
     },
     {
-        platform: "Twitter", params: "campaignid={CampaignId}&targetid={TargetId}&matchtype={MatchType}&network={Network}&device={Device}&adid={AdId}&keyword={keyword:default}&msclkid={msclkid}&querystring={QueryString}&feeditemid={feeditemid}", testLink: ""
+        platform: "Twitter", params: "", testLink: ""
     },
 
 ]
