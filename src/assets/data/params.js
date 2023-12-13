@@ -1,10 +1,5 @@
 export const params = [
     {
-        platform: "Bing",
-        params: "?campaignid={CampaignId}&targetid={TargetId}&matchtype={MatchType}&network={Network}&device={Device}&adid={AdId}&keyword={keyword:default}&msclkid={msclkid}&querystring={QueryString}&feeditemid={feeditemid}",
-        testLink: "campaignid=530663956&targetid=kwd-84251358364749:loc-109&matchtype=e&network=o&device=c&adid=84250629534898&keyword=LeQuotidien&msclkid=fada6d09bca616b06bc209af240ccff0&querystring=le%20quotidien&feeditemid="
-    },
-    {
         platform: "Bing Leo",
         params: "aff_sub1={{AFF_SUB1}}&aff_sub2={{AFF_SUB2}}&aff_sub5={{AFF_SUB5}}&aff_sub7={{AFF_SUB7}}&aff_sub8={{AFF_SUB8}}&aff_sub9={{AFF_SUB9}}&aff_sub10={{AFF_SUB10}}&aff_sub12={{AFF_SUB12}}&aff_sub14={{AFF_SUB14}}",
         testLink: "aff_sub1=530533945&aff_sub2=530533945&aff_sub7=530533945&aff_sub8=c&aff_sub9=D&aff_sub10=s&aff_sub12=default234&msclkid=msclkid3452&querystring=search&feeditemid=1350202764551474"
