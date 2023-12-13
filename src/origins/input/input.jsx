@@ -3,10 +3,13 @@ import "./input.css"
 export const Input = ({
     type,
     handleChange,
+    handleClick = () => { },
     defValue,
     required,
     placeholder,
-    param = undefined
+    param = undefined,
+    disable = false,
+    width = undefined
 }) => {
 
     const onChange = (e) => {
@@ -20,11 +23,14 @@ export const Input = ({
 
     return (
         <input
+            onClick={handleClick}
             type={type}
             onChange={onChange}
             value={defValue}
             required={required}
             placeholder={placeholder}
+            disable={disable}
+            style={{ width: width }}
         />
     );
 };
