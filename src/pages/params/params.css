@@ -1,0 +1,15 @@
+.params-container{
+    padding: 20px 15px;
+    background-color: rgb(45, 45, 45);
+    border-radius: 10px;
+    margin: 5px;
+   
+}
+.params-container p {
+    word-wrap: break-word; /* This will break long words that would otherwise overflow the container */
+    overflow-wrap: break-word; /* This is a standard property for breaking words */
+    overflow: hidden; /* This ensures that any content that overflows the box will be hidden */
+    white-space: normal; /* This will wrap text as normal */
+    margin-right: 15px; /* This can ensure there is some space on the right of the container, if needed */
+cursor: pointer;
+}

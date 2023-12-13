@@ -21,26 +21,16 @@ const Params = () => {
     }
 
     return (
-        <div className="domain-cont">
-            <div className="snowPage-container">
-                <form className="snowPage-form" onSubmit={handleSearch}>
-                    <h2 className="form-title">Platform Params</h2>
-                    <div className="form-body">
-                        <Select
-                            required={true}
-                            data={params.map(i => i.platform)}
-                            title={"Select Platform"}
-                            func={setPlatform}
-                        />
-                        <button type="submit">Search</button>
-                    </div>
-                </form>
-                <br />
-                <div onClick={() => handleCopy(selectredParams)}>
-                    {selectredParams}
+        <>
+            {params.map((i, index) =>
+                <div className="params-container" key={index}>
+                    <h2>{i.platform}</h2>
+                    <b> Params:</b> <p onClick={() => handleCopy(i.params)}>{i.params}</p>
+                    <b> Test Link:</b><p onClick={() => handleCopy(i.testLink)}>{i.testLink}</p>
                 </div>
-            </div>
-        </div >
+            )
+            }
+        </>
     );
 };
 
