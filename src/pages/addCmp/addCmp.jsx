@@ -102,6 +102,13 @@ const AddCmp = () => {
     setEps(updatedEps);
   };
 
+  //update weight page by index
+  const updateWeight = (index, newEpValue) => {
+    const updatedEps = [...eps];
+    updatedEps[index].weight = Number(newEpValue);
+    setEps(updatedEps);
+  };
+
   //add geos by index
   const addGrp = index => {
     if (geo) {
@@ -114,10 +121,10 @@ const AddCmp = () => {
     }
   };
 
-  //delete geos by index
-  const deleteGrp = (key, valueToDelete) => {
+  //delete geo by index
+  const deleteGrp = (index, geoToDelete) => {
     const updatedEps = [...eps];
-    updatedEps[key].geo.grp = updatedEps[key].geo.grp.filter(i => i !== valueToDelete);
+    updatedEps[index].geo.grp = updatedEps[index].geo.grp.filter(i => i !== geoToDelete);
     setEps(updatedEps);
     notify_success(`deleted`);
   };
@@ -208,6 +215,14 @@ const AddCmp = () => {
                   required={true}
                   defValue={eps[index]?.ep}
                   placeholder={"Black Page"}
+                />
+                <Input
+                  type={"number"}
+                  handleChange={updateWeight}
+                  param={index}
+                  required={true}
+                  defValue={eps[index]?.weight}
+                  placeholder={"Weight"}
                 />
                 <div className="selectWithBtn">
                   <ComplexSelect
