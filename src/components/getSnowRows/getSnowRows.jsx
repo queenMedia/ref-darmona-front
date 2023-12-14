@@ -45,7 +45,7 @@ const GetSnowRows = () => {
         notify_error("no results");
         return;
       }
-      notify_success("found " +  response.resp.length + " rows")
+      notify_success("found " + response.resp.length + " rows")
       setData(response.resp);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -54,7 +54,9 @@ const GetSnowRows = () => {
 
   const handleAliasSelect = (alias) => {
     const filterd = user?.cmps?.filter((i) => i.cmpUrl.includes(alias));
-    setIdList(filterd.map((i) => i.cmpUrl));
+    const mapedFilterd = filterd.map((i) => i.cmpUrl)
+    setIdList(mapedFilterd);
+    setId(mapedFilterd[0])
   };
 
   return (
