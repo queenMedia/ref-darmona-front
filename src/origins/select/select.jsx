@@ -1,6 +1,8 @@
 import "./select.css"
 
 export const Select = ({ title, data, func, required, className = "form-select", customOption = undefined, customOptionText = undefined }) => {
+
+  const sortedData = [...data].sort();
   return (
     <select
       className={className}
@@ -10,7 +12,7 @@ export const Select = ({ title, data, func, required, className = "form-select",
     >
       <option value="" disabled >{title}</option>
       {customOption && <option value={customOption} >{customOptionText}</option>}
-      {data?.map((i, index) => {
+      {sortedData?.map((i, index) => {
         return (
           <option key={index} value={i}>
             {i}
