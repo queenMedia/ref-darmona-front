@@ -31,10 +31,6 @@ const SnowPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (dateFrom === "" || dateTo === "" || id === "") {
-      notify_error("you must fill in all fields");
-      return;
-    }
     notify_Info("Searching");
     try {
       const onlyId = getCmpValue(id);
@@ -44,7 +40,6 @@ const SnowPage = () => {
         onlyId,
         user.token
       );
-      console.log(response);
       if (!response) {
         notify_error("no results");
         return;
@@ -52,13 +47,13 @@ const SnowPage = () => {
       if (response?.resp?.length < 1) {
         response?.resp?.push({ SKIP: false, COUNT: 0 });
       }
-      console.log(response);
+
       const updatedData = [...data];
       updatedData.unshift({
         date: getCurrentDateAndHour(),
         id: onlyId,
         passed: response.resp[0].PASSED || 0,
-        notPassed: response?.resp[1]?.NOT_PASSED || 0,
+        notPassed: response?.resp[0]?.NOT_PASSED || 0,
       });
       setData(updatedData);
     } catch (error) {
@@ -87,6 +82,7 @@ const SnowPage = () => {
                 type="date"
                 value={dateFrom}
                 onChange={(e) => setDateFrom(e.target.value)}
+                required={true}
               />
             </label>
             <br />
@@ -97,6 +93,7 @@ const SnowPage = () => {
                 type="date"
                 value={dateTo}
                 onChange={(e) => setDateTo(e.target.value)}
+                required={true}
               />
             </label>
             <br />
@@ -149,6 +146,7 @@ const SnowPage = () => {
           </tbody>
         </table>
       </div>
+
       <GetSnowRows />
       {user.role === "topg" ? (
         <>
