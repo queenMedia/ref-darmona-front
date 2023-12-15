@@ -20,3 +20,7 @@
   appearance: auto;
   min-width: 480px;
 }
+.customDate-select{
+  display: flex;
+  margin: 15px 0 0 0 ;
+}
