@@ -104,6 +104,12 @@ const EditCmp = () => {
     updatedEps[index].ep = newEpValue;
     setEps(updatedEps);
   };
+  //update weight page by index
+  const updateWeight = (index, newEpValue) => {
+    const updatedEps = [...eps];
+    updatedEps[index].weight = Number(newEpValue);
+    setEps(updatedEps);
+  };
   const updateGrp = index => {
     if (geo) {
       const updatedEps = [...eps];
@@ -186,6 +192,10 @@ const EditCmp = () => {
                   <input id="blackPage" type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} value={decodeURI(item.ep)} required placeholder="Black Page" />
                   <label htmlFor="blackPage">Black Page</label>
                 </div>
+                <div className="edit-blackPage">
+                  <input id="weight" type="number" onChange={e => updateWeight(index, e.target.value)} value={item.weight} required placeholder="Weight" />
+                  <label htmlFor="weight">Weight</label>
+                </div>
                 <div className="geoSelect">
                   <select onChange={e => setGeo(e.target.value)} className="geoSelect-text">
                     {countryCodes.map((i, index) => (
@@ -209,7 +219,7 @@ const EditCmp = () => {
                 ) : (
                   <></>
                 )}
-                {index === 0 ? <span onClick={addEps}>Add Endpoint</span> : <span onClick={() => deleteEps(index)}>Delete Endpoint</span>}
+                {index === 0 ? <span style={{ color: 'green' }} onClick={addEps}>Add Endpoint</span> : <span style={{ color: 'red' }} onClick={() => deleteEps(index)}>Delete Endpoint</span>}
               </div>
             </Box>
           );
