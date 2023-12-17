@@ -110,7 +110,7 @@ const GetSnowRows = () => {
     <div className="snowPage-container">
       <form onSubmit={handleSubmit}>
         <Box>
-          <h1>Snow Rows</h1>
+          <h1>Reason information</h1>
           <Select
               className="selectWidth"
               required={true}
