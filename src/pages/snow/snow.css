@@ -19,6 +19,7 @@
   padding: 0 10px 2px;
   appearance: auto;
   min-width: 480px;
+  max-width: 480px;
 }
 .customDate-select{
   display: flex;

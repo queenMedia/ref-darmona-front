@@ -167,12 +167,9 @@ const GetSnowRows = () => {
         {data.length > 0 ? (
           <thead>
             <tr>
-              <th>Date</th>
-              <th>IP</th>
               <th>GEO</th>
-              <th>DEVICE</th>
-              <th>BROWSER</th>
               <th>REASON</th>
+              <th>Amount</th>
             </tr>
           </thead>
         ) : (
@@ -182,12 +179,9 @@ const GetSnowRows = () => {
           {data.length > 0 ? (
             data?.map((item, index) => (
               <tr key={index}>
-                <td>{item.TS}</td>
-                <td>{item.IP}</td>
-                <td >{item.GEO}</td>
-                <td >{item.DEVICE}</td>
-                <td >{item.BROWSER}</td>
-                <td >{item.REASON}</td>
+                <td>{item.GEO}</td>
+                <td>{item.REASON}</td>
+                <td >{item.NUMBER}</td>
               </tr>
             ))
           ) : (
