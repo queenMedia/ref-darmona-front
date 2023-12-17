@@ -22,8 +22,8 @@ td::before {
   margin: 4px;
 }
 td {
-  text-align: left;
-  padding-left: 30px;
+  text-align: center;
+  /* padding-left: 30px; */
 }
 td > img {
   margin-left: 10px;
