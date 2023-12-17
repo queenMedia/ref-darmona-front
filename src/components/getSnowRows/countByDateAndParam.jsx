@@ -154,7 +154,7 @@ const CountByDateAndParam = () => {
               <th>impressions skip</th>
               <th>query skip</th>
               <th>ip skip</th>
-              <th>no exnpoint skip</th>
+              <th>no endpoint skip</th>
             </tr>
           </thead>
         ) : (
