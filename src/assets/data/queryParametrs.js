@@ -88,7 +88,7 @@ export const taboola_query = {
   aff_sub3: { type: "pattern", cmp: "^[0-9a-zA-z\\-.]+$" },
   aff_sub6: { type: "pattern", cmp: "^[a-zA-z]+$" },
   aff_sub7: { type: "pattern", cmp: "^[0-9]+$" },
-  aff_sub8: { type: "pattern", cmp: "^[0-9a-zA-z_\\-+]+$" },
+  aff_sub8: { type: "pattern", cmp: "^[0-9a-zA-z_\\-+ ]+$" },
   aff_sub9: { type: "pattern", cmp: "^[0-9]+$" },
   aff_sub11: { type: "pattern", cmp: "^[0-9a-zA-z_\\-]+$" },
 };
