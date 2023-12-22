@@ -9,6 +9,7 @@ import { addCmp } from "../../store/slices/user";
 import { ThriveLink } from "../../components/thriveLink/thriveLink";
 import { Ctype } from "../../components/ctype/ctype";
 import { SelectWP } from "../../components/selectWP/selectWP";
+import { SelectBP } from "../../components/selectBP/selectBP";
 import { bing_query, bing_query_map } from "../../assets/data/queryParametrs";
 import { QueryParameters } from "../../components/queryParameters/queryParameters";
 import { Select, ComplexSelect } from "../../origins/select/select";
@@ -191,6 +192,7 @@ const AddCmp = () => {
         {ctype !== "tag" && (
           <>
             <SelectWP setWhitePage={setWhitePage} required={true} />
+            <SelectBP required={true} />
             <ThriveLink />
           </>
         )}
