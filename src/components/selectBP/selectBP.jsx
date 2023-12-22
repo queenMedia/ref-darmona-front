@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "../box/box";
 import { notify_error, notify_Info, handleCopy } from "../../utils/notify";
 import { Select } from "../../origins/select/select"
@@ -38,6 +38,9 @@ export const SelectBP = (props) => {
       const c = rel.map(i => i.celeb)
       var unique = [...new Set(c)]
       setCelebs(unique)
+      setLink("")
+      setSelectedCeleb("")
+      setLinks([])
       notify_Info(`found ${unique.length} celebs`)
     } catch (error) {
       console.log(error.message)
@@ -56,6 +59,10 @@ export const SelectBP = (props) => {
       console.log(console.log(error.message));
     }
   }
+
+  useEffect(()=>{
+
+  },[selectedCeleb])
 
   return (
     <Box>
