@@ -174,7 +174,7 @@ const EditCmp = () => {
               <label htmlFor="whitePage">WP Path</label>
             </div>
             <div>
-              <input type="text" id="whitePage" onChange={e => setWhitePageName(e.target.value)} value={whitePageName} required placeholder="WP Name" />
+              <input type="text" id="whitePage" onChange={e => setWhitePageName(e.target.value)} value={whitePageName || ""} required placeholder="WP Name" />
               <label htmlFor="whitePage">WP Name</label>
             </div>
             {/* <div>
@@ -211,7 +211,7 @@ const EditCmp = () => {
                   <label htmlFor="blackPage">BP Path</label>
                 </div>
                 <div className="edit-blackPage">
-                  <input id="blackPage" type="text" onChange={e => updateEpName(index, encodeURI(e.target.value))} value={decodeURI(item.epName)} required placeholder="BP Name" />
+                  <input id="blackPage" type="text" onChange={e => updateEpName(index, encodeURI(e.target.value))} value={decodeURI(item.epName || "")} required placeholder="BP Name" />
                   <label htmlFor="blackPage">BP Name</label>
                 </div>
                 <div className="edit-blackPage">
