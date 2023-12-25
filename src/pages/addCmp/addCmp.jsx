@@ -27,13 +27,16 @@ const AddCmp = () => {
   const [geo, setGeo] = useState("AF");
   const [availableAliases, setAvailableAliases] = useState([]);
   const [whitePage, setWhitePage] = useState("");
+  const [whitePageName, setWhitePageName] = useState("");
   const [ctype, setCtype] = useState("");
+  const [platformName, setPlatformName] = useState("");
   const [platform, setPlatform] = useState(JSON.stringify({ query: bing_query, map: bing_query_map }));
   const [eps, setEps] = useState([
     {
       geo: { grp: [], bl: false },
       weight: 1,
       ep: "",
+      epName: ""
     },
   ]);
 
@@ -58,6 +61,8 @@ const AddCmp = () => {
       ip: true,
       track: true,
       dc_ep: whitePage,
+      dc_ep_name: whitePageName,
+      platformName: platformName,
       eps: eps,
     };
     const apiResp = await api.addCmp(data, user.token);
@@ -100,6 +105,12 @@ const AddCmp = () => {
   const updateEp = (index, newEpValue) => {
     const updatedEps = [...eps];
     updatedEps[index].ep = newEpValue;
+    setEps(updatedEps);
+  };
+  //update black page name by index
+  const updateEpName = (index, newEpNameValue) => {
+    const updatedEps = [...eps];
+    updatedEps[index].epName = newEpNameValue;
     setEps(updatedEps);
   };
 
@@ -188,7 +199,7 @@ const AddCmp = () => {
         </Box>
 
         <Ctype setType={setCtype} />
-        <QueryParameters setPlatform={setPlatform} />
+        <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} />
         {ctype !== "tag" && (
           <>
             <SelectWP setWhitePage={setWhitePage} required={true} />
@@ -203,20 +214,36 @@ const AddCmp = () => {
               {index === 0 && <h1>Endpoints</h1>}
               <div className="formBody">
                 {index === 0 &&
-                  <Input
-                    type={"text"}
-                    defValue={whitePage}
-                    handleChange={setWhitePage}
-                    required={true}
-                    placeholder={"White Page"}
-                  />}
+                  <>
+                    <Input
+                      type={"text"}
+                      defValue={whitePage}
+                      handleChange={setWhitePage}
+                      required={true}
+                      placeholder={"WP Path"}
+                    />
+                    <Input
+                      type={"text"}
+                      defValue={whitePageName}
+                      handleChange={setWhitePageName}
+                      required={true}
+                      placeholder={"WP Name"}
+                    /></>}
                 <Input
                   type={"text"}
                   handleChange={updateEp}
                   param={index}
                   required={true}
                   defValue={eps[index]?.ep}
-                  placeholder={"Black Page"}
+                  placeholder={"BP Path"}
+                />
+                <Input
+                  type={"text"}
+                  handleChange={updateEpName}
+                  param={index}
+                  required={true}
+                  defValue={eps[index]?.epName}
+                  placeholder={"BP Name"}
                 />
                 <Input
                   type={"number"}

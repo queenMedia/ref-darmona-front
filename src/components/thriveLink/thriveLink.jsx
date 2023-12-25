@@ -25,7 +25,7 @@ export const ThriveLink = () => {
 
   return (
     <Box>
-      <h1>Thrive Link / Black Page</h1>
+      <h1>Thrive Link / BP Path</h1>
       <div className="formBody">
         <select onChange={(e) => setThrivePlatform(e.target.value)}>
           <option value={"bing"}>Select Platform</option>
