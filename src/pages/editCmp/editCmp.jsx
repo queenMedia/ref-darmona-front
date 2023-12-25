@@ -26,6 +26,8 @@ const EditCmp = () => {
   const [geo, setGeo] = useState("");
   const [whitePage, setWhitePage] = useState("");
   const [cmp, setStoreCmp] = useState("");
+  const [whitePageName, setWhitePageName] = useState("");
+  const [platformName, setPlatformName] = useState("");
   const { id, cmpName, status } = useParams();
   const [platform, setPlatform] = useState("");
   const [eps, setEps] = useState([
@@ -33,6 +35,7 @@ const EditCmp = () => {
       geo: { grp: [], bl: false },
       weight: 1,
       ep: "",
+      epName: ""
     },
   ]);
 
@@ -46,6 +49,8 @@ const EditCmp = () => {
     setAlias(json?.alias);
     setImpressions(json?.imp?.count);
     setWhitePage(json?.dc_ep);
+    setWhitePageName(json?.dc_ep_name || "");
+    setPlatformName(json?.platformName || "");
     setEps(json?.eps);
   };
 
@@ -75,16 +80,14 @@ const EditCmp = () => {
       dc_ep: encodeURI(whitePage),
       eps: eps,
       status: cmpStatus,
+      dc_ep_name: whitePageName,
+      platformName
     };
     if (platform !== "") {
       data.query = JSON.parse(platform).query
       data.query_map = JSON.parse(platform).map
     }
 
-    for (let index = 0; index < data.eps.length; index++) {
-      const element = data.eps[index];
-      console.log(element.geo.grp);
-    }
     const apiResp = await api.updateCmp(data, user.token);
     console.log({ apiResp });
     if (apiResp === 200) {
@@ -99,9 +102,16 @@ const EditCmp = () => {
       notify_error(apiResp || "Failed to Edit");
     }
   };
+  //update black page by index
   const updateEp = (index, newEpValue) => {
     const updatedEps = [...eps];
     updatedEps[index].ep = newEpValue;
+    setEps(updatedEps);
+  };
+  //update black page name by index
+  const updateEpName = (index, newEpNameValue) => {
+    const updatedEps = [...eps];
+    updatedEps[index].epName = newEpNameValue;
     setEps(updatedEps);
   };
   //update weight page by index
@@ -160,9 +170,17 @@ const EditCmp = () => {
               <label htmlFor="alias">Alias(disabled)</label>
             </div>
             <div>
-              <input type="text" id="whitePage" onChange={e => setWhitePage(e.target.value)} value={whitePage} required placeholder="White Page" />
-              <label htmlFor="whitePage">White Page</label>
+              <input type="text" id="whitePage" onChange={e => setWhitePage(e.target.value)} value={whitePage} required placeholder="WP Path" />
+              <label htmlFor="whitePage">WP Path</label>
             </div>
+            <div>
+              <input type="text" id="whitePage" onChange={e => setWhitePageName(e.target.value)} value={whitePageName} required placeholder="WP Name" />
+              <label htmlFor="whitePage">WP Name</label>
+            </div>
+            {/* <div>
+              <input type="text" id="whitePage" onChange={e => setPlatformName(e.target.value)} value={platformName} required placeholder="Platform Name" disabled />
+              <label htmlFor="whitePage">Platform</label>
+            </div> */}
             <div>
               <select style={{ width: `100%` }} onChange={e => setCmpStatus(e.target.value)} required id="Select">
                 <option value={status} disabled selected>
@@ -180,17 +198,21 @@ const EditCmp = () => {
             </div>
           </div>
         </Box>
-        <QueryParameters setPlatform={setPlatform} />
+        <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} currentPlatform={platformName} />
         <SelectWP setWhitePage={setWhitePage} required={false} />
         <ThriveLink />
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
-              {index === 0 && <h1>Endpoints</h1>}
+              {index === 0 && <h1>BP Endpoints</h1>}
               <div className="edit-formBody">
                 <div className="edit-blackPage">
-                  <input id="blackPage" type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} value={decodeURI(item.ep)} required placeholder="Black Page" />
-                  <label htmlFor="blackPage">Black Page</label>
+                  <input id="blackPage" type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} value={decodeURI(item.ep)} required placeholder="BP Path" />
+                  <label htmlFor="blackPage">BP Path</label>
+                </div>
+                <div className="edit-blackPage">
+                  <input id="blackPage" type="text" onChange={e => updateEpName(index, encodeURI(e.target.value))} value={decodeURI(item.epName)} required placeholder="BP Name" />
+                  <label htmlFor="blackPage">BP Name</label>
                 </div>
                 <div className="edit-blackPage">
                   <input id="weight" type="number" onChange={e => updateWeight(index, e.target.value)} value={item.weight} required placeholder="Weight" />
