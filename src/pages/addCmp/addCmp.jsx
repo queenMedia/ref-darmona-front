@@ -28,7 +28,7 @@ const AddCmp = () => {
   const [availableAliases, setAvailableAliases] = useState([]);
   const [whitePage, setWhitePage] = useState("");
   const [whitePageName, setWhitePageName] = useState("");
-  const [ctype, setCtype] = useState("");
+  const [ctype, setCtype] = useState("url");
   const [platformName, setPlatformName] = useState("");
   const [platform, setPlatform] = useState(JSON.stringify({ query: bing_query, map: bing_query_map }));
   const [eps, setEps] = useState([
@@ -100,7 +100,6 @@ const AddCmp = () => {
     handleCopy(i)
     setAlias(i)
   };
-
   //update black page by index
   const updateEp = (index, newEpValue) => {
     const updatedEps = [...eps];
@@ -113,14 +112,12 @@ const AddCmp = () => {
     updatedEps[index].epName = newEpNameValue;
     setEps(updatedEps);
   };
-
   //update weight page by index
   const updateWeight = (index, newEpValue) => {
     const updatedEps = [...eps];
     updatedEps[index].weight = Number(newEpValue);
     setEps(updatedEps);
   };
-
   //add geos by index
   const addGrp = index => {
     if (geo) {
@@ -132,7 +129,6 @@ const AddCmp = () => {
       notify_error("Must select first");
     }
   };
-
   //delete geo by index
   const deleteGrp = (index, geoToDelete) => {
     const updatedEps = [...eps];
@@ -195,16 +191,21 @@ const AddCmp = () => {
               title={"Select Alaias"}
               func={handleCopyAndSet}
             />
+          <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} />
+
           </div>
+          {/* <Ctype setType={setCtype} /> */}
+         
         </Box>
 
-        <Ctype setType={setCtype} />
-        <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} />
+        
+       
         {ctype !== "tag" && (
           <>
+            <ThriveLink />
             <SelectWP setWhitePage={setWhitePage} required={true} />
             <SelectBP required={true} />
-            <ThriveLink />
+
           </>
         )}
 

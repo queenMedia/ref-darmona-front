@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "../box/box";
 import {
   bing_query,
   bing_query_map,
@@ -16,21 +15,31 @@ import {
   google_query,
   google_query_map,
 } from "../../assets/data/queryParametrs";
+import { ComplexSelect } from "../../origins/select/select";
 
-export const QueryParameters = props => {
+export const QueryParameters = (props) => {
+  const platforms = [
+    { code: JSON.stringify({ query: bing_query, map: bing_query_map }), name: "Bing" },
+    { code: JSON.stringify({ query: fb_query, map: fb_query_map }), name: "Facebook" },
+    { code: JSON.stringify({ query: bingLeo_query, map: bingLeo_query_map }), name: "Bing(LEO)" },
+    { code: JSON.stringify({ query: taboola_query, map: taboola_query_map }), name: "Taboola" },
+    { code: JSON.stringify({ query: twitter_query, map: twitter_query_map }), name: "Twitter" },
+    { code: JSON.stringify({ query: google_query, map: google_query_map }), name: "Google" },
+    { code: JSON.stringify({ query: tiktok_query, map: tiktok_query_map }), name: "TikTok" },
+  ];
+
+  // Function to handle select change
+  const handleSelectChange = (value) => {
+    props.setPlatform(value);
+    props.setPlatformName(platforms.find(p => p.code === value).name);
+  };
+
   return (
-    <Box>
-      <h1>Query Parameters</h1>
-      <select name="platform" id="platform" form="cmp" onChange={e => { props.setPlatform(e.target.value); props.setPlatformName(e.target.options[e.target.selectedIndex].text); }}>
-        <option value={JSON.stringify({ query: bing_query, map: bing_query_map })}>{props.currentPlatform ? props.currentPlatform : "Select Platform"}</option>
-        {/* <option value={JSON.stringify({ query: bing_query, map: bing_query_map })}>Bing</option> */}
-        <option value={JSON.stringify({ query: fb_query, map: fb_query_map })}>Facebook</option>
-        <option value={JSON.stringify({ query: bingLeo_query, map: bingLeo_query_map })}>Bing(LEO)</option>
-        <option value={JSON.stringify({ query: taboola_query, map: taboola_query_map })}>Taboola</option>
-        <option value={JSON.stringify({ query: twitter_query, map: twitter_query_map })}>Twitter</option>
-        <option value={JSON.stringify({ query: google_query, map: google_query_map })}>Google</option>
-        <option value={JSON.stringify({ query: tiktok_query, map: tiktok_query_map })}>TikTok</option>
-      </select>
-    </Box>
+    <ComplexSelect
+      title={props.currentPlatform ? props.currentPlatform : "Select Platform"}
+      data={platforms}
+      func={handleSelectChange}
+      required={true}
+    />
   );
 };

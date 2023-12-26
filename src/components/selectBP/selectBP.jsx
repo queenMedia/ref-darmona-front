@@ -72,10 +72,6 @@ export const SelectBP = (props) => {
     }
   }
 
-  useEffect(() => {
-
-  }, [selectedCeleb])
-
   return (
     <Box>
       <h1>Black Page</h1>
