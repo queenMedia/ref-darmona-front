@@ -211,7 +211,7 @@ const EditCmp = () => {
                   <label htmlFor="blackPage">BP Path</label>
                 </div>
                 <div className="edit-blackPage">
-                  <input id="blackPage" type="text" onChange={e => updateEpName(index, encodeURI(e.target.value))} value={decodeURI(item.epName || "")} required placeholder="BP Name" />
+                  <input id="blackPage" type="text" onChange={e => updateEpName(index, encodeURI(e.target.value))} value={item.epName} required placeholder="BP Name" />
                   <label htmlFor="blackPage">BP Name</label>
                 </div>
                 <div className="edit-blackPage">
