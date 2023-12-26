@@ -15,6 +15,8 @@ export const SelectWP = (props) => {
 
   const [selectedType, setSelectedType] = useState("");
   const [htmlLinks, setHtmlLinks] = useState([]);
+  const [htmlPaths, setHtmlPaths] = useState([]);
+  const [filteredLinks, setFilterdLinks] = useState([]);
   const types = ["url", "html"];
 
   const handleDomainSelect = async (selectedDomain) => {
@@ -76,13 +78,21 @@ export const SelectWP = (props) => {
         return;
       } else {
         const resp = await api.getWhitePageHtmlType(user.token);
-        console.log(resp);
         notify_Info(`${resp.length} pages found`);
         setHtmlLinks(resp);
+        let paths = resp.map(i => i?.link?.split("/")[0])
+        paths = [...new Set(paths)]
+        console.log(paths);
+        setHtmlPaths(paths)
       }
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  const handlePathSelect = (value) => {
+    const f = htmlLinks.filter(i => i?.link.split("/")[0] === value).map(i => i.link)
+    setFilterdLinks(f)
   };
 
   const handleLinkSelect = (htmlLink) => {
@@ -122,12 +132,20 @@ export const SelectWP = (props) => {
             />
           </>
         ) : (
-          <Select
-            required={props.required}
-            data={htmlLinks.map(i => i.link)}
-            title={"Select Html Page"}
-            func={handleLinkSelect}
-          />
+          <>
+            <Select
+              required={props.required}
+              data={htmlPaths}
+              title={"Select Path"}
+              func={handlePathSelect}
+            />
+            <Select
+              required={props.required}
+              data={filteredLinks}
+              title={"Select Html Page"}
+              func={handleLinkSelect}
+            />
+          </>
         )}
         <input onClick={(e) => handleCopy(link)} value={link} readOnly />
       </div>

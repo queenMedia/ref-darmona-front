@@ -192,14 +192,9 @@ const AddCmp = () => {
               func={handleCopyAndSet}
             />
           <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} />
-
           </div>
           {/* <Ctype setType={setCtype} /> */}
-         
         </Box>
-
-        
-       
         {ctype !== "tag" && (
           <>
             <ThriveLink />
@@ -208,7 +203,6 @@ const AddCmp = () => {
 
           </>
         )}
-
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
