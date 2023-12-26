@@ -19,6 +19,7 @@ export const Sidebar = () => {
     { name: "Snowflake", logo: Snow, path: "/snow", id: "sideLogo" },
     { name: "Domains", logo: Domains, path: "/domains", id: "sideLogo" },
     { name: "Params", logo: Params, path: "/params", id: "sideLogo" },
+    { name: "Tracking", logo: Domains, path: "/trk", id: "sideLogo" },
   ];
 
   function deleteAllCookies() {
@@ -40,6 +41,14 @@ export const Sidebar = () => {
     window.location.reload();
   };
 
+  const handleNavigate = (path) => {
+    if (path === "/trk") {
+      window.open("https://trk.darmona.org/login", "_blank");
+    } else {
+      navigate(path)
+    }
+  }
+
   return (
     <div className="sidebar-container">
       {/* <div className="side-user">
@@ -50,7 +59,7 @@ export const Sidebar = () => {
         {items.map((i, index) => {
           return (
             <div
-              onClick={() => navigate(i.path)}
+              onClick={(e) => handleNavigate(i.path)}
               key={index}
               className="sidbar-tab"
             >
