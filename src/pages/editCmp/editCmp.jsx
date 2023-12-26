@@ -11,6 +11,7 @@ import { updateCmps } from "../../store/slices/user";
 import { cmpStatusOption } from "../../assets/data/commonDomains";
 import { Select } from "../../origins/select/select.jsx";
 import { SelectWP } from "../../components/selectWP/selectWP";
+import { SelectBP } from "../../components/selectBP/selectBP";
 import { QueryParameters } from "../../components/queryParameters/queryParameters";
 import "./editCmp.css";
 
@@ -196,15 +197,18 @@ const EditCmp = () => {
               </select>
               <label htmlFor="Select">Status</label>
             </div>
+            <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} currentPlatform={platformName} />
           </div>
         </Box>
-        <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} currentPlatform={platformName} />
-        <SelectWP setWhitePage={setWhitePage} required={false} />
+        
         <ThriveLink />
+        <SelectWP setWhitePage={setWhitePage} required={false} />
+        <SelectBP required={true} />
+       
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
-              {index === 0 && <h1>BP Endpoints</h1>}
+              {index === 0 && <h1>Endpoints</h1>}
               <div className="edit-formBody">
                 <div className="edit-blackPage">
                   <input id="blackPage" type="text" onChange={e => updateEp(index, encodeURI(e.target.value))} value={decodeURI(item.ep)} required placeholder="BP Path" />

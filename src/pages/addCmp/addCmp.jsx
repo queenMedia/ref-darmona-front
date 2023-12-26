@@ -200,7 +200,6 @@ const AddCmp = () => {
             <ThriveLink />
             <SelectWP setWhitePage={setWhitePage} required={true} />
             <SelectBP required={true} />
-
           </>
         )}
         {eps?.map((item, index) => {
