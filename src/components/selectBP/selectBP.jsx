@@ -38,6 +38,17 @@ export const SelectBP = (props) => {
       const c = rel.map(i => i.celeb)
       var unique = [...new Set(c)]
       setCelebs(unique)
+
+      setSelectedCeleb(unique[0])
+      const chosen = bpgs.filter(i => i.celeb === unique[0] && i.geo === geo);
+      const l = chosen.map(i => i.productionLink)
+      setLinks(l)
+      if (l.length === 1) {
+        console.log(l.length);
+        setLink(l[0])
+      }
+      return
+
       setLink("")
       setSelectedCeleb("")
       setLinks([])
@@ -54,15 +65,16 @@ export const SelectBP = (props) => {
       const chosen = bpgs.filter(i => i.celeb === celeb && i.geo === selectedGeo);
       const l = chosen.map(i => i.productionLink)
       setLinks(l)
+      setLink(l[0])
       notify_Info(`found ${l.length} paths`)
     } catch (error) {
       console.log(console.log(error.message));
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
 
-  },[selectedCeleb])
+  }, [selectedCeleb])
 
   return (
     <Box>

@@ -1,8 +1,17 @@
 import "./select.css"
 
-export const Select = ({ title, data, func, required, className = "form-select", customOption = undefined, customOptionText = undefined }) => {
+export const Select = ({
+  title,
+  data,
+  func,
+  required,
+  className = "form-select",
+  customOption = undefined,
+  customOptionText = undefined
+}) => {
 
   const sortedData = [...data].sort();
+  
   return (
     <select
       className={className}
