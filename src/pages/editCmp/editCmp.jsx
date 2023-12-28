@@ -26,7 +26,6 @@ const EditCmp = () => {
   const [alias, setAlias] = useState("");
   const [geo, setGeo] = useState("");
   const [whitePage, setWhitePage] = useState("");
-  const [cmp, setStoreCmp] = useState("");
   const [whitePageName, setWhitePageName] = useState("");
   const [platformName, setPlatformName] = useState("");
   const { id, cmpName, status } = useParams();
@@ -52,14 +51,13 @@ const EditCmp = () => {
     setWhitePage(json?.dc_ep);
     setWhitePageName(json?.dc_ep_name || "");
     setPlatformName(json?.platformName || "");
+    setPlatform(JSON.stringify({ query: json?.query, map: json?.query_map }))
     setEps(json?.eps);
   };
 
   useEffect(() => {
     setName(cmpName);
     setCmpStatus(status);
-    const findStoreCmp = user.cmps.find(i => i.cmpId === id);
-    setStoreCmp(findStoreCmp);
     handleGetJson(id);
   }, []);
 
@@ -75,7 +73,7 @@ const EditCmp = () => {
     const data = {
       _id: user._id,
       url: decodeURI(id),
-      name,
+      cmpName: name,
       imp: { count: Number(impressions), recurring: true },
       alias,
       dc_ep: encodeURI(whitePage),
@@ -175,13 +173,9 @@ const EditCmp = () => {
               <label htmlFor="whitePage">WP Path</label>
             </div>
             <div>
-              <input type="text" id="whitePage" onChange={e => setWhitePageName(e.target.value)} value={whitePageName || ""} required placeholder="WP Name" />
+              <input type="text" id="whitePage" onChange={(e) => setWhitePageName(e.target.value)} value={whitePageName} required placeholder="WP Name" />
               <label htmlFor="whitePage">WP Name</label>
             </div>
-            {/* <div>
-              <input type="text" id="whitePage" onChange={e => setPlatformName(e.target.value)} value={platformName} required placeholder="Platform Name" disabled />
-              <label htmlFor="whitePage">Platform</label>
-            </div> */}
             <div>
               <select style={{ width: `100%` }} onChange={e => setCmpStatus(e.target.value)} required id="Select">
                 <option value={status} disabled selected>
@@ -200,11 +194,11 @@ const EditCmp = () => {
             <QueryParameters setPlatform={setPlatform} setPlatformName={setPlatformName} currentPlatform={platformName} />
           </div>
         </Box>
-        
+
         <ThriveLink />
         <SelectWP setWhitePage={setWhitePage} required={false} />
-        <SelectBP required={true} />
-       
+        <SelectBP required={false} />
+
         {eps?.map((item, index) => {
           return (
             <Box key={index}>
@@ -215,7 +209,7 @@ const EditCmp = () => {
                   <label htmlFor="blackPage">BP Path</label>
                 </div>
                 <div className="edit-blackPage">
-                  <input id="blackPage" type="text" onChange={e => updateEpName(index, encodeURI(e.target.value))} value={item.epName} required placeholder="BP Name" />
+                  <input id="blackPage" type="text" onChange={e => updateEpName(index, e.target.value)} value={item.epName} required placeholder="BP Name" />
                   <label htmlFor="blackPage">BP Name</label>
                 </div>
                 <div className="edit-blackPage">
@@ -250,7 +244,6 @@ const EditCmp = () => {
             </Box>
           );
         })}
-        {/* <span onClick={addEps}>Add Endpoint</span> */}
         <button type="submit">Submit</button>
       </form>
     </div>

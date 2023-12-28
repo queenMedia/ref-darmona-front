@@ -39,7 +39,7 @@ export const QueryParameters = (props) => {
       title={props.currentPlatform ? props.currentPlatform : "Select Platform"}
       data={platforms}
       func={handleSelectChange}
-      required={true}
+      required={props.currentPlatform ? false : true}
     />
   );
 };
