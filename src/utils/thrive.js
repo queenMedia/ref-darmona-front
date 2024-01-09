@@ -8,9 +8,6 @@ export const generateThriveLink = (domain, platform, id) => {
       link = `https://${domain}/click?trvid=${id}&aff_sub1={{AFF_SUB1}}&aff_sub2={{AFF_SUB2}}&aff_sub3={{AFF_SUB3}}&aff_sub4={{AFF_SUB4}}&aff_sub5={{AFF_SUB5}}&aff_sub6={{AFF_SUB6}}&aff_sub7={{AFF_SUB7}}&aff_sub8={{AFF_SUB8}}&aff_sub9={{AFF_SUB9}}&aff_sub10={{AFF_SUB10}}&aff_sub11={{AFF_SUB11}}&aff_sub12={{AFF_SUB12}}&aff_sub13={{AFF_SUB13}}&aff_sub14={{AFF_SUB14}}&aff_sub15={{AFF_SUB15}}&aff_sub16={{AFF_SUB16}}`;
       break;
     case platform === "bing":
-      link = `https://${domain}/click?trvid=${id}&campaignid={{CAMPAIGNID}}&targetid={{TARGETID}}&matchtype={{MATCHTYPE}}&network={{NETWORK}}&device={{DEVICE}}&adid={{ADID}}&keyword={{KEYWORD}}&msclkid={{MSCLKID}}`;
-      break;
-    case platform === "bingLeo":
       link = `https://${domain}/click?trvid=${id}&aff_sub1={{AFF_SUB1}}&aff_sub2={{AFF_SUB2}}&aff_sub5={{AFF_SUB5}}&aff_sub7={{AFF_SUB7}}&aff_sub8={{AFF_SUB8}}&aff_sub9={{AFF_SUB9}}&aff_sub10={{AFF_SUB10}}&aff_sub12={{AFF_SUB12}}&aff_sub14={{AFF_SUB14}}`;
       break;
     case platform === "taboola":

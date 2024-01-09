@@ -30,7 +30,6 @@ export const ThriveLink = () => {
         <select onChange={(e) => setThrivePlatform(e.target.value)}>
           <option value={"bing"}>Select Platform</option>
           <option value={"bing"}>Bing</option>
-          <option value={"bingLeo"}>BingLeo</option>
           <option value={"facebook"}>Facebook</option>
           <option value={"google"}>Google</option>
           <option value={"taboola"}>Taboola</option>

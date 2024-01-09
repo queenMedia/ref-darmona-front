@@ -1,23 +1,3 @@
-export const bing_query = {
-  matchtype: { type: "pattern", cmp: "^[a-zA-z]{1,3}$" },
-  adid: { type: "pattern", cmp: "^[0-9]+$" },
-  network: { type: "pattern", cmp: "^[a-zA-z]{1,3}$" },
-  keyword: { type: "pattern", cmp: "^[0-9a-zA-z_ ]+$" },
-  campaignid: { type: "pattern", cmp: "^[0-9]+$" },
-  targetid: { type: "pattern", cmp: "^[0-9a-zA-z-:]+$" },
-  device: { type: "pattern", cmp: "^[0-9a-zA-z]+$" },
-  msclkid: { type: "pattern", cmp: "^[0-9a-zA-z]+$" },
-};
-export const bing_query_map = {
-  sub1: "matchtype",
-  sub2: "adid",
-  sub3: "network",
-  sub4: "keyword",
-  sub5: "campaignid",
-  sub6: "targetid",
-  sub7: "device",
-  sub8: "msclkid",
-};
 export const fb_query = {
   site_source_name: { type: "pattern", cmp: "^[a-z]+$" },
   adset_name: { type: "pattern", cmp: "^[a-zA-Z0-9+_ ]+$" },
@@ -38,7 +18,7 @@ export const fb_query_map = {
   sub7: "ad_name",
   sub8: "adset_id",
 };
-export const bingLeo_query = {
+export const bing_query = {
   aff_sub8: { type: "pattern", cmp: "^[a-zA-z]{1,3}$" },
   aff_sub1: { type: "pattern", cmp: "^[0-9]+$" },
   msclkid: { type: "pattern", cmp: "^[0-9a-zA-z]+$" },
@@ -47,7 +27,7 @@ export const bingLeo_query = {
   aff_sub9: { type: "pattern", cmp: "^[a-zA-z]{1,3}$" },
   aff_sub10: { type: "pattern", cmp: "^[a-zA-z]{1,3}$" },
 };
-export const bingLeo_query_map = {
+export const bing_query_map = {
   sub1: "aff_sub8",
   sub2: "aff_sub1",
   sub3: "msclkid",
